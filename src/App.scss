@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+
+/* header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid #f2f2f2;
+  margin: 0 auto;
+}
+
+.header_title {
+  margin: 0;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+.navbarLink {
+  margin-right: 20px;
+  text-decoration: none;
+  font-size: 22px;
+  color: #0b1e49;
+  &:hover,
+  &:focus {
+    color: #f1356d;
+  }
+}
