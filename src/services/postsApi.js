@@ -1,8 +1,7 @@
-import axios from 'axios';
-axios.defaults.baseURL = 'https://simple-blog-api.crew.red';
+import axios from "axios";
 
-const fetchPosts = () => {
-  return axios.get(`/posts`).then(response => response.data);
-};
+axios.defaults.baseURL = "https://simple-blog-api.crew.red";
+
+const fetchPosts = () => axios.get("/posts").then((response) => response.data);
 
 export default fetchPosts;

@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import './App.css';
-import fetchPosts from './services/postsApi';
+import { useState, useEffect } from "react";
+import "./App.css";
+import fetchPosts from "./services/postsApi";
 
 function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetchPosts().then(res => setPosts(res));
+    fetchPosts().then((res) => setPosts(res));
   }, []);
 
   return (
