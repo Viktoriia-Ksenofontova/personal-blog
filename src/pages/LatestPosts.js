@@ -1,24 +1,18 @@
-import React, { useEffect, useState } from "react";
-import fetchPosts from "../services/postsApi";
+import React from "react";
+import { observer } from "mobx-react-lite";
 
-export default function LatestPosts() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    fetchPosts().then((res) => setPosts(res));
-  }, []);
-  return (
+const LatestPosts = observer(({ store }) => (
     <div>
       <h2>Latest posts</h2>
-        <ul>
-          {posts && posts.map(({ id, title, body }) => (
-              <li key={id}>
-                <h3>{title}</h3>
-                <p>{body}</p>
-              </li>
-            )
-          )}
-        </ul>
+      <ul>
+        {store.allPosts && store.allPosts.map(({ id, title, body }) => (
+          <li key={id}>
+            <h3>{title}</h3>
+            <p>{body}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   )
-};
+);
+export default LatestPosts;
