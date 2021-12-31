@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 
 import fetchPosts from "../services/postsApi";
 
-export class PostsStore {
+class PostsStore {
   posts = [];
 
   status = ""; // "success"; "pending"; "error"

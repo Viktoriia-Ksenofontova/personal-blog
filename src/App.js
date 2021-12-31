@@ -1,10 +1,10 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate  } from 'react-router-dom';
 import "./App.scss";
-import Header from "./components/header/Header";
+import Header from "./components/Header/Header";
 import routes from "./routing/routes";
 import LatestPosts from "./pages/LatestPosts";
-import mainPostsStore from "./store/PostsStore";
+import mainPostsStore from "./store/postsStore";
 
 
 function App() {
