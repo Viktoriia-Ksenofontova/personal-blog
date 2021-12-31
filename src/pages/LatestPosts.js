@@ -1,5 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
+import PostItem from "../components/PostItem/PostItem";
 
 const LatestPosts = observer(({ store }) => (
     <div>
@@ -7,8 +8,7 @@ const LatestPosts = observer(({ store }) => (
       <ul>
         {store.allPosts && store.allPosts.map(({ id, title, body }) => (
           <li key={id}>
-            <h3>{title}</h3>
-            <p>{body}</p>
+            <PostItem title={title} body={body}/>
           </li>
         ))}
       </ul>
