@@ -4,7 +4,8 @@ import "./App.scss";
 import Header from "./components/Header/Header";
 import routes from "./routing/routes";
 import LatestPosts from "./pages/LatestPosts";
-import mainPostsStore from "./store/postsStore";
+import CreatePost from "./pages/CreatePost";
+import mainPostsStore from "./store/PostsStore";
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
       <div className="App">
         <Suspense fallback={<p>Loading...</p>}>
           <Routes>
-              <Route exact path={routes.home} element={<LatestPosts store={mainPostsStore}/>}/>
+            <Route exact path={routes.home} element={<LatestPosts store={mainPostsStore} />} />
+            <Route path={routes.createPost} element={<CreatePost/>}/>
               <Route path="*" element={<Navigate to={routes.page404} />} />
           </Routes>
         </Suspense>

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-function PostItem (props) {
+export default function PostItem (props) {
   const { title, body } = props;
   return(
   <>
@@ -17,4 +17,3 @@ PostItem.propTypes = {
   body: PropTypes.string.isRequired
 };
 
-export default PostItem;

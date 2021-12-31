@@ -5,6 +5,8 @@ import fetchPosts from "../services/postsApi";
 class PostsStore {
   posts = [];
 
+  error = null;
+  
   status = ""; // "success"; "pending"; "error"
   
   constructor() {
@@ -19,6 +21,7 @@ class PostsStore {
       runInAction(() => {
         this.posts = res.posts;
         this.status = res.status;
+        this.error = res.error;
       })
     })
   }
