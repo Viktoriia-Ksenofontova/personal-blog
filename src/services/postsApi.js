@@ -6,10 +6,11 @@ const fetchPosts = async(urlPart) => {
   let posts=[];
   let status="";
   let error = null;
+  
   try {
     await axios.get(urlPart)
       .then(response => {
-        posts = [...response.data];
+        posts = response.data;
         status = "success";
         error = null;
       })

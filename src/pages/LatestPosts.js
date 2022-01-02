@@ -9,7 +9,7 @@ const LatestPosts = observer(({ store }) => (
     <ul>
       {store.allPosts && store.allPosts.map(({ id, title, body }) => (
         <li key={id}>
-          <PostItem title={title} body={body}/>
+          <PostItem id={id} title={title} body={body}/>
         </li>
           
       ))}
