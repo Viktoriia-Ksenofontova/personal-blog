@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import fetchPosts from "../services/postsApi";
+import { fetchPosts } from "../services/postsApi";
 
 
 export default function PostPage() {

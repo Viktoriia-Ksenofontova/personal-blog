@@ -18,7 +18,7 @@ function App() {
         <Suspense fallback={<p>Loading...</p>}>
           <Routes>
             <Route exact path={routes.home} element={<LatestPosts store={mainPostsStore}/>} />
-            <Route path={routes.createPost} element={<CreatePost />} />
+            <Route path={routes.createPost} element={<CreatePost store={mainPostsStore}/>} />
             <Route path={routes.post} element={<PostPage/>}/>
             <Route path="*" element={<Navigate to={routes.page404} />} />
           </Routes>

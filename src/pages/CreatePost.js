@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+import { observer } from "mobx-react-lite";
+import { useNavigate } from 'react-router-dom';
 
-export default function CreatePost () {
+const CreatePost = observer(({ store }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const history = useNavigate();
   
   const handleSubmit = (e) => {
     e.preventDefault();
+    store.createNewPost(title, body);
+    history(`posts/`);
   }
 
-  return ( 
+  return (
     <div>
       <h2>Add a New Post</h2>
       <form onSubmit={handleSubmit}>
@@ -19,7 +24,7 @@ export default function CreatePost () {
             id="title"
             onChange={(e) => setTitle(e.target.value)}
           />
-        </label>      
+        </label>
         <label htmlFor='body'>
           Text:
           <textarea required
@@ -33,5 +38,6 @@ export default function CreatePost () {
       </form>
     </div>
   )
-}
+})
 
+export default CreatePost;

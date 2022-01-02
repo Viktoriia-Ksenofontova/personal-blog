@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 
-import fetchPosts from "../services/postsApi";
+import { fetchPosts, createPost } from "../services/postsApi";
 
 class PostsStore {
   posts = [];
@@ -12,6 +12,7 @@ class PostsStore {
   constructor() {
     makeAutoObservable(this);
     this.fetchPosts = fetchPosts;
+    this.createPost = createPost;
     this.fetchAllPosts()
   }
 
@@ -28,6 +29,18 @@ class PostsStore {
 
   get allPosts() {
     return this.posts;
+  }
+
+  createNewPost(title, body) {
+    this.createPost(title, body).then(res => {
+      
+      runInAction(() => { 
+        this.posts.push(res.post);
+        this.status = res.status;
+        this.error = res.error;
+      })
+    })
+    
   }
 }
 

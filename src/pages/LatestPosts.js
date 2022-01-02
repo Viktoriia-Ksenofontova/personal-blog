@@ -7,7 +7,7 @@ const LatestPosts = observer(({ store }) => (
     <h2>Latest posts</h2>
     {store.status==="pending" && <div>Loading...</div>}
     <ul>
-      {store.allPosts && store.allPosts.map(({ id, title, body }) => (
+      {store.allPosts && store.allPosts.slice().reverse().map(({ id, title, body }) => (
         <li key={id}>
           <PostItem id={id} title={title} body={body}/>
         </li>

@@ -2,7 +2,7 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://simple-blog-api.crew.red";
 
-const fetchPosts = async(urlPart) => {
+export const fetchPosts = async(urlPart) => {
   let posts=[];
   let status="";
   let error = null;
@@ -21,4 +21,22 @@ const fetchPosts = async(urlPart) => {
   return { posts, status, error };
 }
 
-export default fetchPosts;
+export const createPost = async (title, body) => {
+  let status = "";
+  let post = {};
+  let error = null;
+
+  try {
+    await axios.post("/posts", { "title": title, "body": body })
+      .then((res) => {
+        post = res.data;
+        status = "created";
+        error = null;
+    })
+  } catch (err) {
+      error=err.message;
+      status="error";
+  }
+  return {post, status, error };
+}
+
