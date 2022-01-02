@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { observer } from "mobx-react-lite";
 import { useNavigate } from 'react-router-dom';
+import Button from "../components/Button/Button";
 
 const CreatePost = observer(({ store }) => {
   const [title, setTitle] = useState("");
@@ -33,8 +34,9 @@ const CreatePost = observer(({ store }) => {
             onChange={(e) => setBody(e.target.value)}
           />
         </label>
-
-        <button type="submit">Add Post</button>
+      
+        <Button type="submit">Add Post</Button>
+        
       </form>
     </div>
   )

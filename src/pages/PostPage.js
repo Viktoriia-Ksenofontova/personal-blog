@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { fetchPosts } from "../services/postsApi";
-
+import Button from '../components/Button/Button';
 
 export default function PostPage() {
   const [title, setTitle] = useState("");
@@ -54,8 +54,9 @@ export default function PostPage() {
             onChange={(e) => setNewComment(e.target.value)}
           />
         </label>
-
-        <button type="submit">Add comment</button>
+        
+      <Button type="submit">Add comment</Button>
+       
       </form>
       
     </div>
