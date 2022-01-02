@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { fetchPosts } from "../services/postsApi";
 import Button from '../components/Button/Button';
+import List from "../components/List/List";
 
 export default function PostPage() {
   const [title, setTitle] = useState("");
@@ -36,13 +37,13 @@ export default function PostPage() {
       
       {comments.length === 0 ?
         <p>There are no comments here yet</p> :
-        <ul>
+        <List>
           {comments.map((comment) => (
             <li key={comment.id}>
               <p>{comment.body}</p>
             </li>
           ))}
-        </ul>
+        </List>
         }
 
       <form onSubmit={handleSubmit}>
