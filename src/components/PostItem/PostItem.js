@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 
 export default function PostItem (props) {
   const {id, title, body } = props;
-  return(
+  return (
   <>
     <h3>{title}</h3>
     <p>{body}</p>
-      <Link to={`posts/:${id}`}>Read more</Link>
+    <Link to={`posts/:${id}`}>Read more</Link>
   </>
   )  
 };

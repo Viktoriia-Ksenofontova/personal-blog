@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom';
 const CreatePost = observer(({ store }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const history = useNavigate();
+  const navigate = useNavigate();
   
   const handleSubmit = (e) => {
     e.preventDefault();
     store.createNewPost(title, body);
-    history(`posts/`);
+    navigate(`posts/`);
   }
 
   return (
