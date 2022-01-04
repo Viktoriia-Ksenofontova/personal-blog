@@ -2,9 +2,10 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import PostItem from "../components/PostItem/PostItem";
 import List from "../components/List/List";
+import Container from "../components/Container/Container";
 
 const LatestPosts = observer(({ store }) => (
-  <div>
+  <Container>
     <h2>Latest posts</h2>
     {store.status==="pending" && <div>Loading...</div>}
     <List>
@@ -15,6 +16,6 @@ const LatestPosts = observer(({ store }) => (
           
       ))}
     </List>
-  </div>
+  </Container>
 ));
 export default LatestPosts;

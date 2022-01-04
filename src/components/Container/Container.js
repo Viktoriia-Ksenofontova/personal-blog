@@ -2,21 +2,18 @@ import React from "react";
 import { useFela } from 'react-fela';
 import PropTypes from 'prop-types';
 
-export default function List({children }){
+export default function Container({children }){
   const { css } = useFela();
  
   return (   
-    <ul className={css({
-      margin: 0,
-      padding: 0,
-      listStyle: "none",
-      textAlign:"left"
+    <div className={css({
+      padding: '20px'
     })}>
       {children}
-    </ul>
+    </div>
   )
 }
 
-List.propTypes = {
+Container.propTypes = {
   children: PropTypes.node.isRequired,
 };
