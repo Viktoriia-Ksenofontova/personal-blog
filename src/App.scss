@@ -2,25 +2,3 @@
   text-align: center;
   font-family: 'Montserrat', sans-serif;
 }
-
-/* header */
-
-.header_title {
-  margin: 0;
-}
-
-.navbar {
-  display: flex;
-  align-items: center;
-}
-.navbarLink {
-  margin-right: 20px;
-  text-decoration: none;
-  font-size: 22px;
-  font-weight: bold;
-  color: #0b1e49;
-  &:hover,
-  &:focus {
-    color: #f1356d;
-  }
-}

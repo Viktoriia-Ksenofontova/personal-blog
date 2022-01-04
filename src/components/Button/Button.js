@@ -8,6 +8,7 @@ export default function Button({ type,  children }){
  
   return (   
     <button className={css({
+      marginBottom: '10px',
       padding: "10px",
       width: "200px",
       borderRadius: "20px",
@@ -16,7 +17,7 @@ export default function Button({ type,  children }){
       borderColor: "transparent",
       backgroundColor: "grey",
       color: 'white',
-      ':hover': { color: 'black', backgroundColor: '#f1356d'}
+      ':hover': { color: 'black', backgroundColor: 'yellowgreen'}
     })}
       // eslint-disable-next-line react/button-has-type
     type={type}>
