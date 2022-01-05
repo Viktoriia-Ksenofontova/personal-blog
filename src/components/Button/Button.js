@@ -1,7 +1,6 @@
 import React from "react";
 import { useFela } from 'react-fela';
 import PropTypes from 'prop-types';
-import "../../assets/colors.scss";
 
 export default function Button({ type,  children }){
   const { css } = useFela();
