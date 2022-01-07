@@ -4,8 +4,8 @@ import { createRenderer } from 'fela';
 import { RendererProvider } from 'react-fela';
 import routes from "./routing/routes";
 import mainPostsStore from "./store/PostsStore";
-import Header from "./components/Header/Header";
-import "./App.scss";
+import Header from "./components/Header";
+
 
 const LatestPosts = React.lazy(()=> import("./pages/LatestPosts"));
 const CreatePost = React.lazy(()=> import("./pages/CreatePost"));
@@ -19,7 +19,7 @@ function App() {
     <RendererProvider renderer = {renderer}>
     <Router>
       <Header />
-      <div className="App">
+      <main>
         <Suspense fallback={<p>Loading...</p>}>
           <Routes>
             <Route exact path={routes.home} element={<LatestPosts store={mainPostsStore}/>} />
@@ -28,7 +28,7 @@ function App() {
             <Route path="*" element={<Navigate to={routes.page404} />} />
           </Routes>
         </Suspense>
-      </div>
+      </main>
       </Router>
       </RendererProvider>
   );

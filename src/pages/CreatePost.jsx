@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useFela } from 'react-fela';
 import { observer } from "mobx-react-lite";
 import { useNavigate } from 'react-router-dom';
-import Container from '../components/Container/Container';
-import Button from "../components/Button/Button";
-import Form from '../components/Form/Form';
+import Container from '../components/Container';
+import Button from "../components/Button";
+import Form from '../components/Form';
 import Icon from '../assets/images/comment-with-a-pencil.svg';
 
 const labelRule = () => ({

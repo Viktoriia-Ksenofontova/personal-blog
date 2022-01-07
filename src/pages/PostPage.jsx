@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useFela } from 'react-fela';
 import { useParams } from "react-router-dom";
 import { fetchPosts, createComment } from "../services/postsApi";
-import Button from '../components/Button/Button';
-import List from "../components/List/List";
-import CommentItem from '../components/CommentItem/CommentItem';
-import Form from '../components/Form/Form';
-import Container from '../components/Container/Container';
+import Button from '../components/Button';
+import List from "../components/List";
+import CommentItem from '../components/CommentItem';
+import Form from '../components/Form';
+import Container from '../components/Container';
 
 
 export default function PostPage() {

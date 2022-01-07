@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useFela } from 'react-fela';
 import routes from "../../routing/routes";
+import Container from '../Container/Container';
 
 const navbarLinkRule = () => ({
   marginRight: '20px',
@@ -28,24 +29,21 @@ export default function Header() {
     <header className={css({
       display: 'flex',
       justifyContent: 'space-between',
-      padding: "20px",
       backgroundColor: 'grey'
     })} >
-      
-      <h1 className={css({
-        margin: 0,
-        color: 'yellowgreen'
-      })}>
+      <Container>
+        <h1 className={css({color: 'yellowgreen'})}>
         News & Events
-      </h1>
-      <nav className={css({display: 'flex', alignItems: 'center'})}>
-        <NavLink to={routes.home} className={css(navbarLinkRule)} >
-          Home
-        </NavLink>
-        <NavLink to={routes.createPost} className={css(navbarLinkRule)}>
-          Create_Post
-        </NavLink>
-      </nav>
-   </header>
+        </h1>
+        <nav className={css({display: 'flex', alignItems: 'center'})}>
+          <NavLink to={routes.home} className={css(navbarLinkRule)} >
+            Home
+          </NavLink>
+          <NavLink to={routes.createPost} className={css(navbarLinkRule)}>
+            Create_Post
+          </NavLink>
+        </nav>
+      </Container>
+    </header>
   )
 }

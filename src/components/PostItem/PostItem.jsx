@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useFela } from "react-fela";
-import Text from "../Text/Text";
+import Text from "../Text";
 
 const linkRule = () => ({
   display: 'block',

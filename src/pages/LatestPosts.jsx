@@ -1,8 +1,8 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import PostItem from "../components/PostItem/PostItem";
-import List from "../components/List/List";
-import Container from "../components/Container/Container";
+import PostItem from "../components/PostItem";
+import List from "../components/List";
+import Container from "../components/Container";
 
 const LatestPosts = observer(({ store }) => (
   <Container>
