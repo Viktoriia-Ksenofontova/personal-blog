@@ -7,7 +7,10 @@ export default function Container({children }){
  
   return (   
     <div className={css({
-      padding: '20px'
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      padding: '20px',
+      maxWidth: '1440px'
     })}>
       {children}
     </div>
