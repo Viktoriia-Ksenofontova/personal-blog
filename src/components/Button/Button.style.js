@@ -10,12 +10,11 @@ const style = ({ theme }) => ({
     borderColor: "transparent",
     backgroundColor: palette[theme].button,
     color: palette[theme].buttonText,
+    transition: 'all 0.4s linear',
      ':hover': {
       color: palette[theme].text,
       backgroundColor: palette[theme].accent
      }
-
 })
-
 
 export default style;

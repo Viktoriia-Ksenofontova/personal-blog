@@ -1,23 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useFela } from "react-fela";
+import ThemeContext from "../../context/ThemeContext";
 import Text from "../Text";
-
-const linkRule = () => ({
-  display: 'block',
-  textDecoration: 'none',
-  fontSize: '15px',
-  fontWeight: 'bold',
-  color: 'black',
-  textAlign:'right',
-  ':hover': {
-    color: 'yellowgreen'
-  },
-  ':focus': {
-    color: 'yellowgreen'
-  },
-});
+import linkRule from "./PostItem.style";
 
 const postStyle = {
   overflow: 'hidden',
@@ -29,17 +16,18 @@ const postStyle = {
 
 export default function PostItem (props) {
   const { id, title, body } = props;
+  const { theme } = useContext(ThemeContext);
   const { css } = useFela();
   return (
     <>
       <Text as="h3" variant="heading3">
         {title}
       </Text>
-      <Text as="p" styles={postStyle }>
+      <Text as="p" styles={postStyle}>
         {body}
       </Text>
       
-      <Link to={`posts/:${id}`} className={css(linkRule)}>
+      <Link to={`posts/:${id}`} className={css(linkRule(theme))}>
         Read more
       </Link>
     </>

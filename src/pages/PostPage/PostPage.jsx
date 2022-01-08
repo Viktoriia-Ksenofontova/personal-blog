@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useFela } from 'react-fela';
 import { useParams } from "react-router-dom";
-import { fetchPosts, createComment } from "../services/postsApi";
-import Button from '../components/Button';
-import List from "../components/List";
-import CommentItem from '../components/CommentItem';
-import Form from '../components/Form';
-import Container from '../components/Container';
-
+import { fetchPosts, createComment } from "../../services/postsApi";
+import { Container, Form, CommentItem, List, Button, Text } from '../../components';
+import ThemeContext from "../../context/ThemeContext";
+import palette from '../../assets/colors';
 
 export default function PostPage() {
   const [title, setTitle] = useState("");
@@ -16,6 +13,7 @@ export default function PostPage() {
   const [status, setStatus] = useState("");
   const [newComment, setNewComment] = useState("");
   const { postId } = useParams();
+  const { theme } = useContext(ThemeContext);
 
   const { css } = useFela();
 
@@ -41,17 +39,13 @@ export default function PostPage() {
     <Container>
       {status === "pending" && <div>Loading...</div>}
       
-      <h2>{title}</h2>
-      <p className={css({
-        textAlign:"left"
-      })}>
-        {body}
-      </p>
+      <Text as='h2' styles={{textAlign:"center"}} variant='heading2'>{title}</Text>
+      <Text as='p'>{body}</Text>
 
-      <h3>Comments:</h3>
+      <Text as='h3' variant='heading3'>Comments:</Text>
       
-      {comments.length === 0 ?
-        <p>There are no comments here yet</p> :
+      {comments?.length === 0 ?
+        <Text as='p'>There are no comments here yet</Text> :
         <List>
           {comments.map((comment) => (
             <li key={comment.id}>
@@ -65,9 +59,12 @@ export default function PostPage() {
         <label htmlFor='comment' className={css({
           display: 'flex',
           width: '100%',
+          fontSize: '16px',
+          fontWeight: '500',
           alignItems: 'top',
           textAlign: 'left',
-          marginBottom: '20px'
+          marginBottom: '20px',
+          color: palette[theme].text
         })}>
           Your comment:
           <textarea required
@@ -76,13 +73,11 @@ export default function PostPage() {
             onChange={(e) => setNewComment(e.target.value)}
             className={css({
               marginLeft: '20px',
-              width: '100%',
-              borderTop: 'none',
-              borderLeft: 'none',
-              borderRight: 'none',
-              borderBottomColor: 'grey',
-              borderBottomStyle: 'solid',
-              borderBottomWidth: '2px',
+              padding: '10px',
+              width: '100%', 
+              border: 'none',
+              borderRadius:'20px',
+              boxShadow: `0px 0px 6px ${palette[theme].shadowColor}`,
               outline:'none'
             })}
           />
@@ -90,9 +85,7 @@ export default function PostPage() {
         
         <Button type="submit">Add comment</Button>
       </Form>
-      
     </Container>
-  
   )
 }
 
