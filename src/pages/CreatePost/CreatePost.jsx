@@ -1,41 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useFela } from 'react-fela';
 import { observer } from "mobx-react-lite";
 import { useNavigate } from 'react-router-dom';
-import Container from '../components/Container';
-import Button from "../components/Button";
-import Form from '../components/Form';
-import Icon from '../assets/images/comment-with-a-pencil.svg';
-
-const labelRule = () => ({
-  display: 'flex',
-  fontSize: '16px',
-  width: '100%',
-  marginBottom: '20px',
-  textAlign: 'left',
-  alignItems:'top'
-});
-
-const inputRule = () => ({
-  marginLeft: "20px",
-  borderTop: 'none',
-  borderLeft: 'none',
-  borderRight: 'none',
-  borderBottomColor: 'grey',
-  borderBottomStyle: 'solid',
-  borderBottomWidth: '2px',
-  outline: 'none',
-  width: '100%'
-})
-
+import { Container, Button, Form, Text } from '../../components';
+import Icon from '../../assets/images/comment-with-a-pencil.svg';
+import ThemeContext from "../../context/ThemeContext";
+import palette from '../../assets/colors';
 
 const CreatePost = observer(({ store }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const navigate = useNavigate();
-  
+  const { theme } = useContext(ThemeContext);
   const { css } = useFela();
-  
+
+  const labelRule = () => ({
+    display: 'flex',
+    fontSize: '16px',
+    fontWeight: '500',
+    width: '100%',
+    marginBottom: '20px',
+    textAlign: 'left',
+    alignItems: 'top',
+    color: palette[theme].text
+  });
+
+  const inputRule = () => ({
+    marginLeft: "20px",
+    padding:"10px",
+    border: 'none',
+    borderRadius:'20px',
+    boxShadow: `0px 0px 6px ${palette[theme].shadowColor}`,
+    outline: 'none',
+    width: '100%'
+  })
+
   const handleSubmit = (e) => {
     e.preventDefault();
     store.createNewPost(title, body);
@@ -44,12 +43,13 @@ const CreatePost = observer(({ store }) => {
 
   return (
     <Container>
-      <div className={css({display:'flex', justifyContent:'center'})}>
+      <div className={css({display:'flex', justifyContent:'center', alignItems:"flex-start"})}>
       <img src={Icon} alt="pencil" width= '30px'/>
-        <h2 className={css({ marginLeft: '20px' })}>
+        <Text as='h2' styles={{ marginLeft: '20px' }} variant="heading2">
           Add a New Post
-        </h2>
+        </Text>
       </div> 
+
       <Form handleSubmit={handleSubmit}>
         <label htmlFor="title" className={css(labelRule)}>
           Title:
@@ -70,11 +70,8 @@ const CreatePost = observer(({ store }) => {
             className={css(inputRule)}
           />
         </label>
-      
         <Button type="submit">Add Post</Button>
-        
       </Form>
-      
     </Container>
   )
 })
