@@ -15,7 +15,8 @@ const palette = {
     button: '#808080',
     buttonText: '#fff',
     themeSwitch: '#d3d3d4',
-    shadowColor: 'rgba(0, 5, 97, 0.2)'
+    shadowColor: 'rgba(0, 5, 97, 0.2)',
+    header:'#808080',
   }
 }
 

@@ -4,7 +4,7 @@ import { createRenderer } from 'fela';
 import { RendererProvider } from 'react-fela';
 import routes from "./routing/routes";
 import mainPostsStore from "./store/PostsStore";
-import { Header, Main } from "./components";
+import { Footer, Header, Main } from "./components";
 import ThemeContext from "./context/ThemeContext";
 
 const LatestPosts = React.lazy(()=> import("./pages/LatestPosts"));
@@ -31,7 +31,8 @@ function App() {
             <Route path="*" element={<Navigate to={routes.page404} />} />
           </Routes>
         </Suspense>
-      </Main>
+          </Main>
+          <Footer/>
       </Router>
       </ThemeContext.Provider>
     </RendererProvider>

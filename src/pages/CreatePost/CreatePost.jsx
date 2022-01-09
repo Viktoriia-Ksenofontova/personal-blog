@@ -37,8 +37,9 @@ const CreatePost = observer(({ store }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    store.createNewPost(title, body);
-    navigate(`posts/`);
+    store.createNewPost(title, body).then(res =>
+      navigate(`/posts/:${res.post.id}`)
+    );
   }
 
   return (
@@ -70,7 +71,7 @@ const CreatePost = observer(({ store }) => {
             className={css(inputRule)}
           />
         </label>
-        <Button type="submit">Add Post</Button>
+        <Button type="submit" text="Add Post"/>
       </Form>
     </Container>
   )
