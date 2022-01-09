@@ -34,9 +34,14 @@ export default function PostItem (props) {
   )  
 };
 
+PostItem.defaultProps = {
+  title: "",
+  body: ""
+};
+
 PostItem.propTypes = {
   id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired
+  title: PropTypes.string,
+  body: PropTypes.string
 };
 

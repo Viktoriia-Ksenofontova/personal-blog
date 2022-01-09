@@ -7,3 +7,5 @@ export { default as List } from './List';
 export { default as PostItem } from './PostItem';
 export { default as Text } from './Text';
 export { default as Main } from './Main';
+export { default as Footer } from './Footer';
+export { default as ThemeSwitch } from './ThemeSwitch';

@@ -83,7 +83,7 @@ export default function PostPage() {
           />
         </label>
         
-        <Button type="submit">Add comment</Button>
+        <Button type="submit" text="Add comment"/>
       </Form>
     </Container>
   )
