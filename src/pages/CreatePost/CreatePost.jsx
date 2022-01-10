@@ -5,35 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Button, Form, Text } from '../../components';
 import Icon from '../../assets/images/comment-with-a-pencil.svg';
 import ThemeContext from "../../context/ThemeContext";
-import palette from '../../assets/colors';
+import { labelRule, inputRule } from './CreatePost.style';
 
 const CreatePost = observer(({ store }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
   const { css } = useFela();
-
-  const labelRule = () => ({
-    display: 'flex',
-    fontSize: '16px',
-    fontWeight: '500',
-    width: '100%',
-    marginBottom: '20px',
-    textAlign: 'left',
-    alignItems: 'top',
-    color: palette[theme].text
-  });
-
-  const inputRule = () => ({
-    marginLeft: "20px",
-    padding:"10px",
-    border: 'none',
-    borderRadius:'20px',
-    boxShadow: `0px 0px 6px ${palette[theme].shadowColor}`,
-    outline: 'none',
-    width: '100%'
-  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,23 +32,23 @@ const CreatePost = observer(({ store }) => {
       </div> 
 
       <Form handleSubmit={handleSubmit}>
-        <label htmlFor="title" className={css(labelRule)}>
+        <label htmlFor="title" className={css(labelRule(theme))}>
           Title:
           <input type="text" required
             value={title}
             id="title"
             onChange={(e) => setTitle(e.target.value)} 
-            className={css(inputRule)}
+            className={css(inputRule(theme))}
           />
         </label>
-        <label htmlFor='body'className={css(labelRule)}>
+        <label htmlFor='body'className={css(labelRule(theme))}>
           Text:
           <textarea required
             value={body}
             id="body"
             rows={6}
             onChange={(e) => setBody(e.target.value)}
-            className={css(inputRule)}
+            className={css(inputRule(theme))}
           />
         </label>
         <Button type="submit" text="Add Post"/>

@@ -5,19 +5,22 @@ import { Container, PostItem, List, Text, Button } from "../../components";
 import ThemeContext from "../../context/ThemeContext";
 import latestPostStyle from './LatestPost.style';
  
-
 const LatestPosts = observer(({ store }) => {
-  const { allPosts, status } = store;
+  const {allPosts, status } = store;
   const [currentPage, setCurrentPage] = useState(1);
   const [visiblePosts, setVisiblePosts] = useState([]);
 
   const { css } = useFela();
   const { theme } = useContext(ThemeContext);
+  
+  useEffect(() => {
+   store.getPostsFromServer();      
+  }, [store]);
 
   useEffect(() => {
-    setVisiblePosts(allPosts.slice(0, currentPage*5))
+    setVisiblePosts([...allPosts].slice(0, currentPage * 5));
   }, [allPosts, currentPage]);
-
+    
   const handleClick = () => {
     setCurrentPage(currentPage + 1);
   }

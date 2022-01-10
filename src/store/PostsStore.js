@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { fetchPosts, createPost } from "../services/postsApi";
+import { fetchPosts, createPost, deletePost } from "../services/postsApi";
 
 class PostsStore {
   posts = [];
@@ -12,6 +12,7 @@ class PostsStore {
     makeAutoObservable(this);
     this.fetchPosts = fetchPosts;
     this.createPost = createPost;
+    this.deletePost = deletePost;
     this.fetchAllPosts()
   }
 
@@ -30,7 +31,7 @@ class PostsStore {
     return this.posts;
   }
 
-  createNewPost(title, body) {
+   createNewPost(title, body) {
     this.status = "pending";
     const data= this.createPost(title, body).then(res => {
       runInAction(() => { 
@@ -39,6 +40,21 @@ class PostsStore {
         this.error = res.error; 
       })
       return res;
+    })
+    return data;
+  }
+
+  removePost(postId) {
+    this.status = "pending";
+    const data = this.deletePost(postId)
+      .then(({ status, error }) => {
+      runInAction(() => { 
+       this.posts=this.posts.filter(post => post.id !== postId);
+        
+        this.status = status;
+        this.error = error; 
+      })
+      return status;
     })
     return data;
   }
