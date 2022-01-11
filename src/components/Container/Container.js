@@ -1,22 +1,19 @@
 import React from "react";
 import { useFela } from 'react-fela';
 import PropTypes from 'prop-types';
-import makeStyle from './Container.style';
 
-export default function Container({styles, children }){
+export default function Container({children }){
   const { css } = useFela();
-  
+ 
   return (   
-    <div className={css(makeStyle(styles))}>
+    <div className={css({
+      padding: '20px'
+    })}>
       {children}
     </div>
   )
 }
 
-Container.defaultProps = {
-  styles: {}
-};
 Container.propTypes = {
-  styles: PropTypes.objectOf(PropTypes.string),
   children: PropTypes.node.isRequired,
 };

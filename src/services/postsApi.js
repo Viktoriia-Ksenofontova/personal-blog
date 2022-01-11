@@ -41,7 +41,7 @@ export const createPost = async (title, body) => {
 }
 
 export const createComment = async (postId, body) => {
-  let status = "";
+   let status = "";
   let comment = {};
   let error = null;
 
@@ -56,23 +56,6 @@ export const createComment = async (postId, body) => {
     error = err.message;
     status = "error";
   }
-  
+  // console.log(comment);
   return {comment, status, error}
-}
-
-export const deletePost = async (postId) => {
-  let status = "";
-  let error = null;
-
-  try {
-    await axios.delete(`/posts/${postId}`)
-      .then(() => {
-        status = "success";
-        error = null;
-      })
-  } catch (err) {
-    error = err.message;
-    status = "error";
-  }
-  return { status, error };
 }

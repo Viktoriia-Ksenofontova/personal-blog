@@ -2,7 +2,6 @@ import React from "react";
 import { useFela } from 'react-fela';
 import PropTypes from 'prop-types';
 import CommentIcon from '../../assets/images/comment.svg';
-import Text from '../Text';
 
 export default function CommentItem(props) {
    const { css } = useFela();
@@ -11,13 +10,17 @@ export default function CommentItem(props) {
   return (
     <div className={css({
       display: "flex",
-      marginBottom: "20px"
+      borderColor: "grey",
+      borderBottomStyle: 'solid',
+      borderBottomWidth: '1px'
     })}>
 
       <img src={CommentIcon} alt="comment icon" width="30px"/>
-      <Text as='p' styles={{paddingLeft: '20px', marginBottom: '0'}}>
+      <p className={css({
+        margin: "20px"
+      })}>
         {body}
-      </Text>
+      </p>
     </div>
   )  
 };
