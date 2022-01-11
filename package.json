@@ -10,6 +10,7 @@
     "fela": "^11.7.0",
     "mobx": "^6.3.10",
     "mobx-react-lite": "^3.2.2",
+    "modern-css-reset": "^1.4.0",
     "modern-normalize": "^1.1.0",
     "node-sass": "^7.0.1",
     "prop-types": "^15.8.0",
@@ -27,7 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy":"npm run build",
+    "predeploy": "npm run build",
     "deploy": "netlify deploy -p"
   },
   "eslintConfig": {
