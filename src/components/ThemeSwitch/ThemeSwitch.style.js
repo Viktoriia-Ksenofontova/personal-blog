@@ -8,7 +8,8 @@ export const themeSwitchControl = () => ({
   width: '64px',
   height: '32px',
   borderRadius: '50em',
-  padding: '3px 0'
+  padding: '3px 0',
+  '@media (max-width: 767px)':{marginLeft:'auto'}
 });
 
 export const themeSwitchTrack=() =>({
