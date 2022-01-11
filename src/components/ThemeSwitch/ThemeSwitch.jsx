@@ -20,7 +20,7 @@ export default function ThemeSwitch() {
         <input type="checkbox"
           name="theme"
           id="themeSwitchToggle"
-          aria-label="Переключить между тёмной и светлой темой"
+          aria-label="Change theme"
           className={css(themeSwitchToggle)}
           onChange={handleChange}
         /> 
