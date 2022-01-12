@@ -1,4 +1,5 @@
 const heading1 = {
+  display:'inline-block',
   fontSize: 32,
   fontWeight: 700,
   marginBottom: '20px'

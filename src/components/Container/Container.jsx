@@ -1,15 +1,13 @@
 import React from "react";
-import { useFela } from 'react-fela';
 import PropTypes from 'prop-types';
-import makeStyle from './Container.style';
+import {View} from '../index';
 
 export default function Container({styles, children }){
-  const { css } = useFela();
-  
+    
   return (   
-    <div className={css(makeStyle(styles))}>
+    <View viewStyle={styles}>
       {children}
-    </div>
+    </View>
   )
 }
 
