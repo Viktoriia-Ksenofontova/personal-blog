@@ -1,8 +1,8 @@
 const themeIcon = {
     iconSize:{
         large: 44,
-        small: 30,
-        default: 20,
+        small: 20,
+        default: 30,
     },
     color:{
         primary: '#111',
@@ -12,10 +12,10 @@ const themeIcon = {
 
 const getIconSize=(theme, size)=>{
     switch(size){
-        case 'sizeLarge':
+        case 'large':
             return theme.iconSize.large;
            
-        case 'sizeSmall':
+        case 'small':
             return theme.iconSize.small;
            
         default:
