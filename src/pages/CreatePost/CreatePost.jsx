@@ -6,6 +6,8 @@ import { Container, Button, Form, Text } from '../../components';
 import Icon from '../../assets/images/comment-with-a-pencil.svg';
 import ThemeContext from "../../context/ThemeContext";
 import { labelRule, inputRule } from './CreatePost.style';
+import  { CreateCommentIcon, CommentIcon } from '../../components/Image';
+
 
 const CreatePost = observer(({ store }) => {
   const [title, setTitle] = useState("");
@@ -26,6 +28,11 @@ const CreatePost = observer(({ store }) => {
     <Container>
       <div className={css({display:'flex', justifyContent:'center', alignItems:"flex-start"})}>
       <img src={Icon} alt="pencil" width= '30px'/>
+
+      <CommentIcon/>
+      <CreateCommentIcon styles={{width:'50px', height: '50px', fill:'red'}}/>
+      <CreateCommentIcon size="small" iconColor="accent"/>
+
         <Text as='h2' styles={{ marginLeft: '20px' }} variant="heading2">
           Add a New Post
         </Text>
