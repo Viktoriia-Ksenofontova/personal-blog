@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { fetchPosts, createPost, deletePost } from "../services/postsApi";
 
-class PostsStore {
+export default class PostsStore {
   posts = [];
 
   error = null;
@@ -62,4 +62,3 @@ class PostsStore {
 
 const mainPostsStore = new PostsStore()
 
-export default mainPostsStore;

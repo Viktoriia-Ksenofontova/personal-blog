@@ -1,12 +1,16 @@
 import React, {useContext} from "react";
 import { useFela } from 'react-fela';
 import PropTypes from 'prop-types';
-import ThemeContext from "../../context/ThemeContext";
+// import ThemeContext from "../../context/ThemeContext";
+import StateContext from "../../context/StateContext";
 import textStyles from "./Text.style";
 
 export default function Text({ as, styles, variant, children }) {
   const { css } = useFela();
-  const { theme } = useContext(ThemeContext);
+  // const { theme } = useContext(ThemeContext);
+  const {stateContext} = useContext(StateContext);
+ const {theme}=stateContext;
+
   const Component = as;
   const allStyles = textStyles(styles, variant, theme);
 

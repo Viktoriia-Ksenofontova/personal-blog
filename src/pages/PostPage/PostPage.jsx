@@ -1,53 +1,69 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState,useEffect, useLayoutEffect} from 'react';
 import { observer } from "mobx-react-lite";
 import { useFela } from 'react-fela';
 import { useParams, useNavigate  } from "react-router-dom";
-import { fetchPosts, createComment } from "../../services/postsApi";
+// import {  createComment } from "../../services/postsApi";
 import { Container, Form, CommentItem, List, Button, Text } from '../../components';
-import ThemeContext from "../../context/ThemeContext";
+
+import useStore from "../../store/hooks";
+
 import DeleteIcon from "../../assets/images/deleteIcon.svg";
 import palette from '../../assets/colors';
 
-const PostPage = observer(({ store }) => {
+const PostPage = observer(() => {
   const navigate = useNavigate();
+  const { postId } = useParams();
+  const correctPostId = Number(postId.slice(1));
+  const { css } = useFela();
+
+  const { stateContext} = useStore();
+ const {theme, store} = stateContext;
+
+  const [currentPost, setCurrentPost] = useState({});
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [comments, setComments] = useState([]);
-  const [status, setStatus] = useState("");
-  const [newComment, setNewComment] = useState("");
-  const { postId } = useParams();
-  const correctPostId = Number(postId.slice(1));
-  
-  const { theme } = useContext(ThemeContext);
-  const { css } = useFela();
 
-  
+  const [newComment, setNewComment] = useState("");
+
+  useLayoutEffect(() => {
+    store.fetchCommentsAction(correctPostId);
+   
+  },[store, correctPostId]);
 
   useEffect(() => {
-    fetchPosts(`/posts/${correctPostId}?_embed=comments`).then(res => {
-      setTitle(res.posts.title);
-      setBody(res.posts.body);
-      setComments(res.posts.comments);
-      setStatus(res.status)
-    })
-  }, [correctPostId]);
-  
+    if (store.status==='success' || 'created' ){
+      setCurrentPost(store.postForRender.data);
+     }
+    }, [store.postForRender.data, store.status])
 
-  const handleSubmit = (e) => {
+  // console.log('store.postForRender.data', currentPost);
+
+ useEffect(() => {
+  if(currentPost && (store.status==='success')){
+    setTitle(currentPost.title);
+    setBody(currentPost.body);
+    setComments(currentPost.comments);
+  }
+ 
+ }, [currentPost, store.status])
+
+ 
+   
+   const handleSubmit = (e) => {
     e.preventDefault();
-    createComment(correctPostId, newComment).then(res => {
-      setComments([...comments, res.comment]);
-      setNewComment("")
-    })
+    store.createNewComment(correctPostId, newComment);
+    setNewComment("")
+   
   };
 
  
   const handleClick = e => {
     e.preventDefault();
-    store.removePost(correctPostId).then((res) => {
-      setStatus(res);
+    // store.removePost(correctPostId).then((res) => {
+      // setStatus(res);
       navigate(`/`);
-    });  
+    // });  
   }
 
   const buttonDeleteRule = () => ({
@@ -63,20 +79,28 @@ const PostPage = observer(({ store }) => {
 
   return (
     <Container>
-      {status === "pending" && <div>Loading...</div>}
+      {store.status === "pending" && <div>Loading...</div>} 
+      {(store.status === "success" || store.status==="created") &&
+      <>
       <div className={css({ display: 'flex', justifyContent:'center'})}>
-        <Text as='h2' styles={{ textAlign: "center" }} variant='heading2'>{title}</Text>
+        <Text as='h2' styles={{ textAlign: "center" }} variant='heading2'>
+          {title}
+        </Text>
         <button type="button" onClick={handleClick} 
           className={css(buttonDeleteRule)}>
          <img src={DeleteIcon} alt="delete"/>
         </button>
       </div>
-      
       <Text as='p'>{body}</Text>
+      </>
+      }
+
       <Text as='h3' variant='heading3'>Comments:</Text>
-      
-      {comments?.length === 0 ?
-        <Text as='p'>There are no comments here yet</Text> :
+   
+      {comments?.length === 0 && 
+      <Text as='p'>There are no comments here yet</Text> 
+      }
+       {comments?.length > 0  &&
         <List>
           {comments.map((comment) => (
             <li key={comment.id}>

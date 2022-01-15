@@ -3,11 +3,10 @@ import { BrowserRouter as Router, Route, Routes, Navigate  } from 'react-router-
 import { createRenderer } from 'fela';
 import { RendererProvider } from 'react-fela';
 import routes from "./routing/routes";
-import mainPostsStore from "./store/PostsStore";
-import newPostsStore from './store/newPostStore';
 
 import { Footer, Header, Main } from "./components";
-import ThemeContext from "./context/ThemeContext";
+import Service from './store/service';
+import StateContext from "./context/StateContext";
 
 const LatestPosts = React.lazy(()=> import("./pages/LatestPosts"));
 const CreatePost = React.lazy(()=> import("./pages/CreatePost"));
@@ -15,32 +14,31 @@ const PostPage = React.lazy(() => import("./pages/PostPage"));
 
 const renderer = createRenderer();
 
-  
 function App() {
-  const [theme, setTheme] = useState("light");
-  const value = useMemo(()=>({theme, setTheme }),[theme]);
+  const store= new Service();
+  const [stateContext, setStateContext]=useState({theme:"light", store});
+  const value=useMemo(()=>({stateContext, setStateContext }),[stateContext]);
 
   return (
     <RendererProvider renderer = {renderer}>
-      <ThemeContext.Provider value={value}>
+      <StateContext.Provider value={value}>
       <Router>
       <Header />
       <Main>
         <Suspense fallback={<p>Loading...</p>}>
           <Routes>
-            <Route exact path={routes.home} element={<LatestPosts store={newPostsStore}/>} />
-            <Route path={routes.createPost} element={<CreatePost store={mainPostsStore}/>} />
-            <Route path={routes.post} element={<PostPage store={mainPostsStore}/>}/>
+            <Route exact path={routes.home} element={<LatestPosts/>} />
+            <Route path={routes.createPost} element={<CreatePost />} /> 
+            <Route path={routes.post} element={<PostPage />}/> 
             <Route path="*" element={<Navigate to={routes.page404} />} />
           </Routes>
         </Suspense>
           </Main>
           <Footer/>
       </Router>
-      </ThemeContext.Provider>
+      </StateContext.Provider>
     </RendererProvider>
   );
 }
-
 
 export default App;

@@ -1,136 +1,138 @@
-import { makeAutoObservable, runInAction } from "mobx";
-import axios from "axios";
+import { makeObservable, observable, computed, action , toJS} from "mobx";
+// import axios from "axios";
 
-axios.defaults.baseURL = "https://simple-blog-api.crew.red";
+// axios.defaults.baseURL = "https://simple-blog-api.crew.red";
 
-class PostsStore {
+export default class PostsStore {
   posts = [];
 
-  comments = [];
+  activePost={};
 
   error = null;
 
   status = "";
 
   constructor() {
-     makeAutoObservable(this);
-  };
+      makeObservable(this, {
+      posts: observable,
+      activePost: observable,
+      error: observable,
+      status: observable,
+      setPosts: action,
+      setActivePost: action,
+      setNewStatus:action,
+      allPosts: computed,
+      postForRender:computed,
+      countOfPosts: computed
+  })
+  }
 
-  createNewPost = async (title, body) => {
-    try {
-      await axios.post("/posts", { "title": title, "body": body })
-        .then((res) => {
-          runInAction(() => {
-            this.posts.push(res.data);
-            this.status = "created";
-            this.error = null;
-          })
-        })
-    } catch (err) {
-      runInAction(() => {
-        this.error = err.message;
-        this.status = "error";
-      })
-    }
-  };
- 
-  updatePost({ postId, update }) {
-    const postIndex = this.posts.findIndex((post) => post.id === postId);
-    this.posts[postIndex] = update;
-  };
+  setPosts(data) {
+    this.posts=data;
+  }
 
-  deletePost(postId) {
-    const postIndex = this.posts.findIndex((post) => post.id === postId);
-    if (postIndex > -1) {
-      this.posts.splice(postIndex, 1);
-    }
-  };
+  setActivePost(data){
+    this.activePost={...data};
+  }
 
-  createNewComments = async (postId, body) => {
-    try {
-      await axios.post("/comments", { "postId": postId, "body": body })
-        .then((res) => {
-          runInAction(() => {
-            this.comments.push(res.data);
-            this.status = "created";
-            this.error = null;
-          })
-        })
-    } catch (err) {
-      runInAction(() => {
-        this.error = err.message;
-        this.status = "error";
-      })
-    }
-  };
-  
-  getPostsFromServer = async () => {
-    this.status = "pending";
-    try {
-      await axios.get("/posts")
-        .then(response => {
-          runInAction(() => {
-            this.posts = response.data;
-            this.status = "success";
-            this.error = null;
-          })
-        })
-    } catch (err) {
-      runInAction(() => {
-        this.status = "error";
-        this.error = err.message;
-      })
-    }
-  };
+  setNewStatus(status){
+    this.status=status;
+  }
 
-  getCommentsFromServerByPostId = async (postId) => {
-    try {
-      await axios.get(`/posts/${postId}?_embed=comments`)
-        .then((res) => {
-          runInAction(() => {
-            this.comments = res.data.comments;
-            this.status = "success";
-            this.error = null;
-          })
-        })
-    } catch (err) {
-      runInAction(() => {
-        this.error = err.message;
-        this.status = "error";
-      })
-    }
-  };
-  
-  deletePostFromServer = async (postId) => {
-    try {
-      await axios.delete(`/posts/${postId}`)
-        .then(() => {
-          runInAction(() => {
-            this.deletePost(postId);
-            this.status = "success";
-            this.error = null;
-          })
-        })
-    } catch (err) {
-      runInAction(() => {
-        this.error = err.message;
-        this.status = "error";
-      })
-    }
- 
-  };
-  
+   
   get allPosts() {
     const reversePosts = [...this.posts];
     return reversePosts.reverse();
   };
 
+  get postForRender(){
+    return toJS(this.activePost)
+  };
+
   get countOfPosts() {
     return this.posts.length;
   };
-};
+}
 
-const postsStore = new PostsStore();
+//   updatePost(postId, data){
+//     const index = this.posts.findIndex((post)=>post.id===postId);
+//     runInAction(() => {this.posts[index] = data})
+// }
+
+  // createNewPost = async (title, body) => {
+  //   try {
+  //     await axios.post("/posts", { "title": title, "body": body })
+  //       .then((res) => {
+  //         runInAction(() => {
+  //           this.posts.push(res.data);
+  //           this.status = "created";
+  //           this.error = null;
+  //         })
+  //       })
+  //   } catch (err) {
+  //     runInAction(() => {
+  //       this.error = err.message;
+  //       this.status = "error";
+  //     })
+  //   }
+  // };
+ 
+  
+
+  // deletePost(postId) {
+  //   const postIndex = this.posts.findIndex((post) => post.id === postId);
+  //   if (postIndex > -1) {
+  //     this.posts.splice(postIndex, 1);
+  //   }
+  // };
+
+  // createNewComments = async (postId, body) => {
+  //   try {
+  //     await axios.post("/comments", { "postId": postId, "body": body })
+  //       .then((res) => {
+  //         runInAction(() => {
+  //           this.comments.push(res.data);
+  //           this.status = "created";
+  //           this.error = null;
+  //         })
+  //       })
+  //   } catch (err) {
+  //     runInAction(() => {
+  //       this.error = err.message;
+  //       this.status = "error";
+  //     })
+  //   }
+  // };
+  
+  
+
+  
+  
+  // deletePostFromServer = async (postId) => {
+  //   try {
+  //     await axios.delete(`/posts/${postId}`)
+  //       .then(() => {
+  //         runInAction(() => {
+  //           this.deletePost(postId);
+  //           this.status = "success";
+  //           this.error = null;
+  //         })
+  //       })
+  //   } catch (err) {
+  //     runInAction(() => {
+  //       this.error = err.message;
+  //       this.status = "error";
+  //     })
+  //   }
+ 
+  // };
+  
+  
 
 
-export default postsStore;
+// const postsStore = new PostsStore();
+
+
+ 
+
+
