@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import { observer } from "mobx-react-lite";
 import { useFela } from 'react-fela';
-import { Container, PostItem, List, Text, Button } from "../../components";
+import { Container, PostItem, List, Text, Button, Loader } from "../../components";
 
 import latestPostStyle from './LatestPost.style';
 import useStore from "../../store/hooks";
@@ -36,7 +36,7 @@ const LatestPosts = observer(() => {
         Latest post
       </Text>
      
-      {status === "pending" && <div>Loading...</div>}
+      {status === "pending" && <Loader/>}
       <List styles={{ display: 'flex', flexWrap: 'wrap' }}>
         {visiblePosts.map(({id, title, body }) => (
           <li key={id} className={css(latestPostStyle(theme))}>
