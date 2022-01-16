@@ -1,6 +1,6 @@
 import { runInAction, action, makeObservable } from 'mobx';
 import axios from "axios";
-import PostsStore from './NewPostStore';
+import PostsStore from './PostStore';
 
 axios.defaults.baseURL = "https://simple-blog-api.crew.red";
 

@@ -1,20 +1,20 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useFela } from 'react-fela';
-// import ThemeContext from "../../context/ThemeContext";
+import useStore from '../../store/hooks';
+
 import {themeSwitchControl, themeSwitchToggle, themeSwitchMarker, themeSwitchTrack} from './ThemeSwitch.style';
-import StateContext from "../../context/StateContext";
 
 
 export default function ThemeSwitch() {
   const [checked, setChecked] = useState(false);
-  // const { theme, setTheme } = useContext(ThemeContext);
-  const {stateContext, setStateContext} =useContext(StateContext);
+    
   const { css } = useFela();
+  const { stateContext, setStateContext } = useStore();
+  const { theme } = stateContext;
 
   const handleChange=()=>{
     setChecked(!checked);
-    // setTheme(theme === "light" ? "dark" : "light");
-    setStateContext(stateContext.theme === "light" ? ({store:stateContext.store, theme:"dark"}) : ({store:stateContext.store, theme:"light"}))
+    setStateContext(theme === "light" ? ({store:stateContext.store, theme:"dark"}) : ({store:stateContext.store, theme:"light"}))
   }
 
   return (

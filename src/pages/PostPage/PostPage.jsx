@@ -87,7 +87,7 @@ const PostPage = observer(() => {
               justifyContent: 'center',
             })}
           >
-            <Text as="h2" styles={{ textAlign: 'center' }} variant="heading2">
+            <Text as="h2" styles={{ textAlign: 'center', width: 'calc(100% - 80px)' }} variant="heading2">
               {title}
             </Text>
             <button

@@ -1,21 +1,22 @@
-import React, {useEffect, useState, useContext } from 'react';
+import React, {useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useFela } from 'react-fela';
 import routes from "../../routing/routes";
 import { Container, Text, ThemeSwitch } from '../index';
 import palette from '../../assets/colors';
-// import ThemeContext from "../../context/ThemeContext";
+
 import IconClose from '../../assets/images/closeIcon.svg';
 import IconMenu from '../../assets/images/menuIcon.svg';
 import {navStyle, navbarLinkRule, headerStyles, navWrapperStyles, closeNavWrapperStyles, buttonMenuStyles } from './Header.style';
-import StateContext from '../../context/StateContext';
+
+import useStore from '../../store/hooks';
 
 export default function Header() {
   const { css } = useFela();
-  // const { theme } = useContext(ThemeContext);
-  const {stateContext} = useContext(StateContext);
- const {theme}=stateContext;
-    
+
+  const { stateContext } = useStore();
+  const { theme } = stateContext;
+     
   const [scrolled, setScrolled] = useState(false);
   const [openMenu, setOpenMenu]=useState(false);
   const [userWidth, setUserWidth] = useState(window.innerWidth);

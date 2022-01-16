@@ -1,17 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useFela } from 'react-fela';
 import PropTypes from 'prop-types';
 import makeStyle from './Button.style';
-// import ThemeContext from "../../context/ThemeContext";
-import StateContext from "../../context/StateContext";
+
+import useStore from '../../store/hooks';
 
 export default function Button({ text, type, onClick}){
   const { css } = useFela();
-  // const { theme } = useContext(ThemeContext);
-  const {stateContext} = useContext(StateContext);
- const {theme}=stateContext;
-  
-  return (   
+  const { stateContext } = useStore();
+  const { theme } = stateContext;
+ 
+ return (   
     <button onClick={onClick} className={css(makeStyle({ theme }))}
       // eslint-disable-next-line react/button-has-type
     type={type}>
