@@ -4,7 +4,7 @@ import { createRenderer } from 'fela';
 import { RendererProvider } from 'react-fela';
 import routes from "./routing/routes";
 
-import { Footer, Header, Main } from "./components";
+import { Footer, Header, Main, Loader } from "./components";
 import Service from './store/service';
 import StateContext from "./context/StateContext";
 
@@ -25,7 +25,7 @@ function App() {
       <Router>
       <Header />
       <Main>
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<Loader/>}>
           <Routes>
             <Route exact path={routes.home} element={<LatestPosts/>} />
             <Route path={routes.createPost} element={<CreatePost />} /> 
