@@ -49,7 +49,7 @@ class Service extends PostsStore {
        
         try { await axios.get(`/posts/${postId}?_embed=comments`)
            .then(response=>{
-              this.setActivePost(response);
+              this.setActivePost(response.data);
               this.handleSuccess();
             })
       } catch (error){
@@ -58,13 +58,10 @@ class Service extends PostsStore {
     }
 
     async createNewComment (postId, body) {
-        this.setNewStatus("pending");
         try {
            await axios.post("/comments", { "postId": postId, "body": body })
              .then(({data}) => {
-              
-
-                const newActivePost=({...this.postForRender.data});
+                const newActivePost=({...this.postForRender});
                 newActivePost.comments.push(data);
                
                 this.setActivePost(newActivePost);
@@ -78,6 +75,37 @@ class Service extends PostsStore {
         }
     };
 
+
+    async createNewPost (title, body) {
+        let id;
+    try {
+      await axios.post("/posts", { "title": title, "body": body })
+       .then(({data}) => {
+           this.setActivePost(data);
+           this.handleSuccess();
+           id=data.id;
+   })
+  } catch (error) {
+     this.handleError(error);
+   }
+   return id;
+  };
+
+
+  async removePost(postId) {
+    try {
+       await axios.delete(`/posts/${postId}`)
+      .then(() => {
+       
+        const updatedPosts=[ ...this.allPosts ].reverse().filter(post => post.id !== postId);
+        this.setPosts(updatedPosts);
+        this.handleSuccess();
+      })
+    } catch (error) {
+        this.handleError(error);
+   }
+
+  }
 
 }
 

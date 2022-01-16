@@ -1,26 +1,27 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useFela } from 'react-fela';
 import { observer } from "mobx-react-lite";
 import { useNavigate } from 'react-router-dom';
 import { Container, Button, Form, Text } from '../../components';
-import ThemeContext from "../../context/ThemeContext";
 import { labelRule, inputRule } from './CreatePost.style';
 import  { CreateCommentIcon } from '../../components/Image';
+import useStore from "../../store/hooks";
 
+const CreatePost = observer(() => {
+  const navigate = useNavigate();
+  const { css } = useFela();
 
-const CreatePost = observer(({ store }) => {
+  const { stateContext} = useStore();
+  const {theme, store} = stateContext;
+
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
-  const navigate = useNavigate();
-  const { theme } = useContext(ThemeContext);
-  const { css } = useFela();
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    store.createNewPost(title, body).then(res =>
-      navigate(`/posts/:${res.post.id}`)
-    );
+    store.createNewPost(title, body).then(res=>{
+      navigate(`/posts/:${res}`)
+    }) 
   }
 
   return (
