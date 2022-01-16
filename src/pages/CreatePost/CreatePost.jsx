@@ -3,10 +3,9 @@ import { useFela } from 'react-fela';
 import { observer } from "mobx-react-lite";
 import { useNavigate } from 'react-router-dom';
 import { Container, Button, Form, Text } from '../../components';
-import Icon from '../../assets/images/comment-with-a-pencil.svg';
 import ThemeContext from "../../context/ThemeContext";
 import { labelRule, inputRule } from './CreatePost.style';
-import  { CreateCommentIcon, CommentIcon } from '../../components/Image';
+import  { CreateCommentIcon } from '../../components/Image';
 
 
 const CreatePost = observer(({ store }) => {
@@ -27,15 +26,13 @@ const CreatePost = observer(({ store }) => {
   return (
     <Container>
       <div className={css({display:'flex', justifyContent:'center', alignItems:"flex-start"})}>
-      <img src={Icon} alt="pencil" width= '30px'/>
+      <CreateCommentIcon />
+      <CreateCommentIcon size="large" iconColor="accent"/>
+      <CreateCommentIcon size="small"/>
 
-      <CommentIcon/>
-      <CreateCommentIcon styles={{width:'50px', height: '50px', fill:'red'}}/>
-      <CreateCommentIcon size="small" iconColor="accent"/>
-
-        <Text as='h2' styles={{ marginLeft: '20px' }} variant="heading2">
-          Add a New Post
-        </Text>
+      <Text as='h2' styles={{ marginLeft: '20px' }} variant="heading2">
+        Add a New Post
+      </Text>
       </div> 
 
       <Form handleSubmit={handleSubmit}>
