@@ -12,13 +12,8 @@ header:{
     display:'flex', 
     position: 'relative', 
     justifyContent: 'space-between'
-},
-
-list: {
-    padding: '0',
-    margin: '0 0 10px 0',
-    listStyle: "none",
 }
+
 }
 
 export const makeViewStyle=(styleProps, variant)=>{
