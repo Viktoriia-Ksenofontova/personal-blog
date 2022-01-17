@@ -7,7 +7,9 @@ const heading1 = {
 const heading2 = {
   fontSize: 24,
   fontWeight: 700,
-  marginBottom: '20px'
+  marginBottom: '20px',
+  textAlign: 'center', 
+  width: '100%'
 };
 const heading3 = {
   fontSize: 18,
