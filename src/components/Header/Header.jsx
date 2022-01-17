@@ -2,13 +2,9 @@ import React, {useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useFela } from 'react-fela';
 import routes from "../../routing/routes";
-import { Container, Text, ThemeSwitch } from '../index';
-import palette from '../../assets/colors';
-
-import IconClose from '../../assets/images/closeIcon.svg';
-import IconMenu from '../../assets/images/menuIcon.svg';
-import {navStyle, navbarLinkRule, headerStyles, navWrapperStyles, closeNavWrapperStyles, buttonMenuStyles } from './Header.style';
-
+import { View, Text, ThemeSwitch } from '../index';
+import { CloseIcon, MenuIcon } from '../Image';
+import {logoStyles, navStyle, navbarLinkRule, headerStyles, navWrapperStyles, closeNavWrapperStyles, buttonMenuStyles } from './Header.style';
 import useStore from '../../store/hooks';
 
 export default function Header() {
@@ -55,14 +51,14 @@ export default function Header() {
    
   return (
     <header className={!scrolled? css(headerStyles) : css({...headerStyles(), position: 'sticky', top: 0})} >
-      <Container styles={{ display:'flex', position: 'relative', justifyContent: 'space-between'}}>
-        <Text as="h1" styles={{ color: `${palette.light.accent}`, marginBottom:'0'}} variant="heading1">
+      <View variant='header' viewStyle={!openMenu && { overflow:'hidden'}}>
+        <Text as="h1" styles={userWidth<440? {...logoStyles(),fontSize:'28px'}: logoStyles() } variant="heading1">
         News & Events
         </Text>
         {userWidth<768 && 
           <button type="button" onClick={handleMenuButtonClick} className={css(buttonMenuStyles)}>
-            {openMenu && <img src={IconClose} alt="button close"/>}
-            {!openMenu && <img src={IconMenu} alt="button menu"/>}  
+            {openMenu && <CloseIcon size="large"/>}
+            {!openMenu && <MenuIcon size="large"/>}  
           </button>
         }
         
@@ -81,8 +77,7 @@ export default function Header() {
         </nav>
         <ThemeSwitch/>
         </div>
-        
-      </Container>
+      </View>
     </header>
   )
 }

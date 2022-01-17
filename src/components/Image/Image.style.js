@@ -1,3 +1,5 @@
+import palette from '../../assets/colors';
+
 const themeIcon = {
     iconSize:{
         large: 44,
@@ -5,8 +7,8 @@ const themeIcon = {
         default: 30,
     },
     color:{
-        primary: '#111',
-        accent:'#9ACD32'
+        primary: palette.icon.primary,
+        accent: palette.icon.accent
     }  
 };
 
@@ -36,24 +38,24 @@ const getIconColor=(theme, colorName)=>{
     }
 }
   
-export default function style(size, iconColor, styles) {
+export default function style(size, iconColor, iconStyles) {
     let height;
     let width;
     let fill;
 
     if(iconColor){ 
         fill=getIconColor(themeIcon, iconColor);
-    } else if(styles?.fill){
-        fill=styles.fill;
+    } else if(iconStyles?.fill){
+        fill=iconStyles.fill;
     }
 
     if(size){
         height= getIconSize(themeIcon, size);
         width= getIconSize(themeIcon, size); 
         
-    } else if(styles?.height || styles?.width){
-        height= styles.height || getIconSize(themeIcon, 'default');
-        width= styles.width || getIconSize(themeIcon, 'default');     
+    } else if (iconStyles?.height || iconStyles?.width){
+        height= iconStyles.height || getIconSize(themeIcon, 'default');
+        width= iconStyles.width || getIconSize(themeIcon, 'default');     
         
     } else {  
         height= getIconSize(themeIcon, 'default');
