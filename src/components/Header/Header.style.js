@@ -48,7 +48,7 @@ export const navbarLinkRule = () => ({
         backgroundColor:palette[theme].menuWrapper,
         right: '0',
         top: '100%',
-        transform: 'translateX(0)'
+        transform: 'translateX(0)',
     }
   });
 
@@ -67,8 +67,10 @@ export const navbarLinkRule = () => ({
   })
 
   export const buttonMenuStyles=()=>({
-    width:'40px', 
-    height:'40px', 
+    width:'50px', 
+    height:'50px', 
+    padding:'3px',
+    textAlign:'center',
     backgroundColor:'transparent', 
     outline: 'none', 
     border:'none', 
@@ -81,4 +83,7 @@ export const navbarLinkRule = () => ({
     }
   })
 
-  
+  export const logoStyles=()=>({
+    color: `${palette.light.accent}`, 
+    marginBottom:'0'
+  })
