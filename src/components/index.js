@@ -10,3 +10,4 @@ export { default as Main } from './Main';
 export { default as Footer } from './Footer';
 export { default as ThemeSwitch } from './ThemeSwitch';
 export { default as View } from './View';
+export { default as Loader } from './Loader'

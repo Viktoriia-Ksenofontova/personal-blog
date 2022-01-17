@@ -3,14 +3,8 @@ import { observer } from 'mobx-react-lite';
 import { useFela } from 'react-fela';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import {
-  Container,
-  Form,
-  CommentItem,
-  List,
-  Button,
-  Text,
-} from '../../components';
+
+import { Container, Form, CommentItem, List, Button, Text, Loader } from '../../components';
 
 import useStore from '../../store/hooks';
 
@@ -78,7 +72,7 @@ const PostPage = observer(() => {
 
   return (
     <Container>
-      {store.status === 'pending' && <div>Loading...</div>}
+      {store.status === 'pending' && <Loader/>}
       {(store.status === 'success' || store.status === 'created') && (
         <>
           <div
