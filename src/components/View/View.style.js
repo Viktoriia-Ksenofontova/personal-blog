@@ -14,11 +14,14 @@ header:{
     justifyContent: 'space-between'
 },
 
-list: {
-    padding: '0',
-    margin: '0 0 10px 0',
-    listStyle: "none",
+footer:{
+    margin:'0 auto',
+    padding:'20px',
+    maxWidth: '1440px',
+    display:'flex', 
+    justifyContent: 'center'
 }
+
 }
 
 export const makeViewStyle=(styleProps, variant)=>{

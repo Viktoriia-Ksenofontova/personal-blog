@@ -2,8 +2,6 @@ import React  from "react";
 import { useFela } from 'react-fela';
 import PropTypes from 'prop-types';
 import useStore from '../../store/hooks';
-
-// import StateContext from "../../context/StateContext";
 import textStyles from "./Text.style";
 
 export default function Text({ as, styles, variant, children }) {
