@@ -1,21 +1,20 @@
-import { runInAction, action, makeObservable } from 'mobx';
+import { runInAction } from 'mobx';
 import axios from "axios";
 import PostsStore from './PostStore';
 
 axios.defaults.baseURL = "https://simple-blog-api.crew.red";
 
 class Service extends PostsStore {
-
-    constructor() {
-    super();
-        makeObservable(this, {
-        handleError:action,
-        handleSuccess:action,
-        fetchPostsAction: action,
-        fetchCommentsAction:action,
-        createNewComment:action,
-      })
-    }
+    // constructor() {
+    // super();
+    // makeObservable(this, {
+    //     handleError:action,
+    //     handleSuccess:action,
+    //     fetchPostsAction: action,
+    //     fetchCommentsAction:action,
+    //     createNewComment:action,
+    // })
+    // }
     
     handleError(err){
         runInAction(() => {
@@ -34,11 +33,11 @@ class Service extends PostsStore {
     async fetchPostsAction(){
         this.setNewStatus("pending");
 
-        try { await axios.get("/posts")
-            .then(response => {
-            this.setPosts(response.data);
-            this.handleSuccess()
-            })
+        try { const response = await axios.get("/posts");
+            if (response.data) {
+                this.setPosts(response.data);
+                this.handleSuccess();
+            }
         } catch (error){
             this.handleError(error);    
         }        
@@ -47,66 +46,58 @@ class Service extends PostsStore {
     async fetchCommentsAction(postId){
          this.setNewStatus("pending");
        
-        try { await axios.get(`/posts/${postId}?_embed=comments`)
-           .then(response=>{
-              this.setActivePost(response.data);
-              this.handleSuccess();
-            })
+        try { const response = await axios.get(`/posts/${postId}?_embed=comments`);
+            if (response.data) {
+                this.setActivePost(response.data);
+                this.handleSuccess();
+            }
       } catch (error){
         this.handleError(error); 
       }
     }
 
     async createNewComment (postId, body) {
-        try {
-           await axios.post("/comments", { "postId": postId, "body": body })
-             .then(({data}) => {
+        try { const response =  await axios.post("/comments", { "postId": postId, "body": body });
+        if (response.data) {
                 const newActivePost=({...this.postForRender});
-                newActivePost.comments.push(data);
+                newActivePost.comments.push(response.data);
                
                 this.setActivePost(newActivePost);
                 runInAction(() => {
                     this.status = "created";
                     this.error = null;
                 })
-             })
+             }
         } catch (error) {
             this.handleError(error);
         }
     };
 
-
     async createNewPost (title, body) {
         let id;
-    try {
-      await axios.post("/posts", { "title": title, "body": body })
-       .then(({data}) => {
-           this.setActivePost(data);
-           this.handleSuccess();
-           id=data.id;
-   })
-  } catch (error) {
-     this.handleError(error);
-   }
-   return id;
-  };
+        try { const response = await axios.post("/posts", { "title": title, "body": body });
+            if (response.data) {
+                this.setActivePost(response.data);
+                this.handleSuccess();
+                id=response.data.id;
+            }
+        } catch (error) {
+            this.handleError(error);
+        }
+    return id;
+    };
 
-
-  async removePost(postId) {
-    try {
-       await axios.delete(`/posts/${postId}`)
-      .then(() => {
-       
-        const updatedPosts=[ ...this.allPosts ].reverse().filter(post => post.id !== postId);
-        this.setPosts(updatedPosts);
-        this.handleSuccess();
-      })
-    } catch (error) {
-        this.handleError(error);
-   }
-
-  }
-
+    async removePost(postId) {
+        try { const response = await axios.delete(`/posts/${postId}`);
+            if (response) {
+                const updatedPosts=[ ...this.allPosts ].reverse().filter(post => post.id !== postId);
+                this.setPosts(updatedPosts);
+                this.handleSuccess();
+            }
+        } catch (error) {
+            this.handleError(error);
+        }
+    };
 }
 
 export default Service;
