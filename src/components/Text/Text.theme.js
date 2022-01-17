@@ -23,8 +23,7 @@ const primary = {
 };
 const small = {
   fontSize: 12,
-  fontWeight: 400,
-  marginBottom: '10px'
+  fontWeight: 400
 }
 
 export default {
