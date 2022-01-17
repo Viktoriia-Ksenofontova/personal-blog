@@ -1,8 +1,10 @@
-import React, {useContext} from "react";
+import React from "react";
+import { observer } from "mobx-react-lite";
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useFela } from "react-fela";
-import ThemeContext from "../../context/ThemeContext";
+
+import useStore from "../../store/hooks";
 import Text from "../Text";
 import linkRule from "./PostItem.style";
 
@@ -14,10 +16,12 @@ const postStyle = {
   '-webkitBoxOrient': 'vertical'
 }
 
-export default function PostItem (props) {
+const PostItem = observer((props) =>{
   const { id, title, body } = props;
-  const { theme } = useContext(ThemeContext);
   const { css } = useFela();
+  const { stateContext} =useStore();
+  const {theme}=stateContext;
+
   return (
     <>
       <Text as="h3" variant="heading3">
@@ -32,7 +36,9 @@ export default function PostItem (props) {
       </Link>
     </>
   )  
-};
+});
+
+export default PostItem;
 
 PostItem.defaultProps = {
   title: "",

@@ -1,22 +1,27 @@
-import React, {useContext, useState, useEffect} from "react";
+import React, { useState, useEffect} from "react";
 import { observer } from "mobx-react-lite";
 import { useFela } from 'react-fela';
 import { Container, PostItem, List, Text, Button } from "../../components";
-import ThemeContext from "../../context/ThemeContext";
+
 import latestPostStyle from './LatestPost.style';
+import useStore from "../../store/hooks";
+
  
-const LatestPosts = observer(({ store }) => {
+const LatestPosts = observer(() => {
+  const { css } = useFela();
+  const { stateContext } = useStore()
+  const {theme, store} = stateContext;
   const {allPosts, status } = store;
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [visiblePosts, setVisiblePosts] = useState([]);
 
-  const { css } = useFela();
-  const { theme } = useContext(ThemeContext);
-  
   useEffect(() => {
-   store.getPostsFromServer();      
+   store.fetchPostsAction();      
   }, [store]);
 
+  // console.log('all', allPosts)
+  
   useEffect(() => {
     setVisiblePosts([...allPosts].slice(0, currentPage * 5));
   }, [allPosts, currentPage]);
@@ -24,7 +29,7 @@ const LatestPosts = observer(({ store }) => {
   const handleClick = () => {
     setCurrentPage(currentPage + 1);
   }
-
+  
   return (
     <Container>
       <Text as="h2" styles={{ textAlign: 'center'}} variant="heading2">
