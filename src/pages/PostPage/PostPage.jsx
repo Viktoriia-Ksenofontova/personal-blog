@@ -3,13 +3,10 @@ import { observer } from 'mobx-react-lite';
 import { useFela } from 'react-fela';
 import { useParams, useNavigate } from 'react-router-dom';
 
-
 import { Container, Form, CommentItem, List, Button, Text, Loader } from '../../components';
-
 import useStore from '../../store/hooks';
-
-import DeleteIcon from '../../assets/images/deleteIcon.svg';
-import palette from '../../assets/colors';
+import { DeleteIcon } from '../../components/Image';
+import {labelRuleStyle, textareaRuleStyle, buttonDeleteRuleStyle} from './PostPage.style';
 
 const PostPage = observer(() => {
   const navigate = useNavigate();
@@ -53,43 +50,31 @@ const PostPage = observer(() => {
     setNewComment('');
   };
 
-  const handleClick = e => {
+  const handleDeleteBtnClick = e => {
     e.preventDefault();
     store.removePost(correctPostId);
     navigate(`/`);
   };
 
-  const buttonDeleteRule = () => ({
-    width: '30px',
-    marginLeft: '50px',
-    height: '30px',
-    border: `1px solid ${palette[theme].accent}`,
-    borderRadius: '50%',
-    transition: 'all 0.4s linear',
-    ':hover': { backgroundColor: palette[theme].accent },
-    ':focus': { backgroundColor: palette[theme].accent },
-  });
+  const handleTextareaChange = e => {
+    e.preventDefault();
+    setNewComment(e.target.value);
+  }
 
   return (
     <Container>
       {store.status === 'pending' && <Loader/>}
-      {(store.status === 'success' || store.status === 'created') && (
+      {(store.status === 'success' || 'created') && (
         <>
-          <div
-            className={css({
-              display: 'flex',
-              justifyContent: 'center',
-            })}
-          >
-            <Text as="h2" styles={{ textAlign: 'center', width: 'calc(100% - 80px)' }} variant="heading2">
+          <div className={css({display: 'flex', justifyContent: 'center'})} >
+            <Text as="h2" variant="heading2">
               {title}
             </Text>
-            <button
-              type="button"
-              onClick={handleClick}
-              className={css(buttonDeleteRule)}
+            <button type="button"
+              onClick={handleDeleteBtnClick}
+              className={css(buttonDeleteRuleStyle(theme))}
             >
-              <img src={DeleteIcon} alt="delete" />
+              <DeleteIcon/>
             </button>
           </div>
           <Text as="p">{body}</Text>
@@ -116,32 +101,13 @@ const PostPage = observer(() => {
       <Form handleSubmit={handleSubmit}>
         <label
           htmlFor="comment"
-          className={css({
-            display: 'flex',
-            width: '100%',
-            fontSize: '16px',
-            fontWeight: '500',
-            alignItems: 'top',
-            textAlign: 'left',
-            marginBottom: '20px',
-            color: palette[theme].text,
-          })}
+          className={css(labelRuleStyle(theme))}
         >
           Your comment:
-          <textarea
-            required
-            value={newComment}
+          <textarea required value={newComment}
             id="comment"
-            onChange={e => setNewComment(e.target.value)}
-            className={css({
-              marginLeft: '20px',
-              padding: '10px',
-              width: '100%',
-              border: 'none',
-              borderRadius: '20px',
-              boxShadow: `0px 0px 6px ${palette[theme].shadowColor}`,
-              outline: 'none',
-            })}
+            onChange={handleTextareaChange}
+            className={css(textareaRuleStyle(theme))}
           />
         </label>
 

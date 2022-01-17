@@ -52,7 +52,7 @@ export default function Header() {
   return (
     <header className={!scrolled? css(headerStyles) : css({...headerStyles(), position: 'sticky', top: 0})} >
       <View variant='header' viewStyle={!openMenu && { overflow:'hidden'}}>
-        <Text as="h1" styles={userWidth<440? {...logoStyles(),fontSize:'28px'}: logoStyles() } variant="heading1">
+        <Text as="h1" variant="heading1" styles= {userWidth<440? {...logoStyles(), fontSize:'28px'} : logoStyles()} >
         News & Events
         </Text>
         {userWidth<768 && 
