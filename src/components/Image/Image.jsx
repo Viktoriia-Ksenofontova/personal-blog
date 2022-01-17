@@ -8,9 +8,9 @@ import { ReactComponent as menuIcon } from '../../assets/images/menuIcon.svg';
 import style from './Image.style';
 
 function CreateIconComponent(Icon){
-  return function insideCreateIconComponent({size, iconColor, styles}){
+  return function insideCreateIconComponent({size, iconColor, iconStyles}){
     
-   const componentStyles=style(size, iconColor, styles);
+   const componentStyles=style(size, iconColor, iconStyles);
    return (
       <Icon 
          width={componentStyles.width}
