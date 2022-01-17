@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useFela } from 'react-fela';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -31,7 +31,7 @@ const PostPage = observer(() => {
     store.fetchCommentsAction(correctPostId);
   }, [store, correctPostId]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (store.status === 'success' || 'created') {
       setCurrentPost(store.postForRender);
     }
@@ -39,7 +39,7 @@ const PostPage = observer(() => {
 
   // console.log('store.postForRender.data', currentPost);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (currentPost && store.status === 'success') {
       setTitle(currentPost.title);
       setBody(currentPost.body);
