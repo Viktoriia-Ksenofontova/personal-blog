@@ -16,7 +16,7 @@ const style = ({ theme }) => ({
     cursor:'pointer',
     transition: 'all 0.4s linear',
      ':hover': {
-      color: palette[theme].text,
+      color: palette[theme].buttonHoverText,
       backgroundColor: palette[theme].accent
      }
 })
