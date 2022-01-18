@@ -9,6 +9,7 @@ export const postStyle = () => ({
   height:'72px'
 });
 
+
 export const linkRuleStyle = (theme) => ({
   width: '110px',
   alignSelf:'end',
@@ -29,3 +30,4 @@ export const linkRuleStyle = (theme) => ({
     color: palette[theme].accent
   },
 });
+
