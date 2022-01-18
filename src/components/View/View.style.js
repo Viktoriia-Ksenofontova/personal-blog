@@ -1,5 +1,7 @@
 const viewTheme={
 container: {
+    display: 'flex',
+    flexDirection: 'column',
     margin:'0 auto',
     padding:'20px',
     maxWidth: '1440px'
@@ -12,6 +14,18 @@ header:{
     display:'flex', 
     position: 'relative', 
     justifyContent: 'space-between'
+},
+
+footer:{
+    margin:'0 auto',
+    padding:'20px',
+    maxWidth: '1440px',
+    display:'flex', 
+    justifyContent: 'center'
+},
+
+content:{
+    display: 'flex',
 }
 
 }

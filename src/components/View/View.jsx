@@ -8,7 +8,12 @@ import { makeViewStyle } from './View.style';
 export default function View({
   as = 'div',
   variant,
+  flex,
+  gap,
+  justifyContent,
+  alignItems,
   flexWrap,
+  margin,
   overflow,
   children,
   viewStyle,
@@ -17,8 +22,13 @@ export default function View({
   const Component = as;
   const { css } = useFela();
   const styleProps = {
+    flex,
+    gap,
+    justifyContent,
+    alignItems,
     flexWrap,
     overflow,
+    margin,
     ...viewStyle,
   };
 
@@ -37,7 +47,12 @@ View.defaultProps = {
   viewStyle: {},
   variant: 'container',
   flexWrap: 'nowrap',
-  overflow: 'visible',
+  flex: '',
+  gap:'',
+  margin:'',
+  justifyContent:'',
+  alignItems:'',
+  overflow: '',
 };
 
 View.propTypes = {
@@ -45,6 +60,11 @@ View.propTypes = {
   viewStyle: PropTypes.objectOf(PropTypes.string),
   variant: PropTypes.string,
   children: PropTypes.node.isRequired,
+  flex: PropTypes.string,
+  gap: PropTypes.string,
+  margin:PropTypes.string,
+  justifyContent:PropTypes.string,
+  alignItems:PropTypes.string,
   flexWrap: PropTypes.string,
   overflow: PropTypes.string,
 };

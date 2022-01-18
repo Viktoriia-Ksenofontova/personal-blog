@@ -1,13 +1,14 @@
 import palette from '../../assets/colors';
 
-export const postStyle=()=>({
+export const postStyle = () => ({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   display: '-webkit-box',
   '-webkitLineClamp': '3',
   '-webkitBoxOrient': 'vertical',
-  height:'72px',
-})
+  height:'72px'
+});
+
 
 export const linkRuleStyle = (theme) => ({
   width: '110px',

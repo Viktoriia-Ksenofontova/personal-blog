@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useFela } from 'react-fela';
 import { observer } from "mobx-react-lite";
 import { useNavigate } from 'react-router-dom';
-import { Container, Button, Form, Text } from '../../components';
+import { Container, Button, Form, View, Text } from '../../components';
 import { labelRule, inputRule } from './CreatePost.style';
 import  { CreateCommentIcon } from '../../components/Image';
 import useStore from "../../store/hooks";
@@ -26,15 +26,15 @@ const CreatePost = observer(() => {
 
   return (
     <Container>
-      <div className={css({display:'flex', justifyContent:'center', alignItems:"flex-start"})}>
-      <CreateCommentIcon />
-      <CreateCommentIcon size="large" iconColor="accent"/>
-      <CreateCommentIcon size="small"/>
+      <View variant="content" gap="20px" justifyContent='center' margin='0 0 20px'>
+        <CreateCommentIcon />
+        <CreateCommentIcon size="large" iconColor="accent"/>
+        <CreateCommentIcon size="small"/>
 
-      <Text as='h2' styles={{ marginLeft: '20px' }} variant="heading2">
-        Add a New Post
-      </Text>
-      </div> 
+        <Text as='h2' variant="heading2">
+          Add a New Post
+        </Text>
+      </View> 
 
       <Form handleSubmit={handleSubmit}>
         <label htmlFor="title" className={css(labelRule(theme))}>

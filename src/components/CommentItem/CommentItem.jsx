@@ -1,27 +1,27 @@
 import React from "react";
-import { useFela } from 'react-fela';
 import PropTypes from 'prop-types';
-import CommentIcon from '../../assets/images/comment.svg';
-import Text from '../Text';
+import {CommentIcon} from '../Image';
+import {Text, View} from '../index';
 
 export default function CommentItem(props) {
-   const { css } = useFela();
+  
   const { body } = props;
   
   return (
-    <div className={css({
-      display: "flex",
-      marginBottom: "20px"
-    })}>
-
-      <img src={CommentIcon} alt="comment icon" width="30px"/>
-      <Text as='p' styles={{paddingLeft: '20px', marginBottom: '0'}}>
-        {body}
+    <View variant="content" gap="20px" margin='10px 0 10px'>
+      <CommentIcon/>
+      <Text as='p' styles={{ flex: '1 calc(100% - 50px)'}}> 
+        {body} 
       </Text>
-    </div>
+    </View>
+    
   )  
 };
 
+CommentItem.defaultProps = {
+  body:""
+}
+
 CommentItem.propTypes = {
-  body: PropTypes.string.isRequired
+  body: PropTypes.string
 };

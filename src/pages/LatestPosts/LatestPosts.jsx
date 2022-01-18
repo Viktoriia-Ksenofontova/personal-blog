@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useFela } from 'react-fela';
 import { Container, PostItem, List, Text, Button, Loader } from "../../components";
 
-import {postStyle, listStyle} from './LatestPost.style';
+import { postStyle, listStyle } from './LatestPost.style';
 import useStore from "../../store/hooks";
 
  
@@ -11,7 +11,7 @@ const LatestPosts = observer(() => {
   const { css } = useFela();
   const { stateContext } = useStore()
   const {theme, store} = stateContext;
-  const {allPosts, status } = store;
+  const {allPosts } = store;
   
   const [currentPage, setCurrentPage] = useState(1);
   const [visiblePosts, setVisiblePosts] = useState([]);
@@ -32,25 +32,24 @@ const LatestPosts = observer(() => {
   
   return (
     <Container>
-      {status === "pending" && <Loader/>}
-      {status === "success" &&
-      <>
-        <Text as="h2" styles={{ textAlign: 'center'}} variant="heading2">
-          Latest post
-        </Text>
-        <List styles={listStyle()}>
-          {visiblePosts.map(({id, title, body }) => (
-            <li key={id} className={css(postStyle(theme))}>
-              <PostItem id={id} title={title} body={body} />
-            </li>
-          ))}
-        </List>
-    
-        {visiblePosts.length > 0 && allPosts.length>visiblePosts.length && (
-          <Button type="button" onClick={handleClick} text="Load more"/> 
-        )}
-      </>
-      }
+      {store.status === "pending" ? <Loader/> : (
+         <>
+          <Text as="h2" styles={{textAlign: 'center'}} variant="heading2">
+            Latest post
+          </Text>
+          <List styles={listStyle()}>
+            {visiblePosts.map(({id, title, body }) => (
+              <li key={id} className={css(postStyle(theme))}>
+                <PostItem id={id} title={title} body={body} />
+              </li>
+            ))}
+          </List>
+      
+          {visiblePosts.length > 0 && allPosts.length>visiblePosts.length && (
+            <Button type="button" onClick={handleClick} text="Load more"/> 
+          )}
+        </>
+      )}
     </Container>
   )
 });

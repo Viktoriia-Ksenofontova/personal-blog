@@ -1,34 +1,27 @@
-const heading1 = {
-  display:'inline-block',
-  fontSize: 32,
-  fontWeight: 700,
-  marginBottom: '20px'
-};
-const heading2 = {
-  fontSize: 24,
-  fontWeight: 700,
-  marginBottom: '20px'
-};
-const heading3 = {
-  fontSize: 18,
-  fontWeight: 700,
-  // marginBottom: '20px'
-};
-const primary = {
-  fontSize: 16,
-  fontWeight: 400,
-  // marginBottom: '10px'
-};
-const small = {
-  fontSize: 12,
-  fontWeight: 400,
-  // marginBottom: '10px'
+const textTheme= {
+  heading1:{
+    display:'inline-block',
+    fontSize: '32px',
+    fontWeight: '700',
+    marginBottom: '20px'
+  },
+  heading2 : {
+    fontSize: '24px',
+    fontWeight: '700',
+    marginBottom: '20px'
+  },
+  heading3: {
+    fontSize: '18px',
+    fontWeight: '700'
+  },
+  primary : {
+    fontSize: '16px',
+    fontWeight: '400'
+  },
+  small : {
+    fontSize: '12px',
+    fontWeight: '400'
+  }
 }
 
-export default {
-  heading1,
-  heading2,
-  heading3,
-  primary,
-  small
-};
+export default textTheme

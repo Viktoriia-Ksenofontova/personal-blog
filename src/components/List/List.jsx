@@ -1,18 +1,13 @@
 import React from "react";
 import { useFela } from 'react-fela';
 import PropTypes from 'prop-types';
+import makeListStyle from './List.style'
 
 export default function List({styles, children }){
   const { css } = useFela();
  
   return (   
-    <ul className={css({
-      padding: '0',
-      margin: '0 0 10px 0',
-      listStyle: "none",
-      textAlign: "left",
-      ...styles
-    })}>
+    <ul className={css(makeListStyle(styles))}>
       {children}
     </ul>
   )
