@@ -1,8 +1,17 @@
 import palette from '../../assets/colors';
 
-const linkRule = (theme) => ({
-  display: 'block',
+export const postStyle=()=>({
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  display: '-webkit-box',
+  '-webkitLineClamp': '3',
+  '-webkitBoxOrient': 'vertical',
+  height:'72px',
+})
+
+export const linkRuleStyle = (theme) => ({
   width: '110px',
+  alignSelf:'end',
   marginLeft: 'auto',
   padding:'5px',
   textDecoration: 'none',
@@ -21,4 +30,3 @@ const linkRule = (theme) => ({
   },
 });
 
-export default linkRule;

@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useFela } from 'react-fela';
 import { Container, PostItem, List, Text, Button, Loader } from "../../components";
 
-import latestPostStyle from './LatestPost.style';
+import {postStyle, listStyle} from './LatestPost.style';
 import useStore from "../../store/hooks";
 
  
@@ -32,23 +32,25 @@ const LatestPosts = observer(() => {
   
   return (
     <Container>
-      <Text as="h2" styles={{ textAlign: 'center'}} variant="heading2">
-        Latest post
-      </Text>
-     
       {status === "pending" && <Loader/>}
-      <List styles={{ display: 'flex', flexWrap: 'wrap' }}>
-        {visiblePosts.map(({id, title, body }) => (
-          <li key={id} className={css(latestPostStyle(theme))}>
+      {status === "success" &&
+      <>
+        <Text as="h2" styles={{ textAlign: 'center'}} variant="heading2">
+          Latest post
+        </Text>
+        <List styles={listStyle()}>
+          {visiblePosts.map(({id, title, body }) => (
+            <li key={id} className={css(postStyle(theme))}>
               <PostItem id={id} title={title} body={body} />
-          </li>
-        ))}
-      </List>
-      
-      {visiblePosts.length > 0 && allPosts.length>visiblePosts.length && (
-         <Button type="button" onClick={handleClick} text="Load more"/> 
-      )}
-      
+            </li>
+          ))}
+        </List>
+    
+        {visiblePosts.length > 0 && allPosts.length>visiblePosts.length && (
+          <Button type="button" onClick={handleClick} text="Load more"/> 
+        )}
+      </>
+      }
     </Container>
   )
 });

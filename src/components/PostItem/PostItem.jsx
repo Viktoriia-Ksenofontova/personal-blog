@@ -6,15 +6,7 @@ import { useFela } from "react-fela";
 
 import useStore from "../../store/hooks";
 import Text from "../Text";
-import linkRule from "./PostItem.style";
-
-const postStyle = {
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  display: '-webkit-box',
-  '-webkitLineClamp': '3',
-  '-webkitBoxOrient': 'vertical'
-}
+import {linkRuleStyle, postStyle} from "./PostItem.style";
 
 const PostItem = observer((props) =>{
   const { id, title, body } = props;
@@ -27,11 +19,11 @@ const PostItem = observer((props) =>{
       <Text as="h3" variant="heading3">
         {title}
       </Text>
-      <Text as="p" styles={postStyle}>
+      <Text as="p" styles={postStyle()}>
         {body}
       </Text>
       
-      <Link to={`posts/:${id}`} className={css(linkRule(theme))}>
+      <Link to={`posts/:${id}`} className={css(linkRuleStyle(theme))}>
         Read more
       </Link>
     </>
