@@ -8,7 +8,7 @@ export default function Footer() {
 
   return (
     <footer className={css({backgroundColor: 'grey'})} >
-      <View variant='footer'>
+      <View variant='footer' justifyContent='center'>
         <Text as="p" variant='small' styles={{color:`${palette.light.text}`}}> &copy; Copyright 2022</Text>
       </View>
     </footer>

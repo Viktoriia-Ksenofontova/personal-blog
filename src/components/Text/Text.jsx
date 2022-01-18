@@ -4,16 +4,15 @@ import PropTypes from 'prop-types';
 import useStore from '../../store/hooks';
 import textStyles from "./Text.style";
 
-export default function Text({ as, styles, variant, children }) {
+export default function Text({ as, styles, variant="primary", children }) {
   const { css } = useFela();
   const { stateContext } = useStore();
   const { theme } = stateContext;
   
   const Component = as;
-  const allStyles = textStyles(styles, variant, theme);
 
   return (
-    <Component className={css(allStyles)}>
+    <Component className={css(textStyles(styles, variant, theme))}>
       {children}
     </Component>
   )
@@ -21,7 +20,7 @@ export default function Text({ as, styles, variant, children }) {
 
 Text.defaultProps = {
   styles: {},
-  variant: "primary"
+  variant: ""
 };
 
 Text.propTypes = {

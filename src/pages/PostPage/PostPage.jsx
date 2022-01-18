@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { useFela } from 'react-fela';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { Container, Form, CommentItem, List, Button, Text, Loader } from '../../components';
+import { Container, Form, CommentItem, List, Button, Text, Loader, View } from '../../components';
 import useStore from '../../store/hooks';
 import { DeleteIcon } from '../../components/Image';
 import {labelRuleStyle, textareaRuleStyle, buttonDeleteRuleStyle} from './PostPage.style';
@@ -37,7 +37,7 @@ const PostPage = observer(() => {
   // console.log('store.postForRender.data', currentPost);
 
   useLayoutEffect(() => {
-    if (currentPost && store.status === 'success') {
+    if (currentPost && (store.status === 'success' || 'created')) {
       setTitle(currentPost.title);
       setBody(currentPost.body);
       setComments(currentPost.comments);
@@ -63,10 +63,9 @@ const PostPage = observer(() => {
 
   return (
     <Container>
-      {store.status === 'pending' && <Loader/>}
-      {(store.status === 'success' || 'created') && (
+      {store.status === 'pending' ? <Loader/> : (
         <>
-          <div className={css({display: 'flex', justifyContent: 'center'})} >
+          <View variant='content' justifyContent='space-between'>
             <Text as="h2" variant="heading2">
               {title}
             </Text>
@@ -76,43 +75,44 @@ const PostPage = observer(() => {
             >
               <DeleteIcon/>
             </button>
-          </div>
-          <Text as="p">{body}</Text>
-        </>
-      )}
+          </View>
+          
+          <Text as="p" styles={{margin: '0 0 20px'}}>
+            {body}
+          </Text>
+       
+          <Text as="h3" variant="heading3">
+            Comments:
+          </Text>
 
-      <Text as="h3" variant="heading3">
-        Comments:
-      </Text>
+          {comments?.length === 0 && (
+            <Text as="p" variant="small" styles={{margin: '10px 0 20px'}}>There are no comments here yet</Text>
+          )}
+          {comments?.length > 0 && (
+            <List>
+              {comments.map(comment => (
+                <li key={comment.id}>
+                  <CommentItem body={comment.body} />
+                </li>
+              ))}
+            </List>
+          )}
 
-      {comments?.length === 0 && (
-        <Text as="p">There are no comments here yet</Text>
-      )}
-      {comments?.length > 0 && (
-        <List>
-          {comments.map(comment => (
-            <li key={comment.id}>
-              <CommentItem body={comment.body} />
-            </li>
-          ))}
-        </List>
-      )}
-
-      <Form handleSubmit={handleSubmit}>
-        <label
-          htmlFor="comment"
-          className={css(labelRuleStyle(theme))}
-        >
-          Your comment:
-          <textarea required value={newComment}
-            id="comment"
-            onChange={handleTextareaChange}
-            className={css(textareaRuleStyle(theme))}
-          />
-        </label>
-
-        <Button type="submit" text="Add comment" />
-      </Form>
+          <Form handleSubmit={handleSubmit}>
+            <label htmlFor="comment"
+              className={css(labelRuleStyle(theme))}
+            >
+              Your comment:
+              <textarea required value={newComment}
+                id="comment"
+                onChange={handleTextareaChange}
+                className={css(textareaRuleStyle(theme))}
+              />
+            </label>
+            <Button type="submit" text="Add comment" />
+          </Form>
+        </>)
+      }
     </Container>
   );
 });

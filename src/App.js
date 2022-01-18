@@ -33,8 +33,8 @@ function App() {
             <Route path="*" element={<Navigate to={routes.page404} />} />
           </Routes>
         </Suspense>
-          </Main>
-          <Footer/>
+      </Main>
+      <Footer/>
       </Router>
       </StateContext.Provider>
     </RendererProvider>
