@@ -12,17 +12,17 @@ const heading2 = {
 const heading3 = {
   fontSize: 18,
   fontWeight: 700,
-  marginBottom: '20px'
+  // marginBottom: '20px'
 };
 const primary = {
   fontSize: 16,
   fontWeight: 400,
-  marginBottom: '10px'
+  // marginBottom: '10px'
 };
 const small = {
   fontSize: 12,
   fontWeight: 400,
-  marginBottom: '10px'
+  // marginBottom: '10px'
 }
 
 export default {
