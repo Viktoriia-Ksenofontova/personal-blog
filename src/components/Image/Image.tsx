@@ -7,7 +7,13 @@ import { ReactComponent as menuIcon } from '../../assets/images/menuIcon.svg';
 
 import style from './Image.style';
 
-function CreateIconComponent(Icon){
+interface IconProps {
+   size?: string;
+   iconColor?: string;
+   iconStyles?: {[key:string]:string};
+}
+
+function CreateIconComponent(Icon: React.ElementType): React.FC<IconProps>{
   return function insideCreateIconComponent({size, iconColor, iconStyles}){
     
    const componentStyles=style(size, iconColor, iconStyles);

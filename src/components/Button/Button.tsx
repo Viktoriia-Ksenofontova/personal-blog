@@ -1,11 +1,17 @@
 import React from "react";
 import { useFela } from 'react-fela';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import makeStyle from './Button.style';
 
 import useStore from '../../store/hooks';
 
-export default function Button({ text, type, onClick}){
+type TProps={
+  text?:string;
+  type:"button"|"submit"|"reset";
+  onClick?:(e:React.MouseEvent)=>void;
+}
+
+export default function Button({ type, text="", onClick}:TProps){
   const { css } = useFela();
   const { stateContext } = useStore();
   const { theme } = stateContext;
@@ -19,14 +25,14 @@ export default function Button({ text, type, onClick}){
   )
 }
 
-Button.defaultProps = {
-  text: "",
-  onClick:()=>{}
-};
+// Button.defaultProps = {
+//   text: "",
+//   onClick:()=>{}
+// };
 
-Button.propTypes = {
-  text: PropTypes.string,
-  type: PropTypes.string.isRequired,
-  onClick: PropTypes.func
+// Button.propTypes = {
+//   text: PropTypes.string,
+//   type: PropTypes.string.isRequired,
+//   onClick: PropTypes.func
   
-};
+// };

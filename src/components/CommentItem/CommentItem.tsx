@@ -1,11 +1,14 @@
 import React from "react";
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {CommentIcon} from '../Image';
 import {Text, View} from '../index';
 
-export default function CommentItem(props) {
+type CommentItemProps={
+  body:string;
+}
+export default function CommentItem ({body}:CommentItemProps) {
   
-  const { body } = props;
+  // const { body } = props;
   
   return (
     <View variant="content" gap="20px" margin='10px 0 10px'>
@@ -18,10 +21,10 @@ export default function CommentItem(props) {
   )  
 };
 
-CommentItem.defaultProps = {
-  body:""
-}
+// CommentItem.defaultProps = {
+//   body:""
+// }
 
-CommentItem.propTypes = {
-  body: PropTypes.string
-};
+// CommentItem.propTypes = {
+//   body: PropTypes.string
+// };

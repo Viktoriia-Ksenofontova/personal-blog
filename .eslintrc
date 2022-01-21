@@ -1,4 +1,4 @@
-{
+{ 
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -8,18 +8,23 @@
     "plugin:import/recommended",
     "plugin:jsx-control-statements/recommended",
     "airbnb",
+    "airbnb-typescript",
     "airbnb/hooks",
     "prettier"
   ],
-  "parserOptions":{
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "sourceType": "module"
-  },
+  
+  "parser": "@typescript-eslint/parser",
+   "parserOptions":{
+    "project": ["./tsconfig.json"],
+     "ecmaFeatures": {
+       "jsx": true
+     },
+     "sourceType": "module"
+   },
   "plugins": [
     "react",
-    "import"
+    "import",
+    "@typescript-eslint"
   ],
 
   "rules": {
@@ -27,6 +32,16 @@
     "react/no-array-index-key": "off",
     "import/prefer-default-export": "off",
     "import/no-default-export": "off",
-    "no-restricted-exports": ["error", { "restrictedNamedExports": ["default"] }]
+    "no-restricted-exports": ["error", { "restrictedNamedExports": ["default"] }],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+   ]
   }
 }
