@@ -6,29 +6,31 @@ import makeStyle from './Button.style';
 import useStore from '../../store/hooks';
 
 type TProps={
-  text?:string;
   type:"button"|"submit"|"reset";
-  onClick?:(e:React.MouseEvent)=>void;
+  text?:string;
+  onClick?:(e:React.MouseEvent<HTMLButtonElement>)=>void;
 }
 
-export default function Button({ type, text="", onClick}:TProps){
+const Button = ({ type, text, onClick}:TProps) => {
   const { css } = useFela();
   const { stateContext } = useStore();
   const { theme } = stateContext;
  
  return (   
-    <button onClick={onClick} className={css(makeStyle({ theme }))}
+    <button onClick={onClick} className={css(makeStyle(theme))}
       // eslint-disable-next-line react/button-has-type
     type={type}>
       {text}
     </button>
-  )
+ )
 }
 
-// Button.defaultProps = {
-//   text: "",
-//   onClick:()=>{}
-// };
+Button.defaultProps = {
+  text: "",
+  onClick:()=>{}
+ };
+
+export default Button;
 
 // Button.propTypes = {
 //   text: PropTypes.string,

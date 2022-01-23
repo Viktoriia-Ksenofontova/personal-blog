@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { useFela } from 'react-fela';
-
+import {TViewProps} from './View.interface';
 import { makeViewStyle } from './View.style';
 
-export default function View({
+const View: React.FC<TViewProps> = ({
   as = 'div',
   variant,
   flex,
@@ -15,10 +15,10 @@ export default function View({
   flexWrap,
   margin,
   overflow,
-  children,
   viewStyle,
+  children,
   ...otherProps
-}) {
+}) => {
   const Component = as;
   const { css } = useFela();
   const styleProps = {
@@ -33,8 +33,7 @@ export default function View({
   };
 
   return (
-    <Component
-      className={css(makeViewStyle(styleProps, variant))}
+    <Component className={css(makeViewStyle(styleProps, variant))}
       {...otherProps}
     >
       {children}
@@ -42,29 +41,32 @@ export default function View({
   );
 }
 
-View.defaultProps = {
-  as: 'div',
-  viewStyle: {},
-  variant: 'container',
-  flexWrap: 'nowrap',
-  flex: '',
-  gap:'',
-  margin:'',
-  justifyContent:'',
-  alignItems:'',
-  overflow: '',
-};
 
-View.propTypes = {
-  as: PropTypes.node,
-  viewStyle: PropTypes.objectOf(PropTypes.string),
-  variant: PropTypes.string,
-  children: PropTypes.node.isRequired,
-  flex: PropTypes.string,
-  gap: PropTypes.string,
-  margin:PropTypes.string,
-  justifyContent:PropTypes.string,
-  alignItems:PropTypes.string,
-  flexWrap: PropTypes.string,
-  overflow: PropTypes.string,
-};
+export default View;
+
+// View.defaultProps = {
+//   as: 'div',
+//   viewStyle: {},
+//   variant: 'container',
+//   flexWrap: 'nowrap',
+//   flex: '',
+//   gap:'',
+//   margin:'',
+//   justifyContent:'',
+//   alignItems:'',
+//   overflow: '',
+// };
+
+// View.propTypes = {
+//   as: PropTypes.node,
+//   viewStyle: PropTypes.objectOf(PropTypes.string),
+//   variant: PropTypes.string,
+//   children: PropTypes.node.isRequired,
+//   flex: PropTypes.string,
+//   gap: PropTypes.string,
+//   margin:PropTypes.string,
+//   justifyContent:PropTypes.string,
+//   alignItems:PropTypes.string,
+//   flexWrap: PropTypes.string,
+//   overflow: PropTypes.string,
+// };

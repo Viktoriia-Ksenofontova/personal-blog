@@ -28,11 +28,12 @@
   ],
 
   "rules": {
-    "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}],
+    // "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}],
     "react/no-array-index-key": "off",
     "import/prefer-default-export": "off",
     "import/no-default-export": "off",
     "no-restricted-exports": ["error", { "restrictedNamedExports": ["default"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -42,6 +43,8 @@
         "ts": "never",
         "tsx": "never"
       }
-   ]
+   ],
+   "react/function-component-definition" : [2, { "namedComponents": "arrow-function" }],
+   "arrow-body-style": ["error", "as-needed"]
   }
 }

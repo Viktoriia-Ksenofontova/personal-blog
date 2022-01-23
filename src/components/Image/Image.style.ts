@@ -12,54 +12,54 @@ const themeIcon = {
     }  
 };
 
-const getIconSize=(theme, size)=>{
+const getIconSize=(size:string)=>{
     switch(size){
         case 'large':
-            return theme.iconSize.large;
+            return themeIcon.iconSize.large;
            
         case 'small':
-            return theme.iconSize.small;
+            return themeIcon.iconSize.small;
            
         default:
-         return theme.iconSize.default;
+         return themeIcon.iconSize.default;
     }
 };
 
-const getIconColor=(theme, colorName)=>{
+const getIconColor=(colorName:string)=>{
     switch(colorName){
         case 'primary':
-            return theme.color.primary;
+            return themeIcon.color.primary;
 
         case 'accent':
-            return theme.color.accent;
+            return themeIcon.color.accent;
 
         default:
-            return theme.color.primary;
+            return themeIcon.color.primary;
     }
 }
   
-export default function style(size, iconColor, iconStyles) {
+export default function style(size:string, iconColor:string, iconStyles:{[key:string]:string}) {
     let height;
     let width;
     let fill;
 
     if(iconColor){ 
-        fill=getIconColor(themeIcon, iconColor);
+        fill=getIconColor(iconColor);
     } else if(iconStyles?.fill){
         fill=iconStyles.fill;
     }
 
     if(size){
-        height= getIconSize(themeIcon, size);
-        width= getIconSize(themeIcon, size); 
+        height= getIconSize(size);
+        width= getIconSize(size); 
         
     } else if (iconStyles?.height || iconStyles?.width){
-        height= iconStyles.height || getIconSize(themeIcon, 'default');
-        width= iconStyles.width || getIconSize(themeIcon, 'default');     
+        height= iconStyles.height || getIconSize('default');
+        width= iconStyles.width || getIconSize('default');     
         
     } else {  
-        height= getIconSize(themeIcon, 'default');
-        width= getIconSize(themeIcon, 'default');
+        height= getIconSize('default');
+        width= getIconSize('default');
        
     }
     return({height, width, fill})

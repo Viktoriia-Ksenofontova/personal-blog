@@ -1,6 +1,6 @@
 import palette from '../../assets/colors';
 
-export const labelRuleStyle = (theme) => ({
+export const labelRuleStyle = (theme:"dark" | "light") => ({
     display: 'flex',
     width: '100%',
     fontSize: '16px',
@@ -11,7 +11,7 @@ export const labelRuleStyle = (theme) => ({
     color: palette[theme].text,
 })
 
-export const textareaRuleStyle=(theme)=>({
+export const textareaRuleStyle=(theme:"dark" | "light") =>({
     marginLeft: '20px',
     padding: '10px',
     width: '100%',
@@ -21,7 +21,7 @@ export const textareaRuleStyle=(theme)=>({
     outline: 'none'
 })
 
-export const buttonDeleteRuleStyle=(theme)=>({
+export const buttonDeleteRuleStyle=(theme:"dark" | "light")=>({
     width: '36px',
     height: '36px',
     padding:'2px',

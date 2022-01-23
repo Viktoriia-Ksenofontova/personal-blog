@@ -1,3 +1,5 @@
+import { TViewProps } from "./View.interface";
+
 const viewTheme={
 container: {
     display: 'flex',
@@ -27,14 +29,18 @@ footer:{
 content:{
     display: 'flex',
 }
-
 }
 
-export const makeViewStyle=(styleProps, variant)=>{
-    const variantStyle=viewTheme[variant];
+export const makeViewStyle = (
+    styleProps: Omit<TViewProps, "as" | "variant" | "viewStyle" | "otherProps">, 
+    variant: "content" | "footer" | "header" | "container"
+    // variant: Pick<TViewProps, "variant">,
+    ) => {
+    const variantStyle = viewTheme[variant];
 
     return {
         ...variantStyle,
         ...styleProps
     }
 }
+

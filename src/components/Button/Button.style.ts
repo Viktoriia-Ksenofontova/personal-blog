@@ -1,6 +1,6 @@
 import palette from '../../assets/colors';
 
-const style = ({ theme }) => ({
+const style = (theme:"dark" | "light") => ({
     display:'block',
     marginBottom: '10px',
     marginLeft: 'auto',
