@@ -6,7 +6,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Form, CommentItem, List, Button, Text, Loader, View } from '../../components';
 import useStore from '../../store/hooks';
 import { DeleteIcon } from '../../components/Image';
-import {labelRuleStyle, textareaRuleStyle, buttonDeleteRuleStyle} from './PostPage.style';
+import { labelRuleStyle, textareaRuleStyle, buttonDeleteRuleStyle } from './PostPage.style';
 
 const PostPage = observer(() => {
   const navigate = useNavigate();
@@ -59,34 +59,39 @@ const PostPage = observer(() => {
   const handleTextareaChange = e => {
     e.preventDefault();
     setNewComment(e.target.value);
-  }
+  };
 
   return (
     <Container>
-      {store.status === 'pending' ? <Loader/> : (
+      {store.status === 'pending' ? (
+        <Loader />
+      ) : (
         <>
-          <View variant='content' justifyContent='space-between'>
+          <View variant="content" justifyContent="space-between">
             <Text as="h2" variant="heading2">
               {title}
             </Text>
-            <button type="button"
+            <button
+              type="button"
               onClick={handleDeleteBtnClick}
               className={css(buttonDeleteRuleStyle(theme))}
             >
-              <DeleteIcon/>
+              <DeleteIcon />
             </button>
           </View>
-          
-          <Text as="p" styles={{margin: '0 0 20px'}}>
+
+          <Text as="p" styles={{ margin: '0 0 20px' }}>
             {body}
           </Text>
-       
+
           <Text as="h3" variant="heading3">
             Comments:
           </Text>
 
           {comments?.length === 0 && (
-            <Text as="p" variant="small" styles={{margin: '10px 0 20px'}}>There are no comments here yet</Text>
+            <Text as="p" variant="small" styles={{ margin: '10px 0 20px' }}>
+              There are no comments here yet
+            </Text>
           )}
           {comments?.length > 0 && (
             <List>
@@ -99,11 +104,11 @@ const PostPage = observer(() => {
           )}
 
           <Form handleSubmit={handleSubmit}>
-            <label htmlFor="comment"
-              className={css(labelRuleStyle(theme))}
-            >
+            <label htmlFor="comment" className={css(labelRuleStyle(theme))}>
               Your comment:
-              <textarea required value={newComment}
+              <textarea
+                required
+                value={newComment}
                 id="comment"
                 onChange={handleTextareaChange}
                 className={css(textareaRuleStyle(theme))}
@@ -111,8 +116,8 @@ const PostPage = observer(() => {
             </label>
             <Button type="submit" text="Add comment" />
           </Form>
-        </>)
-      }
+        </>
+      )}
     </Container>
   );
 });

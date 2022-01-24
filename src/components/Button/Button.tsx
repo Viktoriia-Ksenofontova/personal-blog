@@ -1,34 +1,37 @@
-import React from "react";
+import React from 'react';
 import { useFela } from 'react-fela';
 // import PropTypes from 'prop-types';
 import makeStyle from './Button.style';
 
 import useStore from '../../store/hooks';
 
-type TProps={
-  type:"button"|"submit"|"reset";
-  text?:string;
-  onClick?:(e:React.MouseEvent<HTMLButtonElement>)=>void;
-}
+type TProps = {
+  type: 'button' | 'submit' | 'reset';
+  text?: string;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+};
 
-const Button = ({ type, text, onClick}:TProps) => {
+const Button = ({ type, text, onClick }: TProps) => {
   const { css } = useFela();
   const { stateContext } = useStore();
   const { theme } = stateContext;
- 
- return (   
-    <button onClick={onClick} className={css(makeStyle(theme))}
+
+  return (
+    <button
+      onClick={onClick}
+      className={css(makeStyle(theme))}
       // eslint-disable-next-line react/button-has-type
-    type={type}>
+      type={type}
+    >
       {text}
     </button>
- )
-}
+  );
+};
 
 Button.defaultProps = {
-  text: "",
-  onClick:()=>{}
- };
+  text: '',
+  onClick: () => {},
+};
 
 export default Button;
 
@@ -36,5 +39,5 @@ export default Button;
 //   text: PropTypes.string,
 //   type: PropTypes.string.isRequired,
 //   onClick: PropTypes.func
-  
+
 // };
