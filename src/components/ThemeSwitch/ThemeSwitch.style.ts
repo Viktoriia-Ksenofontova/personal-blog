@@ -9,10 +9,10 @@ export const themeSwitchControl = () => ({
   height: '32px',
   borderRadius: '50em',
   padding: '3px 0',
-  '@media (max-width: 767px)':{marginLeft:'auto'}
+  '@media (max-width: 767px)': { marginLeft: 'auto' },
 });
 
-export const themeSwitchTrack=() =>({
+export const themeSwitchTrack = () => ({
   position: 'absolute',
   left: '0',
   top: '0',
@@ -25,11 +25,11 @@ export const themeSwitchTrack=() =>({
   zIndex: '1',
   cursor: 'pointer',
   '[data-check="true"]': {
-  backgroundColor: palette.dark.themeSwitch
- }
+    backgroundColor: palette.dark.themeSwitch,
+  },
 });
 
-export const themeSwitchToggle=() =>({
+export const themeSwitchToggle = () => ({
   position: 'absolute',
   left: 0,
   top: 0,
@@ -40,7 +40,7 @@ export const themeSwitchToggle=() =>({
   width: 0,
 });
 
-export const themeSwitchMarker=()=>({
+export const themeSwitchMarker = () => ({
   position: 'absolute',
   backgroundColor: '#fff',
   width: '26px',
@@ -52,10 +52,6 @@ export const themeSwitchMarker=()=>({
   transform: 'translateX(3px)',
   transition: 'transform 250ms linear',
   '[data-check="true"]': {
-    transform: 'translateX(35px)'
-  }
+    transform: 'translateX(35px)',
+  },
 });
-
-
-
-

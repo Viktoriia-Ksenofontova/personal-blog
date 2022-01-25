@@ -1,27 +1,27 @@
-const textTheme= {
-  heading1:{
-    display:'inline-block',
+const textTheme = {
+  heading1: {
+    display: 'inline-block',
     fontSize: '32px',
     fontWeight: '700',
-    marginBottom: '20px'
+    marginBottom: '20px',
   },
-  heading2 : {
+  heading2: {
     fontSize: '24px',
     fontWeight: '700',
-    marginBottom: '20px'
+    marginBottom: '20px',
   },
   heading3: {
     fontSize: '18px',
-    fontWeight: '700'
+    fontWeight: '700',
   },
-  primary : {
+  primary: {
     fontSize: '16px',
-    fontWeight: '400'
+    fontWeight: '400',
   },
-  small : {
+  small: {
     fontSize: '12px',
-    fontWeight: '400'
-  }
-}
+    fontWeight: '400',
+  },
+};
 
-export default textTheme
+export default textTheme;

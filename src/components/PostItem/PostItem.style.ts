@@ -6,15 +6,14 @@ export const postStyle = () => ({
   display: '-webkit-box',
   '-webkitLineClamp': '3',
   '-webkitBoxOrient': 'vertical',
-  height:'72px'
+  height: '72px',
 });
 
-
-export const linkRuleStyle = (theme) => ({
+export const linkRuleStyle = (theme: 'dark' | 'light') => ({
   width: '110px',
-  alignSelf:'end',
+  alignSelf: 'end',
   marginLeft: 'auto',
-  padding:'5px',
+  padding: '5px',
   textDecoration: 'none',
   fontSize: '15px',
   fontWeight: 'bold',
@@ -24,10 +23,9 @@ export const linkRuleStyle = (theme) => ({
   borderRadius: '20px',
   transition: 'all 0.4s linear',
   ':hover': {
-    color: palette[theme].accent
+    color: palette[theme].accent,
   },
   ':focus': {
-    color: palette[theme].accent
+    color: palette[theme].accent,
   },
 });
-

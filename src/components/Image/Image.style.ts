@@ -12,7 +12,7 @@ const themeIcon = {
   },
 };
 
-const getIconSize = (size: string) => {
+const getIconSize = (size: 'large' | 'small' | undefined) => {
   switch (size) {
     case 'large':
       return themeIcon.iconSize.large;
@@ -25,7 +25,7 @@ const getIconSize = (size: string) => {
   }
 };
 
-const getIconColor = (colorName: string) => {
+const getIconColor = (colorName: 'primary' | 'accent' | undefined) => {
   switch (colorName) {
     case 'primary':
       return themeIcon.color.primary;
@@ -39,29 +39,27 @@ const getIconColor = (colorName: string) => {
 };
 
 export default function style(
-  size: string,
-  iconColor: string,
-  iconStyles: { [key: string]: string },
+  size: 'large' | 'small' | undefined,
+  iconColor: 'primary' | 'accent' | undefined,
+  iconStyles: { [key: string]: string } | undefined,
 ) {
   let height;
   let width;
   let fill;
 
-  if (iconColor) {
-    fill = getIconColor(iconColor);
-  } else if (iconStyles?.fill) {
+  if (iconStyles?.fill) {
     fill = iconStyles.fill;
+  } else {
+    fill = getIconColor(iconColor);
   }
 
-  if (size) {
+  if (iconStyles?.height) {
+    height = iconStyles.height;
+  } else if (iconStyles?.width) {
+    width = iconStyles.width;
+  } else {
     height = getIconSize(size);
     width = getIconSize(size);
-  } else if (iconStyles?.height || iconStyles?.width) {
-    height = iconStyles.height || getIconSize('default');
-    width = iconStyles.width || getIconSize('default');
-  } else {
-    height = getIconSize('default');
-    width = getIconSize('default');
   }
   return { height, width, fill };
 }

@@ -2,7 +2,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { useFela } from 'react-fela';
-import {TViewProps} from './View.interface';
+import { TViewProps } from './View.interface';
 import { makeViewStyle } from './View.style';
 
 const View: React.FC<TViewProps> = ({
@@ -33,14 +33,11 @@ const View: React.FC<TViewProps> = ({
   };
 
   return (
-    <Component className={css(makeViewStyle(styleProps, variant))}
-      {...otherProps}
-    >
+    <Component className={css(makeViewStyle(styleProps, variant))} {...otherProps}>
       {children}
     </Component>
   );
-}
-
+};
 
 export default View;
 

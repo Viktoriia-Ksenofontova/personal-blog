@@ -8,7 +8,7 @@ import useStore from '../../store/hooks';
 import { DeleteIcon } from '../../components/Image';
 import { labelRuleStyle, textareaRuleStyle, buttonDeleteRuleStyle } from './PostPage.style';
 
-const PostPage = observer(() => {
+const PostPage: React.FC = observer(() => {
   const navigate = useNavigate();
   const { postId } = useParams();
   const correctPostId = Number(postId.slice(1));
@@ -44,19 +44,19 @@ const PostPage = observer(() => {
     }
   }, [currentPost, store.status]);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     store.createNewComment(correctPostId, newComment);
     setNewComment('');
   };
 
-  const handleDeleteBtnClick = e => {
+  const handleDeleteBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     store.removePost(correctPostId);
     navigate(`/`);
   };
 
-  const handleTextareaChange = e => {
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
     setNewComment(e.target.value);
   };

@@ -1,4 +1,4 @@
-{ 
+{
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -13,20 +13,16 @@
     "plugin:prettier/recommended",
     "prettier"
   ],
-  
+
   "parser": "@typescript-eslint/parser",
-   "parserOptions":{
+  "parserOptions": {
     "project": ["./tsconfig.json"],
-     "ecmaFeatures": {
-       "jsx": true
-     },
-     "sourceType": "module"
-   },
-  "plugins": [
-    "react",
-    "import",
-    "@typescript-eslint"
-  ],
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": ["react", "import", "@typescript-eslint"],
 
   "rules": {
     "prettier/prettier": [
@@ -50,8 +46,8 @@
         "ts": "never",
         "tsx": "never"
       }
-   ],
-   "react/function-component-definition" : [2, { "namedComponents": "arrow-function" }],
-   "arrow-body-style": ["error", "as-needed"]
+    ],
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+    "arrow-body-style": ["error", "as-needed"]
   }
 }

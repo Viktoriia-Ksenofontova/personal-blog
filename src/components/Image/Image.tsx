@@ -8,26 +8,25 @@ import { ReactComponent as menuIcon } from '../../assets/images/menuIcon.svg';
 import style from './Image.style';
 
 interface IconProps {
-   size?: string;
-   iconColor?: string;
-   iconStyles?: {[key:string]:string};
+  size?: 'large' | 'small';
+  iconColor?: 'primary' | 'accent';
+  iconStyles?: { [key: string]: string };
 }
 
-function CreateIconComponent(Icon: React.ElementType): React.FC<IconProps>{
-  return function insideCreateIconComponent({size, iconColor, iconStyles}){
-    
-   const componentStyles=style(size, iconColor, iconStyles);
-   return (
-      <Icon 
-         width={componentStyles.width}
-         height={componentStyles.height}
-         fill={componentStyles.fill}
-    />
-   );
-};
+function CreateIconComponent(Icon: React.ElementType): React.FC<IconProps> {
+  return function insideCreateIconComponent({ size, iconColor, iconStyles }: IconProps) {
+    const componentStyles = style(size, iconColor, iconStyles);
+    return (
+      <Icon
+        width={componentStyles.width}
+        height={componentStyles.height}
+        fill={componentStyles.fill}
+      />
+    );
+  };
 }
 
-export const MenuIcon = CreateIconComponent(menuIcon)
+export const MenuIcon = CreateIconComponent(menuIcon);
 export const DeleteIcon = CreateIconComponent(deleteIcon);
 export const CloseIcon = CreateIconComponent(closeIcon);
 export const CreateCommentIcon = CreateIconComponent(createCommentIcon);
