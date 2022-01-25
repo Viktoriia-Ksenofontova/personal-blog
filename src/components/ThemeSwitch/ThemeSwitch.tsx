@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useFela } from 'react-fela';
-import useStore from '../../store/hooks';
-
+import { useThemeContext } from '../../store/hooks';
 import {
   themeSwitchControl,
   themeSwitchToggle,
@@ -13,16 +12,12 @@ const ThemeSwitch = () => {
   const [checked, setChecked] = useState(false);
 
   const { css } = useFela();
-  const { stateContext, setStateContext } = useStore();
-  const { theme } = stateContext;
+  const store = useThemeContext();
+  const { theme, setTheme } = store;
 
   const handleChange = () => {
     setChecked(!checked);
-    setStateContext(
-      theme === 'light'
-        ? { store: stateContext.store, theme: 'dark' }
-        : { store: stateContext.store, theme: 'light' },
-    );
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   return (

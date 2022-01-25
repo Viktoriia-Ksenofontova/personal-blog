@@ -1,28 +1,7 @@
 import React from 'react';
-// import Service from '../store/service';
 
-const StateContext = React.createContext({
-  stateContext: {
-    theme: 'light',
-    store: {},
-  },
-  setStateContext: () => {},
-});
+import Service from '../store/service';
 
-// type StateType = {
-//   stateContext: {
-//     theme: 'light' | 'dark';
-//     store: Service;
-//   };
-//   setStateContext: React.Dispatch<React.SetStateAction<StateType>>;
-// };
-
-// const StateContext = React.createContext<StateType>({
-//   stateContext: {
-//     theme: 'light',
-//     store: new Service(),
-//   },
-//   setStateContext: () => {},
-// });
+const StateContext = React.createContext<Service>(new Service());
 
 export default StateContext;

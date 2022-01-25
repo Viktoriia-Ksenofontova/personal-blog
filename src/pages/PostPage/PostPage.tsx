@@ -4,23 +4,35 @@ import { useFela } from 'react-fela';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { Container, Form, CommentItem, List, Button, Text, Loader, View } from '../../components';
-import useStore from '../../store/hooks';
+import { useStateContext, useThemeContext } from '../../store/hooks';
 import { DeleteIcon } from '../../components/Image';
 import { labelRuleStyle, textareaRuleStyle, buttonDeleteRuleStyle } from './PostPage.style';
 
 const PostPage: React.FC = observer(() => {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const correctPostId = Number(postId.slice(1));
+  const correctPostId = Number(postId!.slice(1));
   const { css } = useFela();
+  const store = useStateContext();
+  const { theme } = useThemeContext();
+  // const { theme } = store;
 
-  const { stateContext } = useStore();
-  const { theme, store } = stateContext;
+  type CommentType = {
+    id: number;
+    body: string;
+    postId: number;
+  };
+  type CurrentPostType = {
+    id: number;
+    title: string;
+    body: string;
+    comments?: CommentType[];
+  };
 
-  const [currentPost, setCurrentPost] = useState({});
+  const [currentPost, setCurrentPost] = useState<CurrentPostType | null>(null);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<CommentType[] | undefined>(undefined);
 
   const [newComment, setNewComment] = useState('');
 
@@ -93,7 +105,7 @@ const PostPage: React.FC = observer(() => {
               There are no comments here yet
             </Text>
           )}
-          {comments?.length > 0 && (
+          {comments && (
             <List>
               {comments.map(comment => (
                 <li key={comment.id}>

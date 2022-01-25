@@ -16,7 +16,7 @@ type PostType = {
 export default class PostsStore {
   posts: PostType[] = [];
 
-  activePost: PostType | {} = {};
+  activePost: PostType | null = null;
 
   error: string | null = null;
 

@@ -4,16 +4,22 @@ import { useFela } from 'react-fela';
 import { Container, PostItem, List, Text, Button, Loader } from '../../components';
 
 import { postStyle, listStyle } from './LatestPost.style';
-import useStore from '../../store/hooks';
+import { useThemeContext, useStateContext } from '../../store/hooks';
 
 const LatestPosts: React.FC = observer(() => {
   const { css } = useFela();
-  const { stateContext } = useStore();
-  const { theme, store } = stateContext;
+  const store = useStateContext();
+  const { theme } = useThemeContext();
   const { allPosts } = store;
 
+  type PostType = {
+    id: number;
+    title: string;
+    body: string;
+  };
+
   const [currentPage, setCurrentPage] = useState(1);
-  const [visiblePosts, setVisiblePosts] = useState([]);
+  const [visiblePosts, setVisiblePosts] = useState<PostType[] | []>([]);
 
   useEffect(() => {
     store.fetchPostsAction();

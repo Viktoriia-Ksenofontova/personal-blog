@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
 import { useFela } from 'react-fela';
 
-import useStore from '../../store/hooks';
+import { useThemeContext } from '../../store/hooks';
 import Text from '../Text';
 import { linkRuleStyle, postStyle } from './PostItem.style';
 
@@ -17,8 +17,8 @@ type PostItemProps = {
 const PostItem: React.FC<PostItemProps> = observer(props => {
   const { id, title, body } = props;
   const { css } = useFela();
-  const { stateContext } = useStore();
-  const { theme } = stateContext;
+
+  const { theme } = useThemeContext();
 
   return (
     <>

@@ -13,13 +13,12 @@ import {
   closeNavWrapperStyles,
   buttonMenuStyles,
 } from './Header.style';
-import useStore from '../../store/hooks';
+import { useThemeContext } from '../../store/hooks';
 
 const Header: React.FC = () => {
   const { css } = useFela();
 
-  const { stateContext } = useStore();
-  const { theme } = stateContext;
+  const { theme } = useThemeContext();
 
   const [scrolled, setScrolled] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);

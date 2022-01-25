@@ -1,7 +1,8 @@
 import React from 'react';
 import StateContext from '../context/StateContext';
+import ThemeContext from '../context/ThemeContext';
 
-const useStore = () => {
+export const useStateContext = () => {
   const store = React.useContext(StateContext);
 
   if (!store) {
@@ -11,4 +12,12 @@ const useStore = () => {
   return store;
 };
 
-export default useStore;
+export const useThemeContext = () => {
+  const { theme, setTheme } = React.useContext(ThemeContext);
+
+  if (!theme) {
+    throw new Error('Theme not found');
+  }
+
+  return { theme, setTheme };
+};

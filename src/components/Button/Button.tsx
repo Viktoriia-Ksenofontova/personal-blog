@@ -3,7 +3,7 @@ import { useFela } from 'react-fela';
 // import PropTypes from 'prop-types';
 import makeStyle from './Button.style';
 
-import useStore from '../../store/hooks';
+import { useThemeContext } from '../../store/hooks';
 
 type TProps = {
   type: 'button' | 'submit' | 'reset';
@@ -13,8 +13,8 @@ type TProps = {
 
 const Button = ({ type, text, onClick }: TProps) => {
   const { css } = useFela();
-  const { stateContext } = useStore();
-  const { theme } = stateContext;
+  const store = useThemeContext();
+  const { theme } = store;
 
   return (
     <button

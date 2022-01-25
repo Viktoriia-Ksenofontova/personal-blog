@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFela } from 'react-fela';
 // import PropTypes from 'prop-types';
-import useStore from '../../store/hooks';
+import { useThemeContext } from '../../store/hooks';
 import textStyles from './Text.style';
 
 type TextType = {
@@ -12,8 +12,8 @@ type TextType = {
 
 const Text: React.FC<TextType> = ({ as, children, styles = {}, variant = 'primary' }) => {
   const { css } = useFela();
-  const { stateContext } = useStore();
-  const { theme } = stateContext;
+
+  const { theme } = useThemeContext();
 
   const Component = as;
 

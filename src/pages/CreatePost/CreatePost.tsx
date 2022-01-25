@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Button, Form, View, Text } from '../../components';
 import { labelRule, inputRule } from './CreatePost.style';
 import { CreateCommentIcon } from '../../components/Image';
-import useStore from '../../store/hooks';
+import { useStateContext, useThemeContext } from '../../store/hooks';
 
 const CreatePost = observer(() => {
   const navigate = useNavigate();
   const { css } = useFela();
 
-  const { stateContext } = useStore();
-  const { theme, store } = stateContext;
+  const store = useStateContext();
+  const { theme } = useThemeContext();
 
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
