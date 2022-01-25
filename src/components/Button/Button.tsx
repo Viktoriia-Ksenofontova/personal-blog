@@ -13,9 +13,10 @@ type TProps = {
 
 const Button = ({ type, text, onClick }: TProps) => {
   const { css } = useFela();
-  const { stateContext } = useStore();
-  const { theme } = stateContext;
-
+  const { themeStore } = useStore();
+  // const { stateContext } = useStore();
+  // const { theme } = stateContext;
+  const { theme } = themeStore;
   return (
     <button
       onClick={onClick}

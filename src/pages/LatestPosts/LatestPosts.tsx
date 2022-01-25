@@ -9,8 +9,10 @@ import useStore from "../../store/hooks";
  
 const LatestPosts = observer(() => {
   const { css } = useFela();
-  const { stateContext } = useStore()
-  const {theme, store} = stateContext;
+  // const { stateContext } = useStore();
+  { store } = useStore();
+  const themeStore=store;
+  // const {theme, store} = stateContext;
   const {allPosts } = store;
   
   const [currentPage, setCurrentPage] = useState(1);

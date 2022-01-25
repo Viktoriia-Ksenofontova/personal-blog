@@ -1,13 +1,26 @@
 import { makeObservable, observable, computed, action, toJS } from 'mobx';
 
+type CommentType = {
+  id: number;
+  body: string;
+  postId: number;
+};
+
+type PostType = {
+  id: number;
+  title: string;
+  body: string;
+  comments?: CommentType[];
+};
+
 export default class PostsStore {
-  posts = [];
+  posts: PostType[] = [];
 
-  activePost = {};
+  activePost: PostType | {} = {};
 
-  error = null;
+  error: string | null = null;
 
-  status = '';
+  status: 'success' | 'error' | 'pending' | 'created' = 'pending';
 
   constructor() {
     makeObservable(this, {
@@ -24,15 +37,15 @@ export default class PostsStore {
     });
   }
 
-  setPosts(data) {
+  setPosts(data: PostType[]) {
     this.posts = data;
   }
 
-  setActivePost(data) {
+  setActivePost(data: PostType) {
     this.activePost = { ...data };
   }
 
-  setNewStatus(status) {
+  setNewStatus(status: 'success' | 'error' | 'pending' | 'created') {
     this.status = status;
   }
 
