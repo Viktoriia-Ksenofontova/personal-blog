@@ -17,5 +17,6 @@
     "jsx": "react-jsx",
     "useDefineForClassFields": true
   },
-  "include": ["src", "src/custom.d.ts"]
+  "include": ["src", "src/custom.d.ts"],
+  "exclude": ["node_modules", "build", "scripts"]
 }

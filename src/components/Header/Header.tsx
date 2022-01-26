@@ -22,9 +22,20 @@ const Header: React.FC = () => {
 
   const [scrolled, setScrolled] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
-  const [userWidth, setUserWidth] = useState(0);
+  const [userWidth, setUserWidth] = useState(window.innerWidth);
 
-  // let window: Window;
+  const handleResize = () => {
+    setUserWidth(window.innerWidth);
+  };
+
+  const handleScroll = () => {
+    const offset = window.scrollY;
+    if (offset) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
 
   const handleMenuButtonClick = () => {
     setOpenMenu(!openMenu);
@@ -37,27 +48,11 @@ const Header: React.FC = () => {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
-
-      if (offset) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
-    setUserWidth(window.innerWidth);
-
-    const handleResize = () => {
-      setUserWidth(window.innerWidth);
-    };
-
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -71,7 +66,7 @@ const Header: React.FC = () => {
       <View
         variant="header"
         justifyContent="space-between"
-        overflow={!openMenu ? 'hidden' : 'auto'}
+        overflow={!openMenu ? 'hidden' : undefined}
       >
         <Text
           as="h1"

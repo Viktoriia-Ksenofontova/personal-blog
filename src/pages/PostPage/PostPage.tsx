@@ -15,7 +15,6 @@ const PostPage: React.FC = observer(() => {
   const { css } = useFela();
   const store = useStateContext();
   const { theme } = useThemeContext();
-  // const { theme } = store;
 
   type CommentType = {
     id: number;

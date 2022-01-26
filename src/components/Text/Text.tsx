@@ -5,8 +5,8 @@ import { useThemeContext } from '../../store/hooks';
 import textStyles from './Text.style';
 
 type TextType = {
-  as: string | React.ElementType;
-  styles?: { [key: string]: string } | {};
+  as: string | React.ElementType<any>;
+  styles?: React.CSSProperties;
   variant?: 'heading1' | 'heading2' | 'heading3' | 'primary' | 'small';
 };
 

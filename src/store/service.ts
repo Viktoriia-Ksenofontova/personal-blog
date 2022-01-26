@@ -23,9 +23,9 @@ class Service extends PostsStore {
     this.setNewStatus('pending');
 
     try {
-      const response = await axios.get('/posts');
-      if (response.data) {
-        this.setPosts(response.data);
+      const { data } = await axios.get('/posts');
+      if (data) {
+        this.setPosts(data);
         this.handleSuccess();
       }
     } catch (error) {
@@ -50,7 +50,7 @@ class Service extends PostsStore {
   async createNewComment(postId: number, body: string) {
     try {
       const response = await axios.post('/comments', { postId, body });
-      if (response.data) {
+      if (response.data && this.postForRender) {
         const newActivePost = { ...this.postForRender };
         newActivePost.comments!.push(response.data);
 
