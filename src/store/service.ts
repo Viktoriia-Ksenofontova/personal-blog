@@ -23,7 +23,7 @@ class Service extends PostsStore {
     this.setNewStatus('pending');
 
     try {
-      const response = await axios.get<PostType[]>('/posts');
+      const response = await axios.get<PostType[], HttpResponse<PostType[]>>('/posts');
       if (response.data) {
         this.setPosts(response.data);
         this.handleSuccess();

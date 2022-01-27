@@ -32,7 +32,7 @@ type HttpBaseResponse<D> = {
   error: null;
 };
 
-type HttpResponse<D> = ServerErrorResponse | HttpBaseResponse<D>;
+export type HttpResponse<D> = ServerErrorResponse | HttpBaseResponse<D>;
 
 // type HttpMethods = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
