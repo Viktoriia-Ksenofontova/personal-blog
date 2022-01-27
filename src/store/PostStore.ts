@@ -1,6 +1,6 @@
 import { makeObservable, observable, computed, action, toJS } from 'mobx';
 
-type CommentType = {
+export type CommentType = {
   id: number;
   body: string;
   postId: number;

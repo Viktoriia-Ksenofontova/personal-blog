@@ -2,7 +2,7 @@ import textTheme from './Text.theme';
 import palette from '../../assets/colors';
 
 type TextStylesType = {
-  styles: { [key: string]: string } | {};
+  styles: BaseObject;
   variant: 'heading1' | 'heading2' | 'heading3' | 'primary' | 'small';
   theme: 'dark' | 'light';
 };

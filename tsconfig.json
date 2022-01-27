@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -14,9 +15,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "useDefineForClassFields": true
   },
-  "include": [".src/**/*", "src/custom.d.ts", "src/store/typings.d.ts"],
-  "exclude": ["node_modules"]
+  "include": ["src", "src/custom.d.ts"]
 }

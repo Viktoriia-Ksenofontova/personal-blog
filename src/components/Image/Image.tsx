@@ -10,7 +10,7 @@ import style from './Image.style';
 interface IconProps {
   size?: 'large' | 'small';
   iconColor?: 'primary' | 'accent';
-  iconStyles?: { [key: string]: string };
+  iconStyles?: BaseObject;
 }
 
 function CreateIconComponent(Icon: React.ElementType): React.FC<IconProps> {

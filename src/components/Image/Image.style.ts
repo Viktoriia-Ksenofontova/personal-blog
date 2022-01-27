@@ -41,7 +41,7 @@ const getIconColor = (colorName: 'primary' | 'accent' | undefined) => {
 export default function style(
   size: 'large' | 'small' | undefined,
   iconColor: 'primary' | 'accent' | undefined,
-  iconStyles: { [key: string]: string } | undefined,
+  iconStyles: BaseObject | undefined,
 ) {
   let height;
   let width;

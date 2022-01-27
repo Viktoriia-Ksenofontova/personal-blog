@@ -16,6 +16,6 @@ export interface TViewProps {
   flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
   margin?: string;
   overflow?: 'auto' | 'scroll' | 'hidden';
-  viewStyle?: { [key: string]: string };
-  otherProps?: Record<string, string>[];
+  viewStyle?: BaseObject<string, string>;
+  otherProps?: BaseObject<string, string>;
 }

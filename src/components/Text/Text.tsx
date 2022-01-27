@@ -6,7 +6,7 @@ import textStyles from './Text.style';
 
 type TextType = {
   as: string | React.ElementType<any>;
-  styles?: React.CSSProperties;
+  styles?: BaseObject;
   variant?: 'heading1' | 'heading2' | 'heading3' | 'primary' | 'small';
 };
 

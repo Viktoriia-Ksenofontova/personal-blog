@@ -1,0 +1,8 @@
+{
+  "cSpell.words": ["browserslist", "predeploy"],
+  "eslint.options": {
+    "parserOptions": {
+      "createDefaultProgram": true
+    }
+  }
+}
