@@ -1,6 +1,6 @@
 import { runInAction } from 'mobx';
 import axios from 'axios';
-import PostsStore from './PostStore';
+import PostsStore, { PostType } from './PostStore';
 
 axios.defaults.baseURL = 'https://simple-blog-api.crew.red';
 
@@ -23,9 +23,9 @@ class Service extends PostsStore {
     this.setNewStatus('pending');
 
     try {
-      const { data } = await axios.get('/posts');
-      if (data) {
-        this.setPosts(data);
+      const response = await axios.get<PostType[]>('/posts');
+      if (response.data) {
+        this.setPosts(response.data);
         this.handleSuccess();
       }
     } catch (error) {
@@ -65,7 +65,7 @@ class Service extends PostsStore {
     }
   }
 
-  async createNewPost(title: string, body: string) {
+  async createNewPost(title: string, body: string): Promise<number> {
     let id;
     try {
       const response = await axios.post('/posts', { title, body });

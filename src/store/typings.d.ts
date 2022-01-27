@@ -1,5 +1,5 @@
-type BaseObject<K, V> = {
-  [key: K]: K | V;
+type BaseObject<K extends string = string, V = unknown> = {
+  [key in K]: V;
 };
 
 // type CommentType = {
