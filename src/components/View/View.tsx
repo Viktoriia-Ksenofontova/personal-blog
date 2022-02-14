@@ -3,7 +3,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import { useFela } from 'react-fela';
 import { TViewProps } from './View.interface';
-import { makeViewStyle } from './View.style';
+import makeViewStyle from './View.style';
 
 const View: React.FC<TViewProps> = ({
   as = 'div',
@@ -14,6 +14,7 @@ const View: React.FC<TViewProps> = ({
   alignItems,
   flexWrap,
   margin,
+  padding,
   overflow,
   viewStyle,
   children,
@@ -29,6 +30,7 @@ const View: React.FC<TViewProps> = ({
     flexWrap,
     overflow,
     margin,
+    padding,
     ...viewStyle,
   };
 

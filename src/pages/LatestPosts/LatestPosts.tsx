@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useFela } from 'react-fela';
-import { Container, PostItem, List, Text, Button, Loader } from '../../components';
+import { PostItem, List, Text, Button, Loader, View } from '../../components';
 
 import { postStyle, listStyle } from './LatestPost.style';
 import { useThemeContext, useStateContext } from '../../store/hooks';
@@ -36,7 +36,7 @@ const LatestPosts: React.FC = observer(() => {
   };
 
   return (
-    <Container>
+    <View variant="container" padding="20px">
       {store.status === 'pending' ? (
         <Loader />
       ) : (
@@ -57,7 +57,7 @@ const LatestPosts: React.FC = observer(() => {
           )}
         </>
       )}
-    </Container>
+    </View>
   );
 });
 export default LatestPosts;

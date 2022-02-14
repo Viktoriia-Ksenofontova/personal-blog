@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useFela } from 'react-fela';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
-import { Container, Button, Form, View, Text } from '../../components';
+import { Button, Form, View, Text } from '../../components';
 import { labelRule, inputRule } from './CreatePost.style';
 import { CreateCommentIcon } from '../../components/Image';
 import { useStateContext, useThemeContext } from '../../store/hooks';
@@ -25,7 +25,7 @@ const CreatePost = observer(() => {
   };
 
   return (
-    <Container>
+    <View variant="container" padding="20px">
       <View variant="content" gap="20px" justifyContent="center" margin="0 0 20px">
         <CreateCommentIcon />
         <CreateCommentIcon size="large" iconColor="accent" />
@@ -61,7 +61,7 @@ const CreatePost = observer(() => {
         </label>
         <Button type="submit" text="Add Post" />
       </Form>
-    </Container>
+    </View>
   );
 });
 

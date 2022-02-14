@@ -15,6 +15,7 @@ export interface TViewProps {
   alignItems?: 'center' | 'flex-end' | 'flex-start' | 'stretch' | 'baseline';
   flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
   margin?: string;
+  padding?: string;
   overflow?: 'auto' | 'scroll' | 'hidden';
   viewStyle?: BaseObject<string, string>;
   otherProps?: BaseObject<string, string>;

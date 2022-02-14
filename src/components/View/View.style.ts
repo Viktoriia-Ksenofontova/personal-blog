@@ -2,16 +2,13 @@ import { TViewProps } from './View.interface';
 
 const viewTheme = {
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    margin: '0 auto',
-    padding: '20px',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     maxWidth: '1440px',
   },
 
   header: {
-    margin: '0 auto',
-    padding: '20px',
     maxWidth: '1440px',
     display: 'flex',
     position: 'relative',
@@ -19,11 +16,11 @@ const viewTheme = {
   },
 
   footer: {
-    margin: '0 auto',
-    padding: '20px',
     maxWidth: '1440px',
-    display: 'flex',
-    justifyContent: 'center',
+    display: 'block',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    textAlign: 'center',
   },
 
   content: {
@@ -31,7 +28,7 @@ const viewTheme = {
   },
 };
 
-export const makeViewStyle = (
+const makeViewStyle = (
   styleProps: Omit<TViewProps, 'as' | 'variant' | 'viewStyle' | 'otherProps'>,
   variant: 'content' | 'footer' | 'header' | 'container',
   // variant: Pick<TViewProps, "variant">,
@@ -44,3 +41,5 @@ export const makeViewStyle = (
     ...Object.fromEntries(filteredStyleProps),
   };
 };
+
+export default makeViewStyle;

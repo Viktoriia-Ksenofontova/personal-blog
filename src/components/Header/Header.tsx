@@ -63,40 +63,43 @@ const Header: React.FC = () => {
         !scrolled ? css(headerStyles) : css({ ...headerStyles(), position: 'sticky', top: 0 })
       }
     >
-      <View
-        variant="header"
-        justifyContent="space-between"
-        overflow={!openMenu ? 'hidden' : undefined}
-      >
-        <Text
-          as="h1"
-          variant="heading1"
-          styles={userWidth < 440 ? { ...logoStyles(), fontSize: '28px' } : logoStyles()}
+      <View variant="container">
+        <View
+          variant="header"
+          padding="20px"
+          justifyContent="space-between"
+          overflow={!openMenu ? 'hidden' : undefined}
         >
-          News & Events
-        </Text>
-        {userWidth < 768 && (
-          <button type="button" onClick={handleMenuButtonClick} className={css(buttonMenuStyles)}>
-            {openMenu && <CloseIcon size="large" />}
-            {!openMenu && <MenuIcon size="large" />}
-          </button>
-        )}
+          <Text
+            as="h1"
+            variant="heading1"
+            styles={userWidth < 440 ? { ...logoStyles(), fontSize: '28px' } : logoStyles()}
+          >
+            News & Events
+          </Text>
+          {userWidth < 768 && (
+            <button type="button" onClick={handleMenuButtonClick} className={css(buttonMenuStyles)}>
+              {openMenu && <CloseIcon size="large" />}
+              {!openMenu && <MenuIcon size="large" />}
+            </button>
+          )}
 
-        <div className={openMenu ? css(navWrapperStyles(theme)) : css(closeNavWrapperStyles)}>
-          <nav className={css(navStyle)}>
-            <NavLink to={routes.home} className={css(navbarLinkRule)} onClick={handleLinkClick}>
-              Home
-            </NavLink>
-            <NavLink
-              to={routes.createPost}
-              className={css(navbarLinkRule)}
-              onClick={handleLinkClick}
-            >
-              Create_Post
-            </NavLink>
-          </nav>
-          <ThemeSwitch />
-        </div>
+          <div className={openMenu ? css(navWrapperStyles(theme)) : css(closeNavWrapperStyles)}>
+            <nav className={css(navStyle)}>
+              <NavLink to={routes.home} className={css(navbarLinkRule)} onClick={handleLinkClick}>
+                Home
+              </NavLink>
+              <NavLink
+                to={routes.createPost}
+                className={css(navbarLinkRule)}
+                onClick={handleLinkClick}
+              >
+                Create_Post
+              </NavLink>
+            </nav>
+            <ThemeSwitch />
+          </div>
+        </View>
       </View>
     </header>
   );

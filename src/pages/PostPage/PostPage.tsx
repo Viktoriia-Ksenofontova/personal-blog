@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { useFela } from 'react-fela';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { Container, Form, CommentItem, List, Button, Text, Loader, View } from '../../components';
+import { Form, CommentItem, List, Button, Text, Loader, View } from '../../components';
 import { useStateContext, useThemeContext } from '../../store/hooks';
 import { DeleteIcon } from '../../components/Image';
 import { labelRuleStyle, textareaRuleStyle, buttonDeleteRuleStyle } from './PostPage.style';
@@ -73,7 +73,7 @@ const PostPage: React.FC = observer(() => {
   };
 
   return (
-    <Container>
+    <View variant="container" padding="20px">
       {store.status === 'pending' ? (
         <Loader />
       ) : (
@@ -129,7 +129,7 @@ const PostPage: React.FC = observer(() => {
           </Form>
         </>
       )}
-    </Container>
+    </View>
   );
 });
 
