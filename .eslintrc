@@ -11,22 +11,18 @@
     "airbnb/hooks",
     "prettier"
   ],
-  "parserOptions":{
+  "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "import"
-  ],
+  "plugins": ["react", "import"],
 
   "rules": {
-    "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/no-array-index-key": "off",
-    "import/prefer-default-export": "off",
     "import/no-default-export": "off",
-    "no-restricted-exports": ["error", { "restrictedNamedExports": ["default"] }]
+    "no-restricted-exports": ["warn", { "restrictedNamedExports": ["default"] }]
   }
 }

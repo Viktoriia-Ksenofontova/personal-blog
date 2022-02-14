@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useFela } from 'react-fela';
 
-import { makeViewStyle } from './View.style';
+import makeViewStyle from './View.style';
 
 export default function View({
   as = 'div',

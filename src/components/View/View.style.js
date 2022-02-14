@@ -28,7 +28,7 @@ const viewTheme = {
   },
 };
 
-export const makeViewStyle = (styleProps, variant) => {
+const makeViewStyle = (styleProps, variant) => {
   const variantStyle = viewTheme[variant];
 
   return {
@@ -36,3 +36,5 @@ export const makeViewStyle = (styleProps, variant) => {
     ...styleProps,
   };
 };
+
+export default makeViewStyle;
