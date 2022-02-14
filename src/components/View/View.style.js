@@ -1,40 +1,38 @@
-const viewTheme={
-container: {
-    display: 'flex',
+const viewTheme = {
+  container: {
+    display: 'block',
     flexDirection: 'column',
-    margin:'0 auto',
-    padding:'20px',
-    maxWidth: '1440px'
-},
-
-header:{
-    margin:'0 auto',
-    padding:'20px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    padding: '20px',
     maxWidth: '1440px',
-    display:'flex', 
-    position: 'relative', 
-    justifyContent: 'space-between'
-},
+  },
 
-footer:{
-    margin:'0 auto',
-    padding:'20px',
+  header: {
     maxWidth: '1440px',
-    display:'flex', 
-    justifyContent: 'center'
-},
-
-content:{
     display: 'flex',
-}
+    position: 'relative',
+    justifyContent: 'space-between',
+  },
 
-}
+  footer: {
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    maxWidth: '1440px',
+    display: 'block',
+    textAlign: 'center',
+  },
 
-export const makeViewStyle=(styleProps, variant)=>{
-    const variantStyle=viewTheme[variant];
+  content: {
+    display: 'flex',
+  },
+};
 
-    return {
-        ...variantStyle,
-        ...styleProps
-    }
-}
+export const makeViewStyle = (styleProps, variant) => {
+  const variantStyle = viewTheme[variant];
+
+  return {
+    ...variantStyle,
+    ...styleProps,
+  };
+};

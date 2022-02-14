@@ -14,6 +14,7 @@ export default function View({
   alignItems,
   flexWrap,
   margin,
+  padding,
   overflow,
   children,
   viewStyle,
@@ -29,6 +30,7 @@ export default function View({
     flexWrap,
     overflow,
     margin,
+    padding,
     ...viewStyle,
   };
 
@@ -48,10 +50,11 @@ View.defaultProps = {
   variant: 'container',
   flexWrap: 'nowrap',
   flex: '',
-  gap:'',
-  margin:'',
-  justifyContent:'',
-  alignItems:'',
+  gap: '',
+  margin: '',
+  padding: '',
+  justifyContent: '',
+  alignItems: '',
   overflow: '',
 };
 
@@ -62,9 +65,10 @@ View.propTypes = {
   children: PropTypes.node.isRequired,
   flex: PropTypes.string,
   gap: PropTypes.string,
-  margin:PropTypes.string,
-  justifyContent:PropTypes.string,
-  alignItems:PropTypes.string,
+  margin: PropTypes.string,
+  padding: PropTypes.string,
+  justifyContent: PropTypes.string,
+  alignItems: PropTypes.string,
   flexWrap: PropTypes.string,
   overflow: PropTypes.string,
 };

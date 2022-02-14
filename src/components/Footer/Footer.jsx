@@ -7,10 +7,17 @@ export default function Footer() {
   const { css } = useFela();
 
   return (
-    <footer className={css({backgroundColor: 'grey'})} >
-      <View variant='footer' justifyContent='center'>
-        <Text as="p" variant='small' styles={{color:`${palette.light.text}`}}> &copy; Copyright 2022</Text>
+    <footer className={css({ backgroundColor: 'grey' })}>
+      <View variant="footer" justifyContent="center" padding="20px">
+        <Text
+          as="p"
+          variant="small"
+          styles={{ color: `${palette.light.text}` }}
+        >
+          {' '}
+          &copy; Copyright 2022
+        </Text>
       </View>
     </footer>
-  )
+  );
 }
