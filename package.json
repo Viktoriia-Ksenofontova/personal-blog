@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.24.0",
     "fela": "^11.7.0",
+    "identity-obj-proxy": "^3.0.0",
     "mobx": "^6.3.10",
     "mobx-react-lite": "^3.2.2",
     "modern-css-reset": "^1.4.0",
@@ -21,13 +22,16 @@
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "regenerator-runtime": "^0.13.9",
     "save-dev": "0.0.1-security",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "netlify deploy -p"
@@ -51,6 +55,13 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
+    "babel-jest": "^27.5.1",
+    "enzyme": "^3.11.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.3.0",
@@ -59,7 +70,40 @@
     "eslint-plugin-jsx-control-statements": "^2.2.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "jest": "^27.5.1",
     "lint-staged": "^12.1.4",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "react-test-renderer": "^17.0.2"
+  },
+  "jest": {
+    "verbose": true,
+    "clearMocks": true,
+    "collectCoverage": true,
+    "setupFilesAfterEnv": [
+      "./enzyme.js"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx)$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "./__mocks__/fileMock.js",
+      "\\.(css|scss)$": "identity-obj-proxy"
+    },
+    "testPathIgnorePatterns": [
+      "node_modules",
+      "\\.cache",
+      "<rootDir>.*/public"
+    ],
+    "testEnvironment": "jsdom"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react",
+      "@babel/env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime",
+      "@babel/plugin-syntax-jsx"
+    ]
   }
 }

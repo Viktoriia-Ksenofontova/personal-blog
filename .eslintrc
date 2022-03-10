@@ -23,6 +23,10 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/no-array-index-key": "off",
     "import/no-default-export": "off",
-    "no-restricted-exports": ["warn", { "restrictedNamedExports": ["default"] }]
+    "no-restricted-exports": [
+      "warn",
+      { "restrictedNamedExports": ["default"] }
+    ],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
   }
 }

@@ -1,61 +1,53 @@
-import { makeObservable, observable, computed, action , toJS} from "mobx";
+import { makeObservable, observable, computed, action, toJS } from 'mobx';
 
-export default class PostsStore {
+class PostsStore {
   posts = [];
 
-  activePost={};
+  activePost = {};
 
   error = null;
 
-  status = "";
+  status = '';
 
   constructor() {
-      makeObservable(this, {
+    makeObservable(this, {
       posts: observable,
       activePost: observable,
       error: observable,
       status: observable,
       setPosts: action,
       setActivePost: action,
-      setNewStatus:action,
+      setNewStatus: action,
       allPosts: computed,
-      postForRender:computed,
-      countOfPosts: computed
-  })
+      postForRender: computed,
+      countOfPosts: computed,
+    });
   }
 
   setPosts(data) {
-    this.posts=data;
+    this.posts = data;
   }
 
-  setActivePost(data){
-    this.activePost={...data};
+  setActivePost(data) {
+    this.activePost = { ...data };
   }
 
-  setNewStatus(status){
-    this.status=status;
+  setNewStatus(status) {
+    this.status = status;
   }
 
-   
   get allPosts() {
     const reversePosts = [...this.posts];
     return reversePosts.reverse();
-  };
+  }
 
-  get postForRender(){
-    return toJS(this.activePost)
-  };
+  get postForRender() {
+    return toJS(this.activePost);
+  }
 
   get countOfPosts() {
     return this.posts.length;
-  };
+  }
 }
 
-
- 
-  
-
-
- 
-
-
+export default PostsStore;
