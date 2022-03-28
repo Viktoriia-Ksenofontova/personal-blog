@@ -1,5 +1,3 @@
-# personal-blog
-
 # Technologies:
 
 # Branch main
