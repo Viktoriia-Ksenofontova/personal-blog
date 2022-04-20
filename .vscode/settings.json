@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["browserslist", "predeploy"],
+  "cSpell.words": ["browserslist", "predeploy", "reduxjs"],
   "eslint.options": {
     "parserOptions": {
       "createDefaultProgram": true
