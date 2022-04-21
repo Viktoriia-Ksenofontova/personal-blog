@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useFela } from 'react-fela';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { PostItem, List, Text, Button, Loader, View } from '../../components';
 
 import { postStyle, listStyle } from './LatestPost.style';
-import { useThemeContext, useStateContext } from '../../store/hooks';
+import { useThemeContext } from '../../store/hooks';
+
+import { fetchPosts } from '../../redux/posts/postsOperations';
+import { getAllPosts, getStatus } from '../../redux/posts/postsSelectors';
 
 const LatestPosts: React.FC = observer(() => {
   const { css } = useFela();
-  const store = useStateContext();
+  const dispatch = useAppDispatch();
   const { theme } = useThemeContext();
-  const { allPosts } = store;
+
+  const allPosts = useAppSelector(getAllPosts);
+  const status = useAppSelector(getStatus);
 
   type PostType = {
     id: number;
@@ -22,13 +28,11 @@ const LatestPosts: React.FC = observer(() => {
   const [visiblePosts, setVisiblePosts] = useState<PostType[] | []>([]);
 
   useEffect(() => {
-    store.fetchPostsAction();
-  }, [store]);
-
-  // console.log('all', allPosts)
+    dispatch(fetchPosts());
+  }, [dispatch]);
 
   useEffect(() => {
-    setVisiblePosts([...allPosts].slice(0, currentPage * 5));
+    setVisiblePosts([...allPosts].reverse().slice(0, currentPage * 5));
   }, [allPosts, currentPage]);
 
   const handleClick = () => {
@@ -37,7 +41,7 @@ const LatestPosts: React.FC = observer(() => {
 
   return (
     <View variant="container" padding="20px">
-      {store.status === 'pending' ? (
+      {status === 'pending' ? (
         <Loader />
       ) : (
         <>

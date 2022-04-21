@@ -1,6 +1,5 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-// import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useFela } from 'react-fela';
 

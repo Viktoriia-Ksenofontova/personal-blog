@@ -4,6 +4,10 @@ const fetchPostsRequest = createAction('posts/fetchPostsRequest');
 const fetchPostsSuccess = createAction('posts/fetchPostsSuccess');
 const fetchPostsError = createAction('posts/fetchPostsError');
 
+const fetchCommentsRequest = createAction('posts/fetchCommentsRequest');
+const fetchCommentsSuccess = createAction('posts/fetchCommentsSuccess');
+const fetchCommentsError = createAction('posts/fetchCommentsError');
+
 const createPostRequest = createAction('posts/createPostRequest');
 const createPostSuccess = createAction('posts/createPostSuccess');
 const createPostError = createAction('posts/createPostError');
@@ -16,6 +20,9 @@ export default {
   fetchPostsRequest,
   fetchPostsSuccess,
   fetchPostsError,
+  fetchCommentsRequest,
+  fetchCommentsSuccess,
+  fetchCommentsError,
   createPostRequest,
   createPostSuccess,
   createPostError,

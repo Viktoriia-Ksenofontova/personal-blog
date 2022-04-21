@@ -1,19 +1,37 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useFela } from 'react-fela';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { useParams, useNavigate } from 'react-router-dom';
+import { getStatus, getActivePost } from '../../redux/posts/postsSelectors';
+import { removePost, fetchComments } from '../../redux/posts/postsOperations';
 
-import { Form, CommentItem, List, Button, Text, Loader, View } from '../../components';
-import { useStateContext, useThemeContext } from '../../store/hooks';
+import {
+  Form,
+  CommentItem,
+  List,
+  Button,
+  Text,
+  Loader,
+  View,
+} from '../../components';
+import { useThemeContext } from '../../store/hooks';
 import { DeleteIcon } from '../../components/Image';
-import { labelRuleStyle, textareaRuleStyle, buttonDeleteRuleStyle } from './PostPage.style';
+import {
+  labelRuleStyle,
+  textareaRuleStyle,
+  buttonDeleteRuleStyle,
+} from './PostPage.style';
 
 const PostPage: React.FC = observer(() => {
   const navigate = useNavigate();
   const { postId } = useParams();
   const correctPostId = Number(postId!.slice(1));
   const { css } = useFela();
-  const store = useStateContext();
+  const dispatch = useAppDispatch();
+  const status = useAppSelector(getStatus);
+  const activePost = useAppSelector(getActivePost);
+
   const { theme } = useThemeContext();
 
   type CommentType = {
@@ -29,41 +47,25 @@ const PostPage: React.FC = observer(() => {
   };
 
   const [currentPost, setCurrentPost] = useState<CurrentPostType | null>(null);
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
-  const [comments, setComments] = useState<CommentType[] | undefined>(undefined);
-
   const [newComment, setNewComment] = useState('');
 
-  useLayoutEffect(() => {
-    store.fetchCommentsAction(correctPostId);
-  }, [store, correctPostId]);
+  useEffect(() => {
+    dispatch(fetchComments(correctPostId));
+  }, [correctPostId, dispatch]);
 
-  useLayoutEffect(() => {
-    if (store.status === 'success' || 'created') {
-      setCurrentPost(store.postForRender);
-    }
-  }, [store.postForRender, store.status]);
-
-  // console.log('store.postForRender.data', currentPost);
-
-  useLayoutEffect(() => {
-    if (currentPost && (store.status === 'success' || 'created')) {
-      setTitle(currentPost.title);
-      setBody(currentPost.body);
-      setComments(currentPost.comments);
-    }
-  }, [currentPost, store.status]);
+  useEffect(() => {
+    setCurrentPost(activePost);
+  }, [activePost]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    store.createNewComment(correctPostId, newComment);
+    // store.createNewComment(correctPostId, newComment);
     setNewComment('');
   };
 
   const handleDeleteBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    store.removePost(correctPostId);
+    dispatch(removePost(correctPostId));
     navigate(`/`);
   };
 
@@ -74,13 +76,13 @@ const PostPage: React.FC = observer(() => {
 
   return (
     <View variant="container" padding="20px">
-      {store.status === 'pending' ? (
+      {status === 'pending' ? (
         <Loader />
       ) : (
         <>
           <View variant="content" justifyContent="space-between">
             <Text as="h2" variant="heading2">
-              {title}
+              {currentPost?.title}
             </Text>
             <button
               type="button"
@@ -92,21 +94,21 @@ const PostPage: React.FC = observer(() => {
           </View>
 
           <Text as="p" styles={{ margin: '0 0 20px' }}>
-            {body}
+            {currentPost?.body}
           </Text>
 
           <Text as="h3" variant="heading3">
             Comments:
           </Text>
 
-          {comments?.length === 0 && (
+          {currentPost?.comments?.length === 0 && (
             <Text as="p" variant="small" styles={{ margin: '10px 0 20px' }}>
               There are no comments here yet
             </Text>
           )}
-          {comments && (
+          {currentPost?.comments && (
             <List>
-              {comments.map(comment => (
+              {currentPost.comments.map(comment => (
                 <li key={comment.id}>
                   <CommentItem body={comment.body} />
                 </li>

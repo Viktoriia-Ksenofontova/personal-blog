@@ -3,20 +3,33 @@ import actions from './postsActions';
 
 axios.defaults.baseURL = 'https://simple-blog-api.crew.red';
 
-const fetchPosts = () => async dispatch => {
+export const fetchPosts = () => async dispatch => {
   dispatch(actions.fetchPostsRequest());
 
   try {
     const response = await axios.get('/posts');
-    if (response.data) {
-      dispatch(actions.fetchPostsSuccess(data));
+    if (response) {
+      dispatch(actions.fetchPostsSuccess(response.data));
     }
   } catch (error) {
     dispatch(actions.fetchPostsError(error));
   }
 };
 
-const createPost = (title, body) => async dispatch => {
+export const fetchComments = postId => async dispatch => {
+  dispatch(actions.fetchCommentsRequest());
+
+  try {
+    const { data } = await axios.get(`/posts/${postId}?_embed=comments`);
+    if (data) {
+      dispatch(actions.fetchCommentsSuccess(data));
+    }
+  } catch (error) {
+    dispatch(actions.fetchCommentsError(error));
+  }
+};
+
+export const createPost = (title, body) => async dispatch => {
   dispatch(actions.createPostRequest());
 
   try {
@@ -29,7 +42,7 @@ const createPost = (title, body) => async dispatch => {
   }
 };
 
-const removePost = postId => async dispatch => {
+export const removePost = postId => async dispatch => {
   dispatch(actions.removePostRequest());
 
   try {
@@ -40,10 +53,4 @@ const removePost = postId => async dispatch => {
   } catch (error) {
     dispatch(actions.removePostError(error));
   }
-};
-
-export default {
-  fetchPosts,
-  createPost,
-  removePost,
 };
