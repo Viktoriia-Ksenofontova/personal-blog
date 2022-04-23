@@ -22,6 +22,9 @@ const error = createReducer(null, {
   [actions.removePostError]: (_, { payload }) => payload.message,
   [actions.removePostRequest]: () => null,
   [actions.removePostSuccess]: () => null,
+  [actions.createNewCommentRequest]: () => null,
+  [actions.createNewCommentSuccess]: () => null,
+  [actions.createNewCommentError]: (_, { payload }) => payload.message,
 });
 
 const status = createReducer('pending', {
@@ -37,11 +40,19 @@ const status = createReducer('pending', {
   [actions.removePostRequest]: () => 'pending',
   [actions.removePostSuccess]: () => 'success',
   [actions.removePostError]: () => 'error',
+  [actions.createNewCommentRequest]: () => 'pending',
+  [actions.createNewCommentSuccess]: () => 'created',
+  [actions.createNewCommentError]: () => 'error',
 });
 
 const activePost = createReducer(null, {
   [actions.fetchCommentsSuccess]: (_, { payload }) => payload,
-
+  [actions.createNewCommentSuccess]: (state, action) => ({
+    ...state,
+    comments: state.comments
+      ? state.comments.concat(action.payload)
+      : new Array.concat(action.payload),
+  }),
   // [actions.createPostSuccess]: (_, { payload }) => payload,
 });
 

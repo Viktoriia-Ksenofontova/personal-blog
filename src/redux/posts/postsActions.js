@@ -16,6 +16,10 @@ const removePostRequest = createAction('posts/removePostRequest');
 const removePostSuccess = createAction('posts/removePostSuccess');
 const removePostError = createAction('posts/removePostError');
 
+const createNewCommentRequest = createAction('posts/createNewCommentRequest');
+const createNewCommentSuccess = createAction('posts/createNewCommentSuccess');
+const createNewCommentError = createAction('posts/createNewCommentError');
+
 export default {
   fetchPostsRequest,
   fetchPostsSuccess,
@@ -29,4 +33,7 @@ export default {
   removePostRequest,
   removePostSuccess,
   removePostError,
+  createNewCommentRequest,
+  createNewCommentSuccess,
+  createNewCommentError,
 };

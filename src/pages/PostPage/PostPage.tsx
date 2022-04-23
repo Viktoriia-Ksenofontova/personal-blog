@@ -4,7 +4,11 @@ import { useFela } from 'react-fela';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getStatus, getActivePost } from '../../redux/posts/postsSelectors';
-import { removePost, fetchComments } from '../../redux/posts/postsOperations';
+import {
+  removePost,
+  fetchComments,
+  createNewComment,
+} from '../../redux/posts/postsOperations';
 
 import {
   Form,
@@ -59,6 +63,7 @@ const PostPage: React.FC = observer(() => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    dispatch(createNewComment(correctPostId, newComment));
     // store.createNewComment(correctPostId, newComment);
     setNewComment('');
   };

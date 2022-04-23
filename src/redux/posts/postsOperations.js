@@ -54,3 +54,19 @@ export const removePost = postId => async dispatch => {
     dispatch(actions.removePostError(error));
   }
 };
+
+export const createNewComment = (postId, body) => async dispatch => {
+  dispatch(actions.createNewCommentRequest());
+
+  try {
+    const response = await axios.post('/comments', {
+      postId,
+      body,
+    });
+    if (response.data) {
+      dispatch(actions.createNewCommentSuccess(response.data));
+    }
+  } catch (error) {
+    dispatch(actions.createNewCommentError(error));
+  }
+};
