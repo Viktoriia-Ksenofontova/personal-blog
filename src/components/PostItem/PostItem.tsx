@@ -2,8 +2,9 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
 import { useFela } from 'react-fela';
-
-import { useThemeContext } from '../../store/hooks';
+import { useAppSelector } from '../../redux/hooks';
+import { getTheme } from '../../redux/theme/themeSelectors';
+// import { useThemeContext } from '../../context/hooks';
 import Text from '../Text';
 import { linkRuleStyle, postStyle } from './PostItem.style';
 
@@ -16,8 +17,8 @@ type PostItemProps = {
 const PostItem: React.FC<PostItemProps> = observer(props => {
   const { id, title, body } = props;
   const { css } = useFela();
-
-  const { theme } = useThemeContext();
+  const theme = useAppSelector(getTheme);
+  // const { theme } = useThemeContext();
 
   return (
     <>

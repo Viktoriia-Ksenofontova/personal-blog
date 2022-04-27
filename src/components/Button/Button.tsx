@@ -2,8 +2,9 @@ import React from 'react';
 import { useFela } from 'react-fela';
 // import PropTypes from 'prop-types';
 import makeStyle from './Button.style';
-
-import { useThemeContext } from '../../store/hooks';
+import { useAppSelector } from '../../redux/hooks';
+import { getTheme } from '../../redux/theme/themeSelectors';
+// import { useThemeContext } from '../../context/hooks';
 
 type TProps = {
   type: 'button' | 'submit' | 'reset';
@@ -13,8 +14,9 @@ type TProps = {
 
 const Button = ({ type, text, onClick }: TProps) => {
   const { css } = useFela();
-  const store = useThemeContext();
-  const { theme } = store;
+  // const store = useThemeContext();
+  // const { theme } = store;
+  const theme = useAppSelector(getTheme);
 
   return (
     <button

@@ -1,37 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useFela } from 'react-fela';
-import {
-  useAppDispatch,
-  // , useAppSelector
-} from 'src/redux/hooks';
-
-import { observer } from 'mobx-react-lite';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { useNavigate } from 'react-router-dom';
 import { Button, Form, View, Text } from '../../components';
-import { labelRule, inputRule } from './CreatePost.style';
 import { CreateCommentIcon } from '../../components/Image';
-import { useThemeContext } from '../../store/hooks';
 
+import { getTheme } from '../../redux/theme/themeSelectors';
 import { createPost } from '../../redux/posts/postsOperations';
-// import { getActivePost } from '../../redux/posts/postsSelectors';
+import { labelRule, inputRule } from './CreatePost.style';
 
-const CreatePost = observer(() => {
+const CreatePost = () => {
   const navigate = useNavigate();
   const { css } = useFela();
   const dispatch = useAppDispatch();
-  // const activePost = useAppSelector(getActivePost);
 
-  const { theme } = useThemeContext();
+  const theme = useAppSelector(getTheme);
 
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    dispatch(createPost(title, body));
-    navigate(`/posts`);
-    // navigate(`/posts/:${activePost.id}`);
-  };
+  const handleSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      if (title !== '' && body !== '') {
+        dispatch(createPost(title, body));
+        navigate(`/posts`);
+      }
+    },
+    [dispatch, title, body, navigate],
+  );
 
   return (
     <View variant="container" padding="20px">
@@ -77,6 +74,6 @@ const CreatePost = observer(() => {
       </Form>
     </View>
   );
-});
+};
 
 export default CreatePost;

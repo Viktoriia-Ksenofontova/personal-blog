@@ -6,11 +6,13 @@ const textTheme = {
     marginBottom: '20px',
   },
   heading2: {
+    display: 'inline-block',
     fontSize: '24px',
     fontWeight: '700',
     marginBottom: '20px',
   },
   heading3: {
+    width: '100%',
     fontSize: '18px',
     fontWeight: '700',
   },

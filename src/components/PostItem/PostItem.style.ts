@@ -7,6 +7,7 @@ export const postStyle = () => ({
   '-webkitLineClamp': '3',
   '-webkitBoxOrient': 'vertical',
   height: '72px',
+  width: '100%',
 });
 
 export const linkRuleStyle = (theme: 'dark' | 'light') => ({

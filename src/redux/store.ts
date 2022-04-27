@@ -1,11 +1,16 @@
+import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import postsReducer from './posts/postsReducer';
+import themeReducer from './theme/themeReducer';
+
+const rootReducer = combineReducers({
+  postsStore: postsReducer,
+  theme: themeReducer,
+});
 
 export const store = configureStore({
-  reducer: {
-    postsStore: postsReducer,
-  },
+  reducer: rootReducer,
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV === 'development',
 });

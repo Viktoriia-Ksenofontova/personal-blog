@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useFela } from 'react-fela';
-import { useThemeContext } from '../../store/hooks';
+import { useAppDispatch } from '../../redux/hooks';
+// import { getTheme } from '../../redux/theme/themeSelectors';
+import { toggleTheme } from '../../redux/theme/themeActions';
+// import { useThemeContext } from '../../context/hooks';
 import {
   themeSwitchControl,
   themeSwitchToggle,
@@ -8,21 +11,28 @@ import {
   themeSwitchTrack,
 } from './ThemeSwitch.style';
 
-const ThemeSwitch = () => {
+const ThemeSwitch: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [checked, setChecked] = useState(false);
 
   const { css } = useFela();
-  const store = useThemeContext();
-  const { theme, setTheme } = store;
+  // const store = useThemeContext();
+  // const { theme, setTheme } = store;
+  // const theme = useAppSelector(getTheme);
 
   const handleChange = () => {
     setChecked(!checked);
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    dispatch(toggleTheme());
+    // setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   return (
     <div className={css(themeSwitchControl)}>
-      <label htmlFor="themeSwitchToggle" className={css(themeSwitchTrack)} data-check={checked}>
+      <label
+        htmlFor="themeSwitchToggle"
+        className={css(themeSwitchTrack)}
+        data-check={checked}
+      >
         <input
           type="checkbox"
           name="theme"

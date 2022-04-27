@@ -1,4 +1,4 @@
-import React, { Suspense, useMemo, useState } from 'react';
+import React, { Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -11,9 +11,7 @@ import { RendererProvider } from 'react-fela';
 import routes from './routing/routes';
 
 import { Footer, Header, Main, Loader } from './components';
-// import Service from './store/service';
-// import StateContext from './context/StateContext';
-import ThemeContext from './context/ThemeContext';
+
 import { store } from './redux/store';
 
 const LatestPosts = React.lazy(() => import('./pages/LatestPosts'));
@@ -23,31 +21,29 @@ const PostPage = React.lazy(() => import('./pages/PostPage'));
 const renderer = createRenderer();
 
 const App: React.FC = () => {
-  // const value = useMemo(() => new Service(), []);
-
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const valueTheme = useMemo(() => ({ theme, setTheme }), [theme]);
+  // const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  // const valueTheme = useMemo(() => ({ theme, setTheme }), [theme]);
 
   return (
     <RendererProvider renderer={renderer}>
-      <ThemeContext.Provider value={valueTheme}>
-        <Provider store={store}>
-          <Router>
-            <Header />
-            <Main>
-              <Suspense fallback={<Loader />}>
-                <Routes>
-                  <Route path={routes.home} element={<LatestPosts />} />
-                  <Route path={routes.createPost} element={<CreatePost />} />
-                  <Route path={routes.post} element={<PostPage />} />
-                  <Route path="*" element={<Navigate to={routes.page404} />} />
-                </Routes>
-              </Suspense>
-            </Main>
-            <Footer />
-          </Router>
-        </Provider>
-      </ThemeContext.Provider>
+      {/* <ThemeContext.Provider value={valueTheme}> */}
+      <Provider store={store}>
+        <Router>
+          <Header />
+          <Main>
+            <Suspense fallback={<Loader />}>
+              <Routes>
+                <Route path={routes.home} element={<LatestPosts />} />
+                <Route path={routes.createPost} element={<CreatePost />} />
+                <Route path={routes.post} element={<PostPage />} />
+                <Route path="*" element={<Navigate to={routes.page404} />} />
+              </Routes>
+            </Suspense>
+          </Main>
+          <Footer />
+        </Router>
+      </Provider>
+      {/* </ThemeContext.Provider> */}
     </RendererProvider>
   );
 };

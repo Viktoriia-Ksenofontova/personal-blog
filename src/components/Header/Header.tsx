@@ -13,12 +13,14 @@ import {
   closeNavWrapperStyles,
   buttonMenuStyles,
 } from './Header.style';
-import { useThemeContext } from '../../store/hooks';
+// import { useThemeContext } from '../../context/hooks';
+import { useAppSelector } from '../../redux/hooks';
+import { getTheme } from '../../redux/theme/themeSelectors';
 
 const Header: React.FC = () => {
   const { css } = useFela();
-
-  const { theme } = useThemeContext();
+  const theme = useAppSelector(getTheme);
+  // const { theme } = useThemeContext();
 
   const [scrolled, setScrolled] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
@@ -60,7 +62,9 @@ const Header: React.FC = () => {
   return (
     <header
       className={
-        !scrolled ? css(headerStyles) : css({ ...headerStyles(), position: 'sticky', top: 0 })
+        !scrolled
+          ? css(headerStyles)
+          : css({ ...headerStyles(), position: 'sticky', top: 0 })
       }
     >
       <View variant="container">
@@ -73,20 +77,38 @@ const Header: React.FC = () => {
           <Text
             as="h1"
             variant="heading1"
-            styles={userWidth < 440 ? { ...logoStyles(), fontSize: '28px' } : logoStyles()}
+            styles={
+              userWidth < 440
+                ? { ...logoStyles(), fontSize: '28px' }
+                : logoStyles()
+            }
           >
             News & Events
           </Text>
           {userWidth < 768 && (
-            <button type="button" onClick={handleMenuButtonClick} className={css(buttonMenuStyles)}>
+            <button
+              type="button"
+              onClick={handleMenuButtonClick}
+              className={css(buttonMenuStyles)}
+            >
               {openMenu && <CloseIcon size="large" />}
               {!openMenu && <MenuIcon size="large" />}
             </button>
           )}
 
-          <div className={openMenu ? css(navWrapperStyles(theme)) : css(closeNavWrapperStyles)}>
+          <div
+            className={
+              openMenu
+                ? css(navWrapperStyles(theme))
+                : css(closeNavWrapperStyles)
+            }
+          >
             <nav className={css(navStyle)}>
-              <NavLink to={routes.home} className={css(navbarLinkRule)} onClick={handleLinkClick}>
+              <NavLink
+                to={routes.home}
+                className={css(navbarLinkRule)}
+                onClick={handleLinkClick}
+              >
                 Home
               </NavLink>
               <NavLink
