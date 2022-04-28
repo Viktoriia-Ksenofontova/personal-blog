@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { PostType, CommentType, ServerErrorResponse } from '../index';
+import { PostType, CommentType, ServerErrorResponse } from '../types';
 
 const fetchPostsRequest = createAction('posts/fetchPostsRequest');
 const fetchPostsSuccess = createAction<PostType[], string>(

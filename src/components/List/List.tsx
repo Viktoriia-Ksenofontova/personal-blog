@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFela } from 'react-fela';
 import makeListStyle from './List.style';
+import { BaseObject } from '../../redux/types';
 
 type ListProps = {
   styles?: BaseObject;

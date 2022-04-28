@@ -2,17 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useFela } from 'react-fela';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { useParams, useNavigate } from 'react-router-dom';
-import {
-  getStatus,
-  getActivePost,
-  getErrorMessage,
-} from '../../redux/posts/postsSelectors';
-import { getTheme } from '../../redux/theme/themeSelectors';
-import {
-  removePost,
-  fetchComments,
-  createNewComment,
-} from '../../redux/posts/postsOperations';
 
 import {
   Form,
@@ -24,6 +13,19 @@ import {
   View,
 } from '../../components';
 import { DeleteIcon } from '../../components/Image';
+
+import {
+  getStatus,
+  getActivePost,
+  getErrorMessage,
+} from '../../redux/posts/postsSelectors';
+import {
+  removePost,
+  fetchComments,
+  createNewComment,
+} from '../../redux/posts/postsOperations';
+import { getTheme } from '../../redux/theme/themeSelectors';
+
 import {
   labelRuleStyle,
   textareaRuleStyle,

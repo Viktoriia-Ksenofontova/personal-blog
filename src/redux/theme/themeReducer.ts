@@ -1,6 +1,6 @@
 import { toggleTheme } from './themeActions';
 import { ReducerBuilder } from '../posts/reducerBuilder';
-import { ThemeType } from '..';
+import { ThemeType } from '../types';
 
 const initialThemeState = 'light';
 

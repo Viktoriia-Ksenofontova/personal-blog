@@ -7,7 +7,7 @@ import {
   CommentType,
   HttpResponse,
   ServerErrorResponse,
-} from '../index';
+} from '../types';
 
 axios.defaults.baseURL = 'https://simple-blog-api.crew.red';
 

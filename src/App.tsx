@@ -21,12 +21,8 @@ const PostPage = React.lazy(() => import('./pages/PostPage'));
 const renderer = createRenderer();
 
 const App: React.FC = () => {
-  // const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  // const valueTheme = useMemo(() => ({ theme, setTheme }), [theme]);
-
   return (
     <RendererProvider renderer={renderer}>
-      {/* <ThemeContext.Provider value={valueTheme}> */}
       <Provider store={store}>
         <Router>
           <Header />
@@ -43,7 +39,6 @@ const App: React.FC = () => {
           <Footer />
         </Router>
       </Provider>
-      {/* </ThemeContext.Provider> */}
     </RendererProvider>
   );
 };

@@ -1,5 +1,5 @@
 import { RootState } from '../store';
-import { PostType } from '..';
+import { PostType } from '../types';
 
 export const getAllPosts = (state: RootState): PostType[] | [] =>
   state.postsStore.posts;

@@ -1,29 +1,22 @@
 import React, { useState, useEffect } from 'react';
-// import { observer } from 'mobx-react-lite';
 import { useFela } from 'react-fela';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { PostItem, List, Text, Button, Loader, View } from '../../components';
-
-import { postStyle, listStyle } from './LatestPost.style';
-// import { useThemeContext } from '../../context/hooks';
 
 import { fetchPosts } from '../../redux/posts/postsOperations';
 import { getAllPosts, getStatus } from '../../redux/posts/postsSelectors';
 import { getTheme } from '../../redux/theme/themeSelectors';
 
+import { PostType } from '../../redux/types';
+import { postStyle, listStyle } from './LatestPost.style';
+
 const LatestPosts: React.FC = () => {
   const { css } = useFela();
   const dispatch = useAppDispatch();
-  // const { theme } = useThemeContext();
+
   const theme = useAppSelector(getTheme);
   const allPosts = useAppSelector(getAllPosts);
   const status = useAppSelector(getStatus);
-
-  type PostType = {
-    id: number;
-    title: string;
-    body: string;
-  };
 
   const [currentPage, setCurrentPage] = useState(1);
   const [visiblePosts, setVisiblePosts] = useState<PostType[] | []>([]);

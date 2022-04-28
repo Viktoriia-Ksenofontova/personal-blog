@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 import actions from './postsActions';
-import { PostType, ActivePostType, ErrorType, StatusType } from '../index';
+import { PostType, ActivePostType, ErrorType, StatusType } from '../types';
 import { ReducerBuilder } from './reducerBuilder';
 
 const initialPostsState = [] as PostType[];

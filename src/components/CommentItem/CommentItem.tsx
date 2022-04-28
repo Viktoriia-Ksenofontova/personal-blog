@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { CommentIcon } from '../Image';
 import { Text, View } from '../index';
 
@@ -15,11 +14,4 @@ const CommentItem: React.FC<CommentItemProps> = ({ body }) => (
   </View>
 );
 
-export default CommentItem;
-
-// CommentItem.propTypes = {
-//   body: PropTypes.string
-// };
-// CommentItem.defaultProps = {
-//   body:""
-// }
+export default React.memo(CommentItem);
