@@ -1,4 +1,5 @@
 import textTheme from './Text.theme';
+import { BaseObject } from '../../redux/types';
 import palette from '../../assets/colors';
 
 type TextStylesType = {

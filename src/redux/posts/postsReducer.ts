@@ -1,7 +1,13 @@
 import { combineReducers } from 'redux';
 
 import actions from './postsActions';
-import { PostType, ActivePostType, ErrorType, StatusType } from '../types';
+import {
+  PostType,
+  ActivePostType,
+  ErrorType,
+  StatusType,
+  ServerErrorResponse,
+} from '../types';
 import { ReducerBuilder } from './reducerBuilder';
 
 const initialPostsState = [] as PostType[];
@@ -16,22 +22,29 @@ const posts = ReducerBuilder.new(initialPostsState)
 
 const initialErrorState = null;
 
+const handleError = (payload: ServerErrorResponse): string => {
+  const message = payload.error
+    ? payload.error.message
+    : payload.toJSON().message;
+  return message;
+};
+
 const error = ReducerBuilder.new<ErrorType>(initialErrorState)
   .addCase(actions.fetchPostsRequest, () => null)
   .addCase(actions.fetchPostsSuccess, () => null)
-  .addCase(actions.fetchPostsError, (_, payload) => payload.error.message)
+  .addCase(actions.fetchPostsError, (_, payload) => handleError(payload))
   .addCase(actions.fetchCommentsRequest, () => null)
   .addCase(actions.fetchCommentsSuccess, () => null)
-  .addCase(actions.fetchCommentsError, (_, payload) => payload.error.message)
+  .addCase(actions.fetchCommentsError, (_, payload) => handleError(payload))
   .addCase(actions.createPostRequest, () => null)
   .addCase(actions.createPostSuccess, () => null)
-  .addCase(actions.createPostError, (_, payload) => payload.error.message)
+  .addCase(actions.createPostError, (_, payload) => handleError(payload))
   .addCase(actions.removePostRequest, () => null)
   .addCase(actions.removePostSuccess, () => null)
-  .addCase(actions.removePostError, (_, payload) => payload.error.message)
+  .addCase(actions.removePostError, (_, payload) => handleError(payload))
   .addCase(actions.createNewCommentRequest, () => null)
   .addCase(actions.createNewCommentSuccess, () => null)
-  .addCase(actions.createNewCommentError, (_, payload) => payload.error.message)
+  .addCase(actions.createNewCommentError, (_, payload) => handleError(payload))
   .build();
 
 const initialStatusState = 'pending';
@@ -47,7 +60,7 @@ const status = ReducerBuilder.new<StatusType>(initialStatusState)
   .addCase(actions.createPostSuccess, () => 'success')
   .addCase(actions.createPostError, () => 'error')
   .addCase(actions.removePostRequest, () => 'pending')
-  .addCase(actions.removePostSuccess, () => 'success')
+  .addCase(actions.removePostSuccess, () => 'deleted')
   .addCase(actions.removePostError, () => 'error')
   .addCase(actions.createNewCommentRequest, () => 'pending')
   .addCase(actions.createNewCommentSuccess, () => 'created')

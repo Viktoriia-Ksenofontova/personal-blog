@@ -1,3 +1,5 @@
+import { BaseObject } from '../../redux/types';
+
 const makeListStyle = (styles: BaseObject) => ({
   padding: '0',
   margin: '0 0 10px 0',

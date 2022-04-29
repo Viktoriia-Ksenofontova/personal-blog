@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 type BaseObject<K extends string = string, V = unknown> = {
   [key in K]: V;
 };
@@ -26,6 +27,7 @@ type ServerErrorResponse = {
     code: ErrorCodes;
     message: string;
   };
+  toJSON?;
 };
 
 type HttpBaseResponse<D> = {
@@ -36,7 +38,7 @@ type HttpBaseResponse<D> = {
 
 type ErrorType = null | string;
 
-type StatusType = 'success' | 'error' | 'pending' | 'created';
+type StatusType = 'success' | 'error' | 'pending' | 'created' | 'deleted';
 
 type ActivePostType = null | PostType;
 

@@ -4,6 +4,7 @@ import { ReactComponent as createCommentIcon } from '../../assets/images/comment
 import { ReactComponent as closeIcon } from '../../assets/images/closeIcon.svg';
 import { ReactComponent as deleteIcon } from '../../assets/images/deleteIcon.svg';
 import { ReactComponent as menuIcon } from '../../assets/images/menuIcon.svg';
+import { BaseObject } from '../../redux/types';
 
 import style from './Image.style';
 
@@ -14,7 +15,11 @@ interface IconProps {
 }
 
 function CreateIconComponent(Icon: React.ElementType): React.FC<IconProps> {
-  return function insideCreateIconComponent({ size, iconColor, iconStyles }: IconProps) {
+  return function insideCreateIconComponent({
+    size,
+    iconColor,
+    iconStyles,
+  }: IconProps) {
     const componentStyles = style(size, iconColor, iconStyles);
     return (
       <Icon

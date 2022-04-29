@@ -13,6 +13,7 @@ import {
   View,
 } from '../../components';
 import { DeleteIcon } from '../../components/Image';
+import ErrorPage from '../ErrorPage';
 
 import {
   getStatus,
@@ -51,6 +52,12 @@ const PostPage: React.FC = () => {
     dispatch(fetchComments(correctPostId));
   }, [correctPostId, dispatch]);
 
+  useEffect(() => {
+    if (status === 'deleted') {
+      navigate(`/`);
+    }
+  }, [status, navigate]);
+
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -66,9 +73,8 @@ const PostPage: React.FC = () => {
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       dispatch(removePost(correctPostId));
-      navigate(`/`);
     },
-    [dispatch, correctPostId, navigate],
+    [dispatch, correctPostId],
   );
 
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -77,17 +83,7 @@ const PostPage: React.FC = () => {
   };
 
   if (status === 'error') {
-    return (
-      <View variant="container" padding="20px">
-        <Text as="p" styles={{ color: 'red', textAlign: 'center' }}>
-          Something went wrong
-        </Text>
-
-        <Text as="p" styles={{ textAlign: 'center' }}>
-          {errorMessage}
-        </Text>
-      </View>
-    );
+    return <ErrorPage error={errorMessage} />;
   }
 
   return (

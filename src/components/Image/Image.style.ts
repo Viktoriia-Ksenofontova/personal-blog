@@ -1,4 +1,5 @@
 import palette from '../../assets/colors';
+import { BaseObject } from '../../redux/types';
 
 const themeIcon = {
   iconSize: {

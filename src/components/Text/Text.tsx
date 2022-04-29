@@ -1,7 +1,6 @@
 import React from 'react';
 import { useFela } from 'react-fela';
-// import PropTypes from 'prop-types';
-// import { useThemeContext } from '../../context/hooks';
+import { BaseObject } from '../../redux/types';
 import { useAppSelector } from '../../redux/hooks';
 import { getTheme } from '../../redux/theme/themeSelectors';
 import textStyles from './Text.style';
@@ -20,7 +19,6 @@ const Text: React.FC<TextType> = ({
 }) => {
   const { css } = useFela();
   const theme = useAppSelector(getTheme);
-  // const { theme } = useThemeContext();
 
   const Component = as;
 
@@ -36,10 +34,3 @@ Text.defaultProps = {
   styles: {},
   variant: 'primary',
 };
-
-// Text.propTypes = {
-//   as: PropTypes.node.isRequired,
-//   styles: PropTypes.objectOf(PropTypes.string),
-//   variant:PropTypes.string,
-//   children: PropTypes.node.isRequired,
-// };

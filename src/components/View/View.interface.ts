@@ -1,4 +1,5 @@
 import React from 'react';
+import { BaseObject } from '../../redux/types.d';
 
 export interface TViewProps {
   as?: string | React.ElementType;
