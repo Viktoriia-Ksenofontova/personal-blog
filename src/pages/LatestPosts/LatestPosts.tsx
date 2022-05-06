@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useFela } from 'react-fela';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { PostItem, List, Text, Button, Loader, View } from '../../components';
 
@@ -9,11 +10,12 @@ import { getTheme } from '../../redux/theme/themeSelectors';
 
 import { PostType } from '../../redux/types';
 import { postStyle, listStyle } from './LatestPost.style';
+import '../../translations/i18n';
 
 const LatestPosts: React.FC = () => {
   const { css } = useFela();
   const dispatch = useAppDispatch();
-
+  const { t } = useTranslation();
   const theme = useAppSelector(getTheme);
   const allPosts = useAppSelector(getAllPosts);
   const status = useAppSelector(getStatus);
@@ -40,7 +42,8 @@ const LatestPosts: React.FC = () => {
       ) : (
         <>
           <Text as="h2" styles={{ textAlign: 'center' }} variant="heading2">
-            Latest post
+            {t('latestPostTitle')}
+            {/* Latest post */}
           </Text>
           <List styles={listStyle()}>
             {visiblePosts.map(({ id, title, body }) => (
@@ -51,7 +54,11 @@ const LatestPosts: React.FC = () => {
           </List>
 
           {visiblePosts.length > 0 && allPosts.length > visiblePosts.length && (
-            <Button type="button" onClick={handleClick} text="Load more" />
+            <Button
+              type="button"
+              onClick={handleClick}
+              text={t('buttonLoadMore')}
+            />
           )}
         </>
       )}

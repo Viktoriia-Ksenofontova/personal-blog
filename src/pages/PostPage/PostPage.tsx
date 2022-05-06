@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useFela } from 'react-fela';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { useParams, useNavigate } from 'react-router-dom';
-
+import { useTranslation } from 'react-i18next';
 import {
   Form,
   CommentItem,
@@ -32,11 +32,13 @@ import {
   textareaRuleStyle,
   buttonDeleteRuleStyle,
 } from './PostPage.style';
+import '../../translations/i18n';
 
 const PostPage: React.FC = () => {
   const navigate = useNavigate();
   const { css } = useFela();
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const { postId } = useParams();
   const correctPostId = Number(postId!.slice(1));
@@ -110,18 +112,20 @@ const PostPage: React.FC = () => {
           </Text>
 
           <Text as="h3" variant="heading3">
-            Comments:
+            {t('comments')}
+            {/* Comments: */}
           </Text>
 
           {activePost?.comments?.length === 0 && (
             <Text as="p" variant="small" styles={{ margin: '10px 0 20px' }}>
-              There are no comments here yet
+              {t('defaultComments')}
+              {/* There are no comments here yet */}
             </Text>
           )}
           {activePost?.comments && (
             <List>
               {activePost.comments.map(comment => (
-                <li key={comment.id}>
+                <li key={comment.id} style={{ listStyle: 'none' }}>
                   <CommentItem body={comment.body} />
                 </li>
               ))}
@@ -130,7 +134,8 @@ const PostPage: React.FC = () => {
 
           <Form handleSubmit={handleSubmit}>
             <label htmlFor="comment" className={css(labelRuleStyle(theme))}>
-              Your comment:
+              {t('labelAddComment')}
+              {/* Your comment: */}
               <textarea
                 required
                 value={newComment}
@@ -139,7 +144,7 @@ const PostPage: React.FC = () => {
                 className={css(textareaRuleStyle(theme))}
               />
             </label>
-            <Button type="submit" text="Add comment" />
+            <Button type="submit" text={t('buttonAddComment')} />
           </Form>
         </>
       )}

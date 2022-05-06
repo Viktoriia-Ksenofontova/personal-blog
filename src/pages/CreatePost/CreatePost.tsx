@@ -2,18 +2,20 @@ import React, { useState, useCallback } from 'react';
 import { useFela } from 'react-fela';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Button, Form, View, Text } from '../../components';
 import { CreateCommentIcon } from '../../components/Image';
 
 import { getTheme } from '../../redux/theme/themeSelectors';
 import { createPost } from '../../redux/posts/postsOperations';
 import { labelRule, inputRule } from './CreatePost.style';
+import '../../translations/i18n';
 
 const CreatePost = () => {
   const navigate = useNavigate();
   const { css } = useFela();
   const dispatch = useAppDispatch();
-
+  const { t } = useTranslation();
   const theme = useAppSelector(getTheme);
 
   const [title, setTitle] = useState('');
@@ -43,13 +45,15 @@ const CreatePost = () => {
         <CreateCommentIcon size="small" />
 
         <Text as="h2" variant="heading2">
-          Add a New Post
+          {t('createPostTitle')}
+          {/* Add a New Post */}
         </Text>
       </View>
 
       <Form handleSubmit={handleSubmit}>
         <label htmlFor="title" className={css(labelRule(theme))}>
-          Title:
+          {t('title')}
+          {/* Title: */}
           <input
             type="text"
             required
@@ -60,7 +64,8 @@ const CreatePost = () => {
           />
         </label>
         <label htmlFor="body" className={css(labelRule(theme))}>
-          Text:
+          {t('text')}
+          {/* Text: */}
           <textarea
             required
             value={body}
@@ -70,7 +75,7 @@ const CreatePost = () => {
             className={css(inputRule(theme))}
           />
         </label>
-        <Button type="submit" text="Add Post" />
+        <Button type="submit" text={t('buttonAdd')} />
       </Form>
     </View>
   );

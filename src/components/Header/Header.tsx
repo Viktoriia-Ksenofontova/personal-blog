@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useFela } from 'react-fela';
 import routes from '../../routing/routes';
 import { View, Text, ThemeSwitch } from '../index';
 import { CloseIcon, MenuIcon } from '../Image';
+
+import { useAppSelector } from '../../redux/hooks';
+import { getTheme } from '../../redux/theme/themeSelectors';
+import '../../translations/i18n';
+
 import {
   logoStyles,
   navStyle,
@@ -13,14 +19,16 @@ import {
   closeNavWrapperStyles,
   buttonMenuStyles,
 } from './Header.style';
-// import { useThemeContext } from '../../context/hooks';
-import { useAppSelector } from '../../redux/hooks';
-import { getTheme } from '../../redux/theme/themeSelectors';
 
-const Header: React.FC = () => {
+type Props = {
+  language: string;
+  handleChangeLanguage: any;
+};
+
+const Header: React.FC<Props> = ({ language, handleChangeLanguage }) => {
   const { css } = useFela();
   const theme = useAppSelector(getTheme);
-  // const { theme } = useThemeContext();
+  const { t } = useTranslation();
 
   const [scrolled, setScrolled] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
@@ -83,7 +91,8 @@ const Header: React.FC = () => {
                 : logoStyles()
             }
           >
-            News & Events
+            {t('headerTitle')}
+            {/* News & Events */}
           </Text>
           {userWidth < 768 && (
             <button
@@ -109,17 +118,33 @@ const Header: React.FC = () => {
                 className={css(navbarLinkRule)}
                 onClick={handleLinkClick}
               >
-                Home
+                {t('navLinkHome')}
+                {/* Home */}
               </NavLink>
               <NavLink
                 to={routes.createPost}
                 className={css(navbarLinkRule)}
                 onClick={handleLinkClick}
               >
-                Create_Post
+                {t('navLinkCreatePost')}
+                {/* Create_Post */}
               </NavLink>
             </nav>
             <ThemeSwitch />
+            <select
+              value={language}
+              name="language"
+              onChange={handleChangeLanguage}
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                marginLeft: 'auto',
+                height: '32px',
+              }}
+            >
+              <option value="uk">uk</option>
+              <option value="en">en</option>
+            </select>
           </div>
         </View>
       </View>

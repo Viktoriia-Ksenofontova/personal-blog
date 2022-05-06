@@ -1,4 +1,5 @@
 import { AxiosError } from 'axios';
+
 type BaseObject<K extends string = string, V = unknown> = {
   [key in K]: V;
 };

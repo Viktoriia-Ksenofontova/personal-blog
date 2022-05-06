@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useFela } from 'react-fela';
 import { useAppDispatch } from '../../redux/hooks';
-// import { getTheme } from '../../redux/theme/themeSelectors';
+
 import { toggleTheme } from '../../redux/theme/themeActions';
-// import { useThemeContext } from '../../context/hooks';
+
 import {
   themeSwitchControl,
   themeSwitchToggle,
@@ -16,14 +16,10 @@ const ThemeSwitch: React.FC = () => {
   const [checked, setChecked] = useState(false);
 
   const { css } = useFela();
-  // const store = useThemeContext();
-  // const { theme, setTheme } = store;
-  // const theme = useAppSelector(getTheme);
 
   const handleChange = () => {
     setChecked(!checked);
     dispatch(toggleTheme());
-    // setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   return (

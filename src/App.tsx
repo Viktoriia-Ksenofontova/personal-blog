@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -13,6 +13,7 @@ import routes from './routing/routes';
 import { Footer, Header, Main, Loader } from './components';
 
 import { store } from './redux/store';
+import i18n from './translations/i18n';
 
 const LatestPosts = React.lazy(() => import('./pages/LatestPosts'));
 const CreatePost = React.lazy(() => import('./pages/CreatePost'));
@@ -21,11 +22,24 @@ const PostPage = React.lazy(() => import('./pages/PostPage'));
 const renderer = createRenderer();
 
 const App: React.FC = () => {
+  const [language, setLanguage] = useState('en');
+
+  const handleChangeLanguage = (event: Event) => {
+    const target = event.target as HTMLSelectElement;
+    if (target) {
+      setLanguage(target.value);
+      i18n.changeLanguage(target.value);
+    }
+  };
+
   return (
     <RendererProvider renderer={renderer}>
       <Provider store={store}>
         <Router>
-          <Header />
+          <Header
+            language={language}
+            handleChangeLanguage={handleChangeLanguage}
+          />
           <Main>
             <Suspense fallback={<Loader />}>
               <Routes>

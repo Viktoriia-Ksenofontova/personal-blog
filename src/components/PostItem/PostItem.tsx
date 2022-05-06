@@ -2,11 +2,13 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
 import { useFela } from 'react-fela';
+import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '../../redux/hooks';
 import { getTheme } from '../../redux/theme/themeSelectors';
-// import { useThemeContext } from '../../context/hooks';
+
 import Text from '../Text';
 import { linkRuleStyle, postStyle } from './PostItem.style';
+import '../../translations/i18n';
 
 type PostItemProps = {
   id: number;
@@ -18,7 +20,7 @@ const PostItem: React.FC<PostItemProps> = observer(props => {
   const { id, title, body } = props;
   const { css } = useFela();
   const theme = useAppSelector(getTheme);
-  // const { theme } = useThemeContext();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -30,7 +32,8 @@ const PostItem: React.FC<PostItemProps> = observer(props => {
       </Text>
 
       <Link to={`posts/:${id}`} className={css(linkRuleStyle(theme))}>
-        Read more
+        {t('buttonReadMore')}
+        {/* Read more */}
       </Link>
     </>
   );
@@ -41,10 +44,4 @@ export default PostItem;
 // PostItem.defaultProps = {
 //   title: '',
 //   body: '',
-// };
-
-// PostItem.propTypes = {
-//   id: PropTypes.number.isRequired,
-//   title: PropTypes.string,
-//   body: PropTypes.string
 // };

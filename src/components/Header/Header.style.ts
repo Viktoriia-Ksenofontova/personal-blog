@@ -50,6 +50,7 @@ export const navWrapperStyles = (theme: 'dark' | 'light') => ({
     right: '0',
     top: '100%',
     transform: 'translateX(0)',
+    textAlign: 'right',
   },
 });
 
